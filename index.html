@@ -199,6 +199,22 @@
     border:3px solid var(--off-white);
     box-shadow:0 0 0 2px rgba(28,28,28,.25), 0 1px 4px rgba(0,0,0,.35);
   }
+  .plane-pin{
+    width:32px;height:32px;border-radius:9999px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--charcoal);color:var(--off-white);
+    border:2px solid var(--off-white);
+    box-shadow:0 1px 6px rgba(0,0,0,.35);
+    transform:rotate(var(--bearing,0deg));
+    transform-origin:center;
+  }
+  .plane-pin svg{width:19px;height:19px;display:block;fill:currentColor}
+  .plane-pin.mover{
+    width:28px;height:28px;
+    background:#0f766e;
+    animation:none;
+  }
+  .plane-pin.mover svg{width:17px;height:17px}
   .leaflet-tooltip.stop-tip{
     background:var(--cream);border:1px solid var(--border);
     color:var(--charcoal);border-radius:6px;
@@ -1954,12 +1970,36 @@ window.addEventListener('load', () => {
   function pinIcon(num){
     return L.divIcon({ className:'', html:'<div class="pin">'+num+'</div>', iconSize:[26,26], iconAnchor:[13,13] });
   }
+  function bearingDeg(from, to){
+    const lat1 = from[0] * Math.PI / 180, lat2 = to[0] * Math.PI / 180;
+    const dLon = (to[1] - from[1]) * Math.PI / 180;
+    const y = Math.sin(dLon) * Math.cos(lat2);
+    const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+  }
+  function planeIcon(angle, mover){
+    const cssAngle = angle - 90;
+    const svg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.7 11.3 3.2 2.6c-.7-.3-1.4.4-1.1 1.1l3 7.4 7.5.9-7.5.9-3 7.4c-.3.7.4 1.4 1.1 1.1l18.5-8.7c.6-.3.6-1.1 0-1.4Z"/></svg>';
+    return L.divIcon({
+      className:'',
+      html:'<div class="plane-pin' + (mover ? ' mover' : '') + '" style="--bearing:' + cssAngle.toFixed(1) + 'deg">' + svg + '</div>',
+      iconSize:mover ? [28,28] : [32,32],
+      iconAnchor:mover ? [14,14] : [16,16],
+    });
+  }
   const dotIcon = L.divIcon({ className:'', html:'<div class="dot"></div>', iconSize:[14,14], iconAnchor:[7,7] });
 
-  function addStopMarker(stop, num){
+  function addStopMarker(stop, num, prevLL, nextFlyLL){
     if (stop.virtual) return;
-    L.marker(stop.ll, { icon:pinIcon(num) })
-      .bindTooltip(stop.n, { className:'stop-tip', direction:'top', offset:[0,-14], permanent:true, opacity:1 })
+    const isFlight = (stop.mode === 'fly' && prevLL) || !!nextFlyLL;
+    const fromLL = nextFlyLL ? stop.ll : prevLL;
+    const toLL = nextFlyLL || stop.ll;
+    const marker = L.marker(stop.ll, {
+      icon:isFlight ? planeIcon(bearingDeg(fromLL, toLL), false) : pinIcon(num),
+      zIndexOffset:isFlight ? 800 : 0,
+    });
+    marker
+      .bindTooltip(stop.n, { className:'stop-tip', direction:'top', offset:[0,isFlight ? -18 : -14], permanent:true, opacity:1 })
       .addTo(routeLayer);
   }
 
@@ -1999,10 +2039,12 @@ window.addEventListener('load', () => {
 
     if (!animate || reducedMotion){
       let prevLL = day.stops[0].ll;
-      legs.forEach(leg => {
+      legs.forEach((leg, i) => {
         L.polyline([prevLL, ...leg.pts], LINE_STYLE[leg.mode]).addTo(routeLayer);
+        const nextLeg = legs[i+1];
+        const nextFlyLL = nextLeg && nextLeg.mode === 'fly' && nextLeg.stop.virtual ? nextLeg.stop.ll : null;
+        if (!leg.stop.virtual) addStopMarker(leg.stop, ++numCounter, prevLL, nextFlyLL);
         prevLL = leg.stop.ll;
-        if (!leg.stop.virtual) addStopMarker(leg.stop, ++numCounter);
       });
       return;
     }
@@ -2017,6 +2059,7 @@ window.addEventListener('load', () => {
       const leg = legs[legIdx];
       const startLL = legIdx === 0 ? day.stops[0].ll : legs[legIdx-1].stop.ll;
       const line = L.polyline([startLL], LINE_STYLE[leg.mode]).addTo(routeLayer);
+      mover.setIcon(leg.mode === 'fly' ? planeIcon(bearingDeg(startLL, leg.stop.ll), true) : dotIcon);
       const total = leg.pts.length;
       const durMs = leg.mode==='fly' ? 900 : 650;
       const perFrame = Math.max(1, Math.round(total / (durMs/16)));
@@ -2030,7 +2073,9 @@ window.addEventListener('load', () => {
         mover.setLatLng(slice[slice.length-1]);
         if (k < total){ requestAnimationFrame(frame); }
         else {
-          if (!leg.stop.virtual) addStopMarker(leg.stop, ++numCounter);
+          const nextLeg = legs[legIdx+1];
+          const nextFlyLL = nextLeg && nextLeg.mode === 'fly' && nextLeg.stop.virtual ? nextLeg.stop.ll : null;
+          if (!leg.stop.virtual) addStopMarker(leg.stop, ++numCounter, startLL, nextFlyLL);
           legIdx++;
           setTimeout(animateLeg, 220);
         }
