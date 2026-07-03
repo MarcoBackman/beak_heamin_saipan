@@ -521,6 +521,52 @@
   }
   .ref-author{font-size:11px;color:var(--muted);margin-top:auto}
 
+  /* ── 날짜별 하이라이트 쇼츠 ──────────── */
+  .shorts{
+    margin-top:28px;padding-top:20px;
+    border-top:1px solid var(--border);
+  }
+  .shorts h4{
+    font-size:14px;font-weight:600;color:var(--muted);
+    letter-spacing:-.1px;margin-bottom:12px;
+  }
+  .shorts-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:12px;
+  }
+  .short-card{
+    border:1px solid var(--border);border-radius:12px;
+    background:var(--cream);overflow:hidden;
+  }
+  .short-frame{
+    position:relative;aspect-ratio:9/16;
+    background:linear-gradient(135deg,rgba(28,28,28,.82),rgba(15,118,110,.82));
+    overflow:hidden;
+  }
+  .short-frame iframe{width:100%;height:100%;border:0;display:block}
+  .short-poster{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:18px;color:var(--off-white);
+    background:
+      linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.08)),
+      var(--poster, linear-gradient(135deg,#1c1c1c,#0f766e));
+    background-size:cover;background-position:center;
+  }
+  .short-poster .play{
+    width:44px;height:44px;border-radius:9999px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(252,251,248,.18);
+    border:1px solid rgba(252,251,248,.36);
+    margin-bottom:auto;
+  }
+  .short-poster b{font-size:15px;line-height:1.35;letter-spacing:-.2px}
+  .short-poster span{font-size:12px;line-height:1.45;margin-top:6px;color:rgba(252,251,248,.78)}
+  .short-body{padding:12px 14px 14px}
+  .short-body .spot{font-size:13px;font-weight:600;margin-bottom:4px}
+  .short-body .src{font-size:11px;color:var(--muted);line-height:1.45}
+
   /* ── 스팟 가이드 ─────────────────────── */
   .island-title{font-size:20px;font-weight:600;letter-spacing:-.3px;margin-bottom:16px}
   .spotgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -760,6 +806,16 @@
       margin-left:-14px;margin-right:-14px;
       padding-left:14px;padding-right:14px;
     }
+    .shorts-row{
+      grid-auto-flow:column;
+      grid-auto-columns:minmax(210px,72vw);
+      grid-template-columns:none;
+      overflow-x:auto;scroll-snap-type:x proximity;
+      margin-left:-14px;margin-right:-14px;
+      padding-left:14px;padding-right:14px;padding-bottom:10px;
+      scrollbar-width:thin;
+    }
+    .short-card{scroll-snap-align:start}
     .spotcard{padding:16px}
     .spotcard .kind{margin-left:0}
     .practical summary{padding:13px 16px}
@@ -782,6 +838,7 @@
     .shot.empty{display:none}
     .album:not(:has(.shot:not(.empty))){display:none}
     .refs{display:none}
+    .shorts{display:none}
     .spotcard .goto{display:none}
     .stay-tabs{display:none}
     .stay-panel{display:block!important;break-inside:avoid;margin-bottom:16px}
@@ -1606,6 +1663,44 @@ window.addEventListener('load', () => {
     ],
   };
 
+  const SHORTS = {
+    1: [
+      { id:"y5mT6BDXG3w", spot:"인천 출발 · 사이판 입도", title:"사이판 허니문 출발 전 분위기", line:"입국 팁과 첫날 동선 감 잡기", src:"오하제 Ohaje" },
+    ],
+    2: [
+      { id:"AJdUYAeS6zM", spot:"그로토", title:"사이판의 푸른 눈, 그로토", line:"수중동굴과 계단 진입 동선 미리보기", src:"맨블 MANVEL" },
+      { id:"uDj-kzsA5Go", spot:"라우라우 비치", title:"라우라우 프리다이빙 포인트", line:"거북이 스팟과 대체 코스 체크", src:"알레한드로와 마리나" },
+    ],
+    3: [
+      { id:"xWbm9lq4YEY", spot:"로타 홀", title:"로타 프리다이빙 하이라이트", line:"빛내림과 로타 입도 분위기", src:"촉촉한 초록칩" },
+      { id:"QDdFG3GPiLo", spot:"로타 바다거북 스팟", title:"다이버 성지 로타", line:"거북이와 함께하는 수중 시점", src:"수중성지니" },
+    ],
+    4: [
+      { id:"cn3aRvVlgx0", spot:"테테토 · 스위밍 홀", title:"로타 여행 코스 베스트", line:"테테토 비치와 스위밍 홀 동선", src:"떠나자!영맨" },
+      { id:"fe2hzQkw9PU", spot:"로타섬 핵심 스팟", title:"로타 꼭 가봐야 할 곳", line:"마리아나 관광청 공식 소개", src:"마리아나 관광청" },
+    ],
+    5: [
+      { id:"g8Pd8roMvK8", spot:"마나가하 섬", title:"마나가하 프리다이빙", line:"리프 에지와 라군 분위기", src:"아무튼 도전중" },
+      { id:"3O6uxziQqfU", spot:"보트 스노클링", title:"마나가하 호핑투어", line:"거북이와 열대어 포인트 미리보기", src:"맨블 MANVEL" },
+    ],
+    6: [
+      { id:"8SXZt6TCc1k", spot:"포비든 아일랜드", title:"트레킹 + 스노클링 코스", line:"내추럴 풀까지 이어지는 전체 동선", src:"작은숲" },
+      { id:"PZmeO4yW0mQ", spot:"히든 코스트", title:"비밀의 섬 포비든", line:"한적한 트레킹과 바다 풍경", src:"비타고" },
+    ],
+    7: [
+      { id:"y5mT6BDXG3w", spot:"가라판 · 마지막 밤", title:"사이판 시내와 선셋 분위기", line:"쇼핑과 저녁 코스 감 잡기", src:"오하제 Ohaje" },
+    ],
+    8: [
+      { id:"y5mT6BDXG3w", spot:"귀국 전 회상", title:"사이판 여행 하이라이트", line:"마지막 날 돌아보는 전체 코스", src:"오하제 Ohaje" },
+    ],
+  };
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, ch => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[ch]));
+  }
+
   function refCard(r){
     if (r.ty === "youtube"){
       return '<div class="ref-card" data-yt="' + r.id + '">' +
@@ -1621,16 +1716,64 @@ window.addEventListener('load', () => {
       '<p class="ref-line">' + r.l + '</p><span class="ref-author">' + r.a + '</span></div></a>';
   }
 
+  function shortCard(s){
+    const poster = 'https://i.ytimg.com/vi/' + encodeURIComponent(s.id) + '/hqdefault.jpg';
+    return '<div class="short-card" data-short-id="' + esc(s.id) + '">' +
+      '<div class="short-frame">' +
+        '<div class="short-poster" style="--poster:url(' + poster + ')">' +
+          '<span class="play">▶</span><b>' + esc(s.title) + '</b><span>' + esc(s.line) + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="short-body"><div class="spot">' + esc(s.spot) + '</div><div class="src">YouTube · ' + esc(s.src) + ' · 음소거 자동재생</div></div>' +
+      '</div>';
+  }
+
   document.querySelectorAll('article.day').forEach(art => {
     const dayNum = +art.dataset.day + 1;
     const items = REFS[dayNum];
-    if (!items || !items.length) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'refs';
-    wrap.innerHTML = '<h4>🎬 미리보기 · 참고 콘텐츠</h4><div class="refs-row">' + items.map(refCard).join('') + '</div>';
     const album = art.querySelector('.album');
-    art.insertBefore(wrap, album);
+    const shorts = SHORTS[dayNum];
+    if (shorts && shorts.length){
+      const shortWrap = document.createElement('div');
+      shortWrap.className = 'shorts';
+      shortWrap.innerHTML = '<h4>▶ 하이라이트 쇼츠 · 자동재생</h4><div class="shorts-row">' + shorts.map(shortCard).join('') + '</div>';
+      art.insertBefore(shortWrap, album);
+    }
+    if (items && items.length){
+      const wrap = document.createElement('div');
+      wrap.className = 'refs';
+      wrap.innerHTML = '<h4>🎬 미리보기 · 참고 콘텐츠</h4><div class="refs-row">' + items.map(refCard).join('') + '</div>';
+      art.insertBefore(wrap, album);
+    }
   });
+
+  const loadShort = card => {
+    if (card.dataset.loaded) return;
+    const id = card.dataset.shortId;
+    const frame = card.querySelector('.short-frame');
+    card.dataset.loaded = '1';
+    frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+      '?autoplay=1&mute=1&playsinline=1&loop=1&playlist=' + encodeURIComponent(id) +
+      '&controls=0&modestbranding=1&rel=0" title="날짜별 하이라이트 쇼츠" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  };
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.short-card').forEach(card => {
+      card.addEventListener('click', () => loadShort(card), { once:true });
+    });
+  } else if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting){
+          loadShort(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin:'220px 0px', threshold:.18 });
+    document.querySelectorAll('.short-card').forEach(card => io.observe(card));
+  } else {
+    document.querySelectorAll('.short-card').forEach(loadShort);
+  }
 
   /* 유튜브 카드: 썸네일 클릭 시 그 자리에서 바로 재생 */
   document.querySelectorAll('.ref-card[data-yt] .thumb').forEach(th => {
