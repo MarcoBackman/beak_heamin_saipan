@@ -118,3 +118,24 @@
   p,li,h1,h2,h3,h4,a,span,div{
     overflow-wrap:anywhere;
   }
+
+  /* ── Day 칩 바 ─────────────────────── */
+  .day-chips{
+    position:sticky;top:56px;z-index:1090;
+    display:flex;gap:8px;overflow-x:auto;
+    padding:8px 24px;background:var(--cream);
+    border-bottom:1px solid var(--border);
+    scrollbar-width:none;
+  }
+  .day-chips::-webkit-scrollbar{display:none}
+  .day-chip{
+    flex:none;display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;padding:5px 12px;
+    border:1px solid var(--border);border-radius:9999px;
+    background:transparent;color:var(--charcoal);
+    cursor:pointer;font-family:inherit;white-space:nowrap;
+  }
+  .day-chip span{color:var(--muted);font-size:12px}
+  .day-chip:hover{border-color:var(--border-strong)}
+  .day-chip.on{background:var(--charcoal);color:var(--off-white);border-color:var(--charcoal)}
+  .day-chip.on span{color:rgba(252,251,248,.75)}

@@ -108,6 +108,11 @@
   let animToken = 0;
   let current = -1;
 
+  /* 외부 연동 API — day-nav.js가 소비 */
+  const dayChangeCbs = [];
+  S.onDayChange = cb => { dayChangeCbs.push(cb); if (current >= 0) cb(current); };
+  S.goToDay = goToDay;
+
   function showDay(idx, animate){
     idx = Math.max(0, Math.min(DAYS.length-1, idx));
     if (idx === current) return;
@@ -122,6 +127,7 @@
       a.classList.toggle('active', +a.dataset.day === idx));
     document.querySelectorAll('article.day').forEach(el =>
       el.classList.toggle('active', +el.dataset.day === idx));
+    dayChangeCbs.forEach(cb => cb(idx));
 
     routeLayer.clearLayers();
 

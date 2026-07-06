@@ -1,5 +1,5 @@
   /* ── Sections ────────────────────────── */
-  section{padding:48px 0}
+  section{padding:48px 0;scroll-margin-top:64px}
   section h2{
     font-size:36px;font-weight:600;
     line-height:1.1;letter-spacing:-.9px;
@@ -128,7 +128,7 @@
     border:1px solid var(--border);border-radius:16px;
     padding:40px;margin-bottom:24px;
     background:var(--cream);
-    scroll-margin-top:80px;
+    scroll-margin-top:124px;
   }
   .day-head{
     display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;

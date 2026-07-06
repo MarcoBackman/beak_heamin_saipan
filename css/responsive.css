@@ -160,7 +160,7 @@
 
   /* ── Print ───────────────────────────── */
   @media print{
-    nav.topnav,.hint,#printBtn,aside.map-side,.bgm-btn,.lightbox{display:none}
+    nav.topnav,.day-chips,.hint,#printBtn,aside.map-side,.bgm-btn,.lightbox{display:none}
     body{background:#fff}
     .layout{grid-template-columns:1fr}
     .day{break-inside:avoid;border-color:#ddd}
