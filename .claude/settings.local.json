@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=Saipan%20Managaha%20beach&gsrnamespace=6&gsrlimit=20&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=1600&format=json\" -A \"TravelPlanBot/1.0\")",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "PowerShell(\\(Get-Content index.html | Measure-Object -Line\\).Lines; \\(Get-Item index.html\\).Length)"
     ]
   }
 }
