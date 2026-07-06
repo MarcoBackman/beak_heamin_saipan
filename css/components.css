@@ -454,3 +454,20 @@
     text-align:left;line-height:1.9;
   }
   footer .credits a{color:var(--muted)}
+
+  /* ── 접기 블록 (모바일 기본 접힘) ──── */
+  .fold-toggle{
+    display:flex;align-items:center;gap:6px;width:100%;
+    font-size:14px;font-weight:600;color:var(--muted);
+    letter-spacing:-.1px;margin-bottom:12px;
+    background:none;border:0;padding:0;
+    font-family:inherit;text-align:left;cursor:default;
+  }
+  .fold-toggle .chev{display:none;margin-left:auto;transition:transform .2s}
+  @media (max-width:768px){
+    .fold-toggle{cursor:pointer}
+    .fold-toggle .chev{display:inline}
+    .fold.closed > .fold-toggle .chev{transform:rotate(-90deg)}
+    .fold.closed > *:not(.fold-toggle){display:none}
+    .fold.closed .fold-toggle{margin-bottom:0}
+  }

@@ -65,6 +65,7 @@
       '?autoplay=1&mute=1&playsinline=1&loop=1&playlist=' + encodeURIComponent(id) +
       '&controls=0&modestbranding=1&rel=0" title="날짜별 하이라이트 쇼츠" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
   };
+  S.loadShort = loadShort;   // day-nav.js 접힘 펼침 시 소비
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('.short-card').forEach(card => {

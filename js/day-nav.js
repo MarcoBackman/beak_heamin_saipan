@@ -30,3 +30,29 @@
     });
   });
 })();
+
+/* ═══════════ 모바일 접힘 — 쇼츠·참고 콘텐츠·앨범 ═══════════ */
+(function(){
+  const mobile = window.matchMedia('(max-width:768px)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.shorts, .refs, .album').forEach(b => {
+    const h = b.querySelector('h4');
+    if (!h) return;
+    b.classList.add('fold');
+    if (mobile) b.classList.add('closed');
+    const btn = document.createElement('button');
+    btn.className = 'fold-toggle';
+    btn.setAttribute('aria-expanded', String(!mobile));
+    btn.innerHTML = h.innerHTML + '<span class="chev">▾</span>';
+    h.replaceWith(btn);
+    btn.addEventListener('click', () => {
+      const closed = b.classList.toggle('closed');
+      btn.setAttribute('aria-expanded', String(!closed));
+      /* 펼침 시 미로드 쇼츠 즉시 로드 (IO 미발화 대비) — reduced-motion은 기존 클릭 재생 유지 */
+      const S = window.SAIPAN;
+      if (!closed && !reduced && S && S.loadShort){
+        b.querySelectorAll('.short-card:not([data-loaded])').forEach(c => S.loadShort(c));
+      }
+    });
+  });
+})();
