@@ -1,7 +1,7 @@
   /* ── Map side panel ──────────────────── */
   aside.map-side{
-    position:sticky;top:72px;
-    height:calc(100vh - 96px);
+    position:sticky;top:116px;   /* topnav 57px + Day 칩 바 ~45px + 여백 */
+    height:calc(100vh - 140px);
     min-height:520px;
   }
   .map-panel{
