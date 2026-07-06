@@ -139,3 +139,14 @@
   .day-chip:hover{border-color:var(--border-strong)}
   .day-chip.on{background:var(--charcoal);color:var(--off-white);border-color:var(--charcoal)}
   .day-chip.on span{color:rgba(252,251,248,.75)}
+
+  /* ── 모바일 메뉴 버튼 (데스크톱 숨김) ── */
+  nav.topnav .wrap{gap:12px}
+  nav.topnav .links{margin-left:auto}
+  .menu-btn{
+    display:none;width:34px;height:34px;flex:none;
+    align-items:center;justify-content:center;
+    background:transparent;color:var(--charcoal);
+    border:1px solid var(--border-strong);border-radius:9999px;
+    font-size:15px;cursor:pointer;font-family:inherit;
+  }

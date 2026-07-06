@@ -56,3 +56,20 @@
     });
   });
 })();
+
+/* ═══════════ 모바일 ☰ 메뉴 시트 ═══════════ */
+(function(){
+  const btn = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  if (!btn || !links) return;
+  const set = open => {
+    links.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? '✕' : '☰';
+    btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  };
+  btn.addEventListener('click', () => set(!links.classList.contains('open')));
+  links.addEventListener('click', e => {
+    if (e.target.closest('a, button')) set(false);
+  });
+})();
