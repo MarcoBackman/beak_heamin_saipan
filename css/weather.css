@@ -93,6 +93,12 @@
     border-style:solid;border-color:#7d95ad;
     background:rgba(100,125,150,.10);
   }
+  .wx-rain-chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:12px;font-weight:600;padding:3px 10px;border-radius:9999px;
+    background:rgba(100,125,150,.16);color:#3f566d;
+    border:1px solid #7d95ad;
+  }
 
   /* ── 접근성·인쇄 ── */
   @media (prefers-reduced-motion: reduce){

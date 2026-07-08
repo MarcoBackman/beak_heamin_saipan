@@ -193,6 +193,18 @@
         '<em>' + (wx.live ? '예보' : '9월 평년') + '</em>';
       head.appendChild(b);
     }
+    if (wx.theme === 'rain' || wx.theme === 'thunder'){
+      const rp = art.querySelector('.rain-plan');
+      if (rp){
+        rp.open = true;
+        if (head){
+          const c = document.createElement('span');
+          c.className = 'wx-rain-chip';
+          c.textContent = '☔ 우천 플랜 확인';
+          head.appendChild(c);
+        }
+      }
+    }
     if (S.initWxVisual) S.initWxVisual(art, wx.theme);
   }
 
@@ -201,5 +213,16 @@
       const wx = (live && live[i]) ? live[i] : Object.assign({ live:false }, fb);
       renderDay(i, wx);
     });
+  });
+
+  /* 인쇄 시 우천 플랜 강제 펼침 → 인쇄 후 원상 복구 */
+  let printOpened = [];
+  window.addEventListener('beforeprint', () => {
+    printOpened = Array.prototype.slice.call(document.querySelectorAll('.rain-plan:not([open])'));
+    printOpened.forEach(d => { d.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    printOpened.forEach(d => { d.open = false; });
+    printOpened = [];
   });
 })();
