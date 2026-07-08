@@ -22,7 +22,8 @@
       const ll = btn.dataset.ll.split(',').map(Number);
       if (S.flySpot) S.flySpot(ll, btn.dataset.nm);
       if (window.matchMedia('(max-width:1023px)').matches){
-        document.getElementById('mapSide').scrollIntoView({ behavior:'smooth', block:'center' });
+        if (S.openMapOverlay) S.openMapOverlay();
+        else document.getElementById('mapSide').scrollIntoView({ behavior:'smooth', block:'center' });
       }
     });
   });
