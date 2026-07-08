@@ -19,6 +19,7 @@
 
   const routeLayer = L.layerGroup().addTo(map);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MOBILE_MQ = window.matchMedia('(max-width:1023px)');
 
   /* 전체 스팟 레이어 — 스팟 가이드와 연동 */
   const spotsLayer = L.layerGroup();
@@ -107,11 +108,16 @@
 
   let animToken = 0;
   let current = -1;
+  let lastBounds = null;
 
   /* 외부 연동 API — day-nav.js가 소비 */
   const dayChangeCbs = [];
   S.onDayChange = cb => { dayChangeCbs.push(cb); if (current >= 0) cb(current); };
   S.goToDay = goToDay;
+  S.invalidateMap = () => {
+    map.invalidateSize();
+    if (lastBounds) map.flyToBounds(lastBounds, { padding:[52,52], duration:0, maxZoom:13 });
+  };
 
   function showDay(idx, animate){
     idx = Math.max(0, Math.min(DAYS.length-1, idx));
@@ -133,6 +139,7 @@
 
     const realStops = day.stops.filter(s => !s.virtual);
     const bounds = L.latLngBounds(day.stops.map(s => s.ll));
+    lastBounds = bounds;
     map.flyToBounds(bounds, { padding:[52,52], duration: animate ? .8 : 0, maxZoom:13 });
 
     /* 구간(leg) 목록 구성 */
@@ -210,9 +217,9 @@
     }
   }
   slider.addEventListener('input',  e => showDay(+e.target.value, true));
-  slider.addEventListener('change', e => goToDay(+e.target.value, true));
-  document.getElementById('prevDay').addEventListener('click', () => goToDay(current-1 < 0 ? 0 : current-1, true));
-  document.getElementById('nextDay').addEventListener('click', () => goToDay(current+1 > 7 ? 7 : current+1, true));
+  slider.addEventListener('change', e => goToDay(+e.target.value, !MOBILE_MQ.matches));
+  document.getElementById('prevDay').addEventListener('click', () => goToDay(current-1 < 0 ? 0 : current-1, !MOBILE_MQ.matches));
+  document.getElementById('nextDay').addEventListener('click', () => goToDay(current+1 > 7 ? 7 : current+1, !MOBILE_MQ.matches));
 
   /* ── 스크롤 연동: 보고 있는 날짜를 지도에 반영 ── */
   const observer = new IntersectionObserver(entries => {
