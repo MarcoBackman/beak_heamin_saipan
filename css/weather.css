@@ -8,3 +8,77 @@
     font-style:normal;font-size:11px;color:var(--muted);
     border-left:1px solid var(--border);padding-left:6px;
   }
+
+  /* ── 연출 공통 ─────────────────────── */
+  article.day[data-wx]{position:relative;overflow:hidden}
+  article.day[data-wx] > *{position:relative;z-index:1}
+  article.day[data-wx]::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    filter:opacity(.75);   /* 전역 강도 */
+  }
+  .wx-layer{
+    position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+    filter:opacity(.75);
+  }
+  .wx-layer canvas{position:absolute;inset:0}
+
+  /* ── sun ── */
+  article.day[data-wx=sun]::before{
+    inset:-18%;
+    background:
+      radial-gradient(circle at 24% -8%, rgba(255,178,64,.34), rgba(255,196,96,.15) 32%, rgba(255,210,120,.05) 50%, transparent 66%),
+      radial-gradient(circle at 82% 8%,  rgba(255,222,130,.26), rgba(255,228,150,.10) 30%, transparent 60%),
+      radial-gradient(circle at 50% 45%, rgba(255,238,180,.14), transparent 68%),
+      linear-gradient(180deg, rgba(255,210,110,.12), rgba(255,220,140,.04) 45%, transparent 72%);
+  }
+  article.day[data-wx=sun].wx-run::before{animation:wxSunBreath 16s ease-in-out infinite alternate}
+  @keyframes wxSunBreath{
+    from{transform:translate3d(-1.5%,0,0) scale(1);opacity:.75}
+    to  {transform:translate3d(1.5%,2%,0) scale(1.09);opacity:1}
+  }
+  .wx-rays{
+    position:absolute;width:170%;aspect-ratio:1/1;left:-45%;top:-120%;
+    background:repeating-conic-gradient(from 0deg,
+      transparent 0deg, rgba(255,206,110,.165) 10deg, transparent 20deg 34deg);
+    -webkit-mask:radial-gradient(closest-side, #000 0%, rgba(0,0,0,.38) 42%, transparent 68%);
+            mask:radial-gradient(closest-side, #000 0%, rgba(0,0,0,.38) 42%, transparent 68%);
+  }
+  article.day[data-wx=sun].wx-run .wx-rays{animation:wxRaysTurn 110s linear infinite}
+  @keyframes wxRaysTurn{to{transform:rotate(360deg)}}
+
+  /* ── cloud ── */
+  article.day[data-wx=cloud]::before{
+    background:linear-gradient(180deg, rgba(148,163,184,.14), rgba(148,163,184,.04) 60%, transparent);
+  }
+  .wx-cloud{
+    position:absolute;background-repeat:no-repeat;background-size:contain;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="280" viewBox="0 0 600 280"><defs><filter id="b" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="24"/></filter></defs><g filter="url(%23b)" fill="%23a4b1bf"><ellipse cx="215" cy="172" rx="150" ry="52"/><ellipse cx="325" cy="128" rx="115" ry="62"/><ellipse cx="435" cy="176" rx="125" ry="46"/><ellipse cx="130" cy="195" rx="80" ry="34"/></g></svg>');
+  }
+  .wx-cloud.c1{width:72%;height:62%;top:-14%;opacity:.62}
+  .wx-cloud.c2{width:54%;height:48%;top:16%;opacity:.42}
+  .wx-cloud.c3{width:40%;height:36%;top:44%;opacity:.30}
+  article.day[data-wx=cloud].wx-run .wx-cloud.c1{animation:wxDrift 58s linear infinite;animation-delay:-12s}
+  article.day[data-wx=cloud].wx-run .wx-cloud.c2{animation:wxDrift 84s linear infinite;animation-delay:-47s}
+  article.day[data-wx=cloud].wx-run .wx-cloud.c3{animation:wxDrift 116s linear infinite;animation-delay:-80s}
+  @keyframes wxDrift{
+    from{transform:translateX(-160%)}
+    to  {transform:translateX(320%)}
+  }
+
+  /* ── rain / thunder 틴트 (파티클은 캔버스) ── */
+  article.day[data-wx=rain]::before{
+    background:linear-gradient(180deg, rgba(100,125,150,.12), rgba(100,125,150,.18));
+  }
+  article.day[data-wx=thunder]::before{
+    background:linear-gradient(180deg, rgba(66,80,100,.20), rgba(66,80,100,.26));
+  }
+
+  /* ── 접근성·인쇄 ── */
+  @media (prefers-reduced-motion: reduce){
+    article.day[data-wx].wx-run::before,
+    article.day[data-wx].wx-run .wx-rays,
+    article.day[data-wx].wx-run .wx-cloud{animation:none}
+  }
+  @media print{
+    .wx-layer,article.day[data-wx]::before{display:none}
+  }
