@@ -1,4 +1,7 @@
   /* ── Responsive ──────────────────────── */
+  /* ── 지도 오버레이 요소 — 모바일에서만 표시 ── */
+  .map-fab,.map-overlay-close,.map-overlay-goto{display:none}
+
   @media (max-width:1023px){
     .layout{grid-template-columns:1fr;gap:0}
     aside.map-side{
@@ -7,6 +10,41 @@
     }
     .map-panel{height:auto}
     #map{height:380px;flex:none}
+
+    /* ── 플로팅 지도 오버레이 ── */
+    .map-fab{
+      position:fixed;right:16px;bottom:18px;z-index:1150;
+      display:flex;align-items:center;gap:6px;
+      padding:11px 16px;border-radius:9999px;
+      background:var(--charcoal);color:var(--off-white);
+      border:0;font-family:inherit;font-size:14px;font-weight:600;
+      box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer;
+    }
+    .map-fab.hidden{display:none}
+    body.map-open{overflow:hidden}
+    body.map-open aside.map-side{
+      position:fixed;inset:0;z-index:1500;
+      margin:0;padding:12px;background:var(--cream);
+      order:0;height:auto;
+    }
+    body.map-open .map-panel{height:100%}
+    body.map-open #map{height:auto;flex:1}
+    body.map-open .map-head{position:relative;padding-right:56px}
+    body.map-open .map-overlay-close{
+      display:flex;align-items:center;justify-content:center;
+      position:absolute;right:12px;top:12px;
+      width:34px;height:34px;border-radius:9999px;
+      background:transparent;color:var(--charcoal);
+      border:1px solid var(--border-strong);
+      font-size:15px;cursor:pointer;font-family:inherit;
+    }
+    body.map-open .map-overlay-goto{
+      display:block;margin:0 14px 14px;padding:12px;
+      background:var(--charcoal);color:var(--off-white);
+      border:0;border-radius:10px;
+      font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
+    }
+    body.map-open .map-fab{display:none}
   }
   @media (max-width:768px){
     .wrap,.layout{padding-left:18px;padding-right:18px}
@@ -148,7 +186,7 @@
 
   /* ── Print ───────────────────────────── */
   @media print{
-    nav.topnav,.day-chips,.hint,#printBtn,aside.map-side,.bgm-btn,.lightbox{display:none}
+    nav.topnav,.day-chips,.hint,#printBtn,aside.map-side,.bgm-btn,.lightbox,.map-fab{display:none}
     body{background:#fff}
     .layout{grid-template-columns:1fr}
     .day{break-inside:avoid;border-color:#ddd}
