@@ -237,5 +237,19 @@ window.SAIPAN = (function(){
         {n:'인천으로 🇰🇷', ll:FROM_ICN, virtual:true, mode:'fly'},
       ]},
   ];
-  return { SPOTS, REFS, SHORTS, DAYS };
+
+  /* 날씨 — 여행 좌표·기간 + 9월 사이판 평년 프리셋 (예보 폴백용) */
+  const TRIP = { start:'2026-09-10', end:'2026-09-17', lat:15.19, lon:145.75, tz:'Pacific/Saipan' };
+  const WX_FALLBACK = [
+    { theme:'sun',     tmax:31, tmin:26, pop:20 },  /* D1 9/10 */
+    { theme:'cloud',   tmax:30, tmin:26, pop:40 },  /* D2 9/11 */
+    { theme:'rain',    tmax:30, tmin:25, pop:60 },  /* D3 9/12 */
+    { theme:'sun',     tmax:31, tmin:26, pop:30 },  /* D4 9/13 */
+    { theme:'thunder', tmax:29, tmin:25, pop:70 },  /* D5 9/14 */
+    { theme:'cloud',   tmax:30, tmin:26, pop:40 },  /* D6 9/15 */
+    { theme:'rain',    tmax:30, tmin:25, pop:60 },  /* D7 9/16 */
+    { theme:'sun',     tmax:31, tmin:26, pop:30 },  /* D8 9/17 */
+  ];
+
+  return { SPOTS, REFS, SHORTS, DAYS, TRIP, WX_FALLBACK };
 })();
