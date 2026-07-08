@@ -101,7 +101,9 @@
       raf = requestAnimationFrame(frame);
     }
     resize();
-    window.addEventListener('resize', resize);
+    /* 접힘 펼침 등 카드 자체 높이 변화 추적 (window resize만으론 부족) */
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(art);
+    else window.addEventListener('resize', resize);
     return {
       start(){ if (!raf){ last = 0; raf = requestAnimationFrame(frame); } },
       stop(){ if (raf){ cancelAnimationFrame(raf); raf = null; ctx.clearRect(0,0,W,H); } },

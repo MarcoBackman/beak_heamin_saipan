@@ -11,7 +11,7 @@
 
   /* ── 연출 공통 ─────────────────────── */
   article.day[data-wx]{position:relative;overflow:hidden}
-  article.day[data-wx] > *{position:relative;z-index:1}
+  article.day[data-wx] > *:not(.wx-layer){position:relative;z-index:1}
   article.day[data-wx]::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
     filter:opacity(.75);   /* 전역 강도 */
