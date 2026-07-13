@@ -471,3 +471,102 @@
     .fold.closed > *:not(.fold-toggle){display:none}
     .fold.closed .fold-toggle{margin-bottom:0}
   }
+
+  /* ── 자세히 보기 — 버튼 & 모달 ──────── */
+  .detail-btn{
+    display:flex;align-items:center;gap:10px;width:100%;
+    margin:4px 0 12px;padding:10px 14px;
+    font-size:14px;font-weight:600;color:var(--charcoal);
+    background:var(--tint-3);
+    border:1px solid var(--border);border-radius:10px;
+    font-family:inherit;cursor:pointer;text-align:left;
+    transition:border-color .2s,background .2s;
+  }
+  .detail-btn:hover{border-color:var(--border-strong);background:var(--tint-4)}
+  .detail-btn:focus-visible{outline:none;box-shadow:rgba(0,0,0,.1) 0 4px 12px}
+  .detail-btn .sub{font-size:13px;font-weight:400;color:var(--muted)}
+  .detail-btn .cnt{
+    margin-left:auto;font-size:12px;font-weight:600;color:var(--muted);
+    border:1px solid var(--border);border-radius:9999px;padding:2px 10px;
+  }
+  .detail-btn .cnt:empty{display:none}
+  .detail-btn.all-done .cnt{
+    color:var(--off-white);background:var(--charcoal);border-color:var(--charcoal);
+  }
+
+  .detail-modal{
+    position:fixed;inset:0;z-index:2100;
+    background:rgba(22,21,19,.55);
+    display:none;align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .detail-modal.on{display:flex}
+  .dm-panel{
+    position:relative;width:100%;max-width:680px;max-height:86vh;
+    display:flex;flex-direction:column;
+    background:var(--cream);
+    border:1px solid var(--border);border-radius:16px;
+    box-shadow:rgba(0,0,0,.25) 0 24px 64px;
+    padding:28px;
+    animation:dm-rise .25s ease-out;
+  }
+  @keyframes dm-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .dm-close{
+    position:absolute;top:14px;right:14px;
+    width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;
+    background:transparent;color:var(--charcoal);
+    border:1px solid var(--border-strong);border-radius:9999px;
+    font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .dm-close:hover{background:var(--tint-4)}
+  .dm-close:focus-visible{outline:none;box-shadow:rgba(0,0,0,.1) 0 4px 12px}
+  .dm-head{padding-right:44px;margin-bottom:6px}
+  .dm-head .dm-label{font-size:13px;color:var(--muted)}
+  .dm-head h3{font-size:20px;font-weight:600;letter-spacing:-.3px;margin-top:2px}
+  .dm-body{overflow-y:auto;min-height:0;padding-right:4px}
+  .dm-body section + section{margin-top:20px}
+  .dm-body h4{
+    font-size:14px;font-weight:600;color:var(--muted);
+    margin:16px 0 8px;letter-spacing:-.1px;
+  }
+  .dm-body ul{list-style:none}
+  .dm-body li label{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:9px 10px;border-radius:8px;cursor:pointer;
+    font-size:15px;line-height:1.5;color:var(--text-82);
+  }
+  .dm-body li label:hover{background:var(--tint-4)}
+  .dm-body li + li{border-top:1px solid var(--border)}
+  .dm-body input[type=checkbox]{
+    appearance:none;width:20px;height:20px;flex:none;
+    margin-top:1px;
+    border:1px solid var(--border-strong);border-radius:6px;
+    background:var(--cream);cursor:pointer;position:relative;
+  }
+  .dm-body input[type=checkbox]:checked{background:var(--charcoal);border-color:var(--charcoal)}
+  .dm-body input[type=checkbox]:checked::after{
+    content:"";position:absolute;left:6px;top:2px;
+    width:5px;height:10px;
+    border:solid var(--off-white);border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+  .dm-body input[type=checkbox]:focus-visible{outline:none;box-shadow:rgba(0,0,0,.1) 0 4px 12px}
+  .dm-body li input:checked ~ .x{color:var(--muted);text-decoration:line-through}
+  .dm-body .t{
+    flex:none;width:76px;font-size:13px;color:var(--muted);padding-top:2px;
+  }
+  .dm-bring{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+  .dm-bring li{border-top:1px solid var(--border)}
+  .dm-bring li:nth-child(-n+2){border-top:0}
+  .dm-hint{font-size:12px;color:var(--muted);margin-top:14px}
+  @media (max-width:560px){
+    .detail-modal{padding:12px}
+    .dm-panel{padding:20px;max-height:92vh}
+    .dm-bring{grid-template-columns:1fr}
+    .dm-bring li:nth-child(2){border-top:1px solid var(--border)}
+    .detail-btn{flex-wrap:wrap;row-gap:2px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .dm-panel{animation:none}
+  }

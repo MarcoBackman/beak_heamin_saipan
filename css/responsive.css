@@ -186,7 +186,7 @@
 
   /* ── Print ───────────────────────────── */
   @media print{
-    nav.topnav,.day-chips,.hint,#printBtn,aside.map-side,.bgm-btn,.lightbox,.map-fab{display:none}
+    nav.topnav,.day-chips,.hint,#printBtn,aside.map-side,.bgm-btn,.lightbox,.map-fab,.detail-btn,.detail-modal{display:none}
     body{background:#fff}
     .layout{grid-template-columns:1fr}
     .day{break-inside:avoid;border-color:#ddd}
