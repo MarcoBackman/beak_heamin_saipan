@@ -98,16 +98,11 @@ window.SAIPAN = (function(){
       { ty:"blog", b:"브런치", u:"https://brunch.co.kr/@travie/1205", t:"사이판 로타섬의 초대장", l:"트래비 매거진의 로타 기행 에세이", a:"트래비 매거진" },
     ],
     5: [
-      { ty:"youtube", id:"g8Pd8roMvK8", u:"https://www.youtube.com/watch?v=g8Pd8roMvK8", t:"마나가하 섬 프리다이빙 투어 리뷰", l:"프리다이빙 시점으로 본 마나가하 다이빙 포인트", a:"아무튼 도전중" },
-      { ty:"youtube", id:"3O6uxziQqfU", u:"https://www.youtube.com/watch?v=3O6uxziQqfU", t:"마나가하 섬투어 + 보트 스노클링 호핑투어", l:"거북이·물고기와 함께한 프리다이빙 실사 영상", a:"맨블 MANVEL" },
-      { ty:"blog", b:"네이버 블로그", u:"https://m.blog.naver.com/d-jini/223936899858", t:"마나가하섬 스노클링 투어 내돈내산 후기", l:"최근 다녀온 솔직 후기", a:"d-jini" },
-      { ty:"blog", b:"티스토리", u:"https://jeju-salja.tistory.com/entry/%EC%82%AC%EC%9D%B4%ED%8C%90-%EB%A7%88%EB%82%98%EA%B0%80%ED%95%98%EC%84%AC-%EC%8A%A4%EB%85%B8%ED%81%B4%EB%A7%81-%ED%9B%84%EA%B8%B0-%EC%9D%B4%EC%9A%A9-%EC%A0%95%EB%B3%B4", t:"마나가하섬 스노클링 후기·이용 정보", l:"첫 페리 시간·환경세 $10·명당 자리·샤워시설 실전 정보", a:"제주꿈마니" },
-      { ty:"youtube", id:"m23azI3zIRs", u:"https://www.youtube.com/watch?v=m23azI3zIRs", t:"마나가하 도착하면 이 자리부터 잡으세요", l:"입도 직후 명당 선점 요령 팁 영상", a:"구트의 여행정보" },
+      { ty:"blog", b:"블로그", u:"https://zzintravel.com/603", t:"사이판 켄싱턴호텔 리뷰", l:"7개 레스토랑·인피니티 풀·투명 카약 등 리조트 어메니티 실투숙 후기", a:"찐 여행자" },
+      { ty:"article", b:"트립닷컴", u:"https://kr.trip.com/moments/detail/saipan-569-16508487/", t:"사이판 찐 힐링 호캉스, 켄싱턴 호텔", l:"전 객실 오션뷰·인피니티 풀·선셋 디너 — 리조트 데이 미리보기", a:"담담트립" },
     ],
     6: [
       { ty:"article", b:"마이리얼트립", u:"https://experiences.myrealtrip.com/products/4218182", t:"사이판 오션뷰 코랄오션 골프+리조트 패키지", l:"코럴 오션 18홀 라운딩 상품 정보 — 카트·픽업 포함 구성과 요금 감 잡기", a:"마이리얼트립" },
-      { ty:"blog", b:"블로그", u:"https://zzintravel.com/603", t:"사이판 켄싱턴호텔 리뷰", l:"7개 레스토랑·인피니티 풀·투명 카약 등 리조트 어메니티 실투숙 후기", a:"찐 여행자" },
-      { ty:"article", b:"트립닷컴", u:"https://kr.trip.com/moments/detail/saipan-569-16508487/", t:"사이판 찐 힐링 호캉스, 켄싱턴 호텔", l:"전 객실 오션뷰·인피니티 풀·선셋 디너 — 리조트 데이 오후 미리보기", a:"담담트립" },
       { ty:"blog", b:"네이버 블로그", u:"https://m.blog.naver.com/sallyjmj/223420441495", t:"포비든아일랜드 투어 후기 (하이킹·스노클링·동굴)", l:"골프 대신 택할 수 있는 옵션 코스 — 긴팔·긴바지 추천 등 실전 팁", a:"sallyjmj" },
     ],
     7: [
@@ -135,10 +130,6 @@ window.SAIPAN = (function(){
       { id:"cn3aRvVlgx0", spot:"테테토 · 스위밍 홀", title:"로타 여행 코스 베스트", line:"테테토 비치와 스위밍 홀 동선", src:"떠나자!영맨" },
       { id:"fe2hzQkw9PU", spot:"로타섬 핵심 스팟", title:"로타 꼭 가봐야 할 곳", line:"마리아나 관광청 공식 소개", src:"마리아나 관광청" },
     ],
-    5: [
-      { id:"g8Pd8roMvK8", spot:"마나가하 섬", title:"마나가하 프리다이빙", line:"리프 에지와 라군 분위기", src:"아무튼 도전중" },
-      { id:"3O6uxziQqfU", spot:"보트 스노클링", title:"마나가하 호핑투어", line:"거북이와 열대어 포인트 미리보기", src:"맨블 MANVEL" },
-    ],
     6: [
       { id:"8SXZt6TCc1k", spot:"포비든 아일랜드 (옵션)", title:"트레킹 + 스노클링 코스", line:"골프 대신 택한다면 — 옵션 코스 미리보기", src:"작은숲" },
     ],
@@ -157,10 +148,7 @@ window.SAIPAN = (function(){
   const WING        = [15.2705, 145.7902];   // 윙 비치
   const GROTTO      = [15.2604, 145.8239];   // 그로토 (OSM 검증)
   const LAULAU      = [15.1627, 145.7623];   // 라우라우 비치 파크 (OSM 검증)
-  const CHARLIE     = [15.2248, 145.7347];   // 찰리독 (마나가하 페리 선착장)
-  const MANAGAHA    = [15.2414, 145.7127];   // 마나가하 섬
-  const MANAGAHA_N  = [15.2445, 145.7105];   // 마나가하 북쪽 리프 에지
-  const WRECK       = [15.2382, 145.7133];   // 수상기 렉 (±150m 추정)
+  const CHARLIE     = [15.2248, 145.7347];   // 찰리독 (선셋 크루즈 선착장)
   const FORBIDDEN_T = [15.1570, 145.7830];   // 포비든 트레킹 입구 (추정) — 현재 옵션 코스
   const FORBIDDEN   = [15.1506, 145.7896];   // 포비든 내추럴 풀 (보정) — 현재 옵션 코스
   const CORAL_OCEAN = [15.1150, 145.7017];   // 코럴 오션 리조트 골프장 (OSM 검증 — 프로샵, 켄싱턴 계열)
@@ -207,13 +195,10 @@ window.SAIPAN = (function(){
         {n:'사이판 공항', ll:SPN_AIRPORT, mode:'fly'},
         {n:'켄싱턴 호텔 (인피니티 풀 선셋)', ll:KENSINGTON, mode:'drive'},
       ]},
-    { label:'Day 5 · 9/14 월', title:'마나가하 프리다이빙',
+    { label:'Day 5 · 9/14 월', title:'켄싱턴 리조트 데이 🏖️',
       stops:[
-        {n:'켄싱턴 호텔 (07:40 출발)', ll:KENSINGTON},
-        {n:'찰리독 (08:20 첫 배)', ll:CHARLIE, mode:'drive'},
-        {n:'마나가하 섬 🐠', ll:MANAGAHA, mode:'boat'},
-        {n:'북쪽 리프 에지 (프리다이빙)', ll:MANAGAHA_N, mode:'trek'},
-        {n:'수상기 렉 (옵션 보트)', ll:WRECK, mode:'boat'},
+        {n:'켄싱턴 리조트 (인피니티 풀 · 투명 카약 · 스파)', ll:KENSINGTON},
+        {n:'파우파우 비치 하우스리프 스노클 (도보)', ll:PAUPAU, mode:'drive'},
       ]},
     { label:'Day 6 · 9/15 화', title:'코럴 오션 골프 데이 ⛳',
       stops:[
