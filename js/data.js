@@ -105,11 +105,10 @@ window.SAIPAN = (function(){
       { ty:"youtube", id:"m23azI3zIRs", u:"https://www.youtube.com/watch?v=m23azI3zIRs", t:"마나가하 도착하면 이 자리부터 잡으세요", l:"입도 직후 명당 선점 요령 팁 영상", a:"구트의 여행정보" },
     ],
     6: [
-      { ty:"blog", b:"네이버 블로그", u:"https://m.blog.naver.com/sallyjmj/223420441495", t:"포비든아일랜드 투어 후기 (하이킹·스노클링·동굴)", l:"긴팔·긴바지 추천 등 실전 팁 포함 후기", a:"sallyjmj" },
-      { ty:"blog", b:"네이버 블로그", u:"https://m.blog.naver.com/narae9073/224232171767", t:"2026년 3월 포비든아일랜드 투어 일지", l:"트레킹+히든케이브 스노클링 최신 후기", a:"narae9073" },
-      { ty:"youtube", id:"8SXZt6TCc1k", u:"https://www.youtube.com/watch?v=8SXZt6TCc1k", t:"포비든아일랜드 트래킹+스노클링", l:"트레킹부터 내추럴 풀까지 전체 코스 브이로그", a:"작은숲" },
-      { ty:"youtube", id:"PZmeO4yW0mQ", u:"https://www.youtube.com/watch?v=PZmeO4yW0mQ", t:"비밀의 섬 포비든 아일랜드", l:"한적한 트레킹과 스노클링 매력을 담은 영상", a:"비타고" },
-      { ty:"youtube", id:"4gMTBqL62uI", u:"https://www.youtube.com/watch?v=4gMTBqL62uI", t:"Forbidden Island — BEST hike?", l:"가이드 없이 자력 하이킹한 영어 영상 — 지형·난이도 파악", a:"The Life of Reilly" },
+      { ty:"article", b:"마이리얼트립", u:"https://experiences.myrealtrip.com/products/4218182", t:"사이판 오션뷰 코랄오션 골프+리조트 패키지", l:"코럴 오션 18홀 라운딩 상품 정보 — 카트·픽업 포함 구성과 요금 감 잡기", a:"마이리얼트립" },
+      { ty:"blog", b:"블로그", u:"https://zzintravel.com/603", t:"사이판 켄싱턴호텔 리뷰", l:"7개 레스토랑·인피니티 풀·투명 카약 등 리조트 어메니티 실투숙 후기", a:"찐 여행자" },
+      { ty:"article", b:"트립닷컴", u:"https://kr.trip.com/moments/detail/saipan-569-16508487/", t:"사이판 찐 힐링 호캉스, 켄싱턴 호텔", l:"전 객실 오션뷰·인피니티 풀·선셋 디너 — 리조트 데이 오후 미리보기", a:"담담트립" },
+      { ty:"blog", b:"네이버 블로그", u:"https://m.blog.naver.com/sallyjmj/223420441495", t:"포비든아일랜드 투어 후기 (하이킹·스노클링·동굴)", l:"골프 대신 택할 수 있는 옵션 코스 — 긴팔·긴바지 추천 등 실전 팁", a:"sallyjmj" },
     ],
     7: [
       { ty:"blog", b:"블로그", u:"https://traveldive.co.kr/18", t:"사이판 가라판 맛집 총정리", l:"다이버 시점 별점 평가 — 포땀·컨트리하우스 등 6곳", a:"TravelDive" },
@@ -141,8 +140,7 @@ window.SAIPAN = (function(){
       { id:"3O6uxziQqfU", spot:"보트 스노클링", title:"마나가하 호핑투어", line:"거북이와 열대어 포인트 미리보기", src:"맨블 MANVEL" },
     ],
     6: [
-      { id:"8SXZt6TCc1k", spot:"포비든 아일랜드", title:"트레킹 + 스노클링 코스", line:"내추럴 풀까지 이어지는 전체 동선", src:"작은숲" },
-      { id:"PZmeO4yW0mQ", spot:"히든 코스트", title:"비밀의 섬 포비든", line:"한적한 트레킹과 바다 풍경", src:"비타고" },
+      { id:"8SXZt6TCc1k", spot:"포비든 아일랜드 (옵션)", title:"트레킹 + 스노클링 코스", line:"골프 대신 택한다면 — 옵션 코스 미리보기", src:"작은숲" },
     ],
     7: [
       { id:"y5mT6BDXG3w", spot:"가라판 · 마지막 밤", title:"사이판 시내와 선셋 분위기", line:"쇼핑과 저녁 코스 감 잡기", src:"오하제 Ohaje" },
@@ -163,8 +161,9 @@ window.SAIPAN = (function(){
   const MANAGAHA    = [15.2414, 145.7127];   // 마나가하 섬
   const MANAGAHA_N  = [15.2445, 145.7105];   // 마나가하 북쪽 리프 에지
   const WRECK       = [15.2382, 145.7133];   // 수상기 렉 (±150m 추정)
-  const FORBIDDEN_T = [15.1570, 145.7830];   // 포비든 트레킹 입구 (추정)
-  const FORBIDDEN   = [15.1506, 145.7896];   // 포비든 내추럴 풀 (보정)
+  const FORBIDDEN_T = [15.1570, 145.7830];   // 포비든 트레킹 입구 (추정) — 현재 옵션 코스
+  const FORBIDDEN   = [15.1506, 145.7896];   // 포비든 내추럴 풀 (보정) — 현재 옵션 코스
+  const CORAL_OCEAN = [15.1150, 145.7017];   // 코럴 오션 리조트 골프장 (OSM 검증 — 프로샵, 켄싱턴 계열)
   const ILOVESAIPAN = [15.2130, 145.7196];   // 아이러브사이판 (가라판)
   const GARAPAN     = [15.2069, 145.7192];   // 가라판 레스토랑
   const ROTA_AIRPORT= [14.1743, 145.2425];   // 로타 공항
@@ -192,7 +191,7 @@ window.SAIPAN = (function(){
       ]},
     { label:'Day 3 · 9/12 토', title:'로타 이동 · 로타 홀 빛내림',
       stops:[
-        {n:'켄싱턴 호텔 (짐 보관)', ll:KENSINGTON},
+        {n:'켄싱턴 호텔 (연박 — 짐은 방에)', ll:KENSINGTON},
         {n:'사이판 공항', ll:SPN_AIRPORT, mode:'drive'},
         {n:'로타 공항 (경비행기 30분)', ll:ROTA_AIRPORT, mode:'fly'},
         {n:'로타 숙소 체크인 (송송)', ll:SONGSONG, mode:'drive'},
@@ -206,7 +205,7 @@ window.SAIPAN = (function(){
         {n:'스위밍 홀 (천연 풀)', ll:SWIM_HOLE, mode:'drive'},
         {n:'로타 공항', ll:ROTA_AIRPORT, mode:'drive'},
         {n:'사이판 공항', ll:SPN_AIRPORT, mode:'fly'},
-        {n:'켄싱턴 호텔', ll:KENSINGTON, mode:'drive'},
+        {n:'켄싱턴 호텔 (인피니티 풀 선셋)', ll:KENSINGTON, mode:'drive'},
       ]},
     { label:'Day 5 · 9/14 월', title:'마나가하 프리다이빙',
       stops:[
@@ -216,16 +215,15 @@ window.SAIPAN = (function(){
         {n:'북쪽 리프 에지 (프리다이빙)', ll:MANAGAHA_N, mode:'trek'},
         {n:'수상기 렉 (옵션 보트)', ll:WRECK, mode:'boat'},
       ]},
-    { label:'Day 6 · 9/15 화', title:'포비든 내추럴 풀 (썰물)',
+    { label:'Day 6 · 9/15 화', title:'코럴 오션 골프 데이 ⛳',
       stops:[
-        {n:'켄싱턴 호텔', ll:KENSINGTON},
-        {n:'트레킹 입구 🥾', ll:FORBIDDEN_T, mode:'drive'},
-        {n:'내추럴 풀 · 히든 그로토', ll:FORBIDDEN, mode:'trek'},
+        {n:'켄싱턴 호텔 (이른 출발)', ll:KENSINGTON},
+        {n:'코럴 오션 골프장 ⛳ 18홀 라운딩', ll:CORAL_OCEAN, mode:'drive'},
+        {n:'켄싱턴 복귀 — 풀 · 스파 마무리', ll:KENSINGTON, mode:'drive'},
       ]},
-    { label:'Day 7 · 9/16 수', title:'윙 비치 옵션 · 가라판 마지막 밤',
+    { label:'Day 7 · 9/16 수', title:'리조트 모닝 · 가라판 마지막 밤',
       stops:[
-        {n:'켄싱턴 호텔', ll:KENSINGTON},
-        {n:'윙 비치 (옵션 · 잔잔한 날)', ll:WING, mode:'drive'},
+        {n:'켄싱턴 리조트 모닝 (인피니티 풀 · 카약)', ll:KENSINGTON},
         {n:'아이러브사이판 쇼핑 🛍️', ll:ILOVESAIPAN, mode:'drive'},
         {n:'가라판 디너 🥂', ll:GARAPAN, mode:'drive'},
         {n:'선셋 크루즈 (옵션) 🌅', ll:CHARLIE, mode:'boat'},
