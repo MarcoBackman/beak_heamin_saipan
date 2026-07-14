@@ -53,7 +53,12 @@
       '</ul></section>' +
       '<section><h4>🎒 챙길 것</h4><ul class="dm-bring">' +
         d.bring.map((b, i) => row('d' + dayNum + '-b' + i, '', b)).join('') +
-      '</ul></section>';
+      '</ul></section>' +
+      (d.tips && d.tips.length
+        ? '<section><h4>💡 꿀팁</h4><ul class="dm-tips">' +
+            d.tips.map(t => '<li>' + esc(t) + '</li>').join('') +
+          '</ul></section>'
+        : '');
     modal.classList.add('on');
     document.body.style.overflow = 'hidden';
     modal.querySelector('.dm-close').focus();

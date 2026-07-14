@@ -559,6 +559,13 @@
   .dm-bring{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
   .dm-bring li{border-top:1px solid var(--border)}
   .dm-bring li:nth-child(-n+2){border-top:0}
+  .dm-tips{list-style:none}
+  .dm-tips li{
+    position:relative;padding:8px 10px 8px 26px;
+    font-size:14px;line-height:1.55;color:var(--text-82);
+  }
+  .dm-tips li::before{content:"·";position:absolute;left:12px;font-weight:700}
+  .dm-tips li + li{border-top:1px solid var(--border)}
   .dm-hint{font-size:12px;color:var(--muted);margin-top:14px}
   @media (max-width:560px){
     .detail-modal{padding:12px}
