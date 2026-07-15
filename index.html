@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="./css/base.css?v=1">
 <link rel="stylesheet" href="./css/map.css?v=1">
-<link rel="stylesheet" href="./css/components.css?v=3">
+<link rel="stylesheet" href="./css/components.css?v=4">
 <link rel="stylesheet" href="./css/responsive.css?v=3">
 <link rel="stylesheet" href="./css/weather.css?v=4">
 </head>
@@ -22,6 +22,7 @@
       <a href="#flights">항공편</a>
       <a href="#checklist">체크리스트</a>
       <a href="#staycompare">숙박 비교</a>
+      <a href="#transport">이동수단</a>
       <a href="#spotguide">스팟 가이드</a>
       <a href="#days">일정</a>
       <button class="btn-dark" id="printBtn" onclick="window.print()">인쇄 / PDF 저장</button>
@@ -202,6 +203,112 @@
         </div>
         <div class="verdict" id="calcVerdict"></div>
         <div class="note"><span class="ico">ℹ️</span><span>로타 경비행기·숙소비는 <b>두 옵션에 똑같이 드는 공통 비용</b>이라 총액에는 포함되지만, 두 옵션의 차액에는 영향을 주지 않습니다.</span></div>
+      </div>
+    </section>
+
+    <!-- 이동수단 가성비 -->
+    <section id="transport">
+      <h2>이동수단 가성비 — 렌터카 vs 택시</h2>
+      <p class="lede">사이판은 우버도 시내버스도 없고, 택시는 전화 호출제입니다. 지도에 쓰인 OSRM 실측 경로 기준 사이판 총 주행거리 약 200km(로타는 렌터카 확정이라 제외)로 두 방식의 총비용을 비교했습니다.</p>
+
+      <div class="stay-tabs">
+        <button class="stay-tab on" data-panel="trCompare">⚖️ 금액 비교 · 결론</button>
+        <button class="stay-tab" data-panel="trRent">🚗 렌터카 상세</button>
+        <button class="stay-tab" data-panel="trTaxi">🚕 택시 상세 · 요금표</button>
+      </div>
+
+      <div class="stay-panel on" id="trCompare">
+        <h3>금액 비교 계산기</h3>
+        <p class="pd">확인된 요금으로 값을 바꾸면 총액이 바로 갱신됩니다. 입력값은 이 브라우저에 저장됩니다.</p>
+        <div class="calc-fields">
+          <label class="field"><span>렌터카 1일 요금 ($)<small>보험 포함 — 소형 $45 · 준중형 $55 · 중형 $70 (한인 업체 시세)</small></span><input type="number" id="trRate" value="55" min="0" step="5"></label>
+          <label class="field"><span>렌트 일수<small>D2 아침 인수 → D8 새벽 반납 풀렌트 6일 · 로타 1박 반납형 5일</small></span><input type="number" id="trDays" value="6" min="0" max="8" step="1"></label>
+          <label class="field"><span>완전면책 ZDC ($/일)<small>사고 시 자기부담금 0 옵션 — 소형 $8 ~ 대형 $15</small></span><input type="number" id="trZdc" value="8" min="0" step="1"></label>
+          <label class="field"><span>유가 ($/갤런)<small>2026년 3월 사이판 보통휘발유 $6.37 — 급등 추세라 재확인</small></span><input type="number" id="trGas" value="6.4" min="0" step="0.1"></label>
+          <label class="field"><span>택시 구간 합계 ($)<small>택시 탭의 요금표 기준 D2~D8 전 구간 합산 — 기본 $355</small></span><input type="number" id="trTaxiSum" value="355" min="0" step="5"></label>
+          <label class="field"><span>택시 팁 (%)<small>미국령 관례 10~15%</small></span><input type="number" id="trTip" value="10" min="0" max="30" step="1"></label>
+          <label class="field"><span>투어 픽업으로 대체 ($)<small>그로토·라우라우는 가이드 투어 픽업 포함이 일반적 — 포함이면 110, 아니면 0</small></span><input type="number" id="trPickup" value="110" min="0" step="5"></label>
+        </div>
+        <div class="totals">
+          <div class="total-card" id="trCardA">
+            <div class="lbl">🚗 렌터카</div>
+            <div class="amt" id="trTotalA">–</div>
+            <div class="sub" id="trSubA"></div>
+            <span class="win-tag">더 저렴</span>
+          </div>
+          <div class="total-card" id="trCardB">
+            <div class="lbl">🚕 택시 (+투어 픽업)</div>
+            <div class="amt" id="trTotalB">–</div>
+            <div class="sub" id="trSubB"></div>
+            <span class="win-tag">더 저렴</span>
+          </div>
+        </div>
+        <div class="verdict" id="trVerdict"></div>
+        <div class="note"><span class="ico">💡</span><span>켄싱턴 패키지에 <b>공항 픽업·샌딩</b>이 포함되면 택시 합계에서 D8 새벽 공항행 $35를 빼세요. D6 골프도 켄싱턴과 코럴 오션이 <b>같은 이랜드 계열</b>이라 셔틀 제공 여부를 컨시어지에 확인해볼 가치가 있습니다 (제공 시 −$90).</span></div>
+      </div>
+
+      <div class="stay-panel" id="trRent">
+        <h3>렌터카 — 풀렌트 기준 (D2 아침 인수 → D8 새벽 반납)</h3>
+        <p class="pd">사이판은 한국과 같은 <b>좌핸들·우측통행</b>이고 최고 제한속도 35mph(약 56km/h)라 운전 난도가 낮습니다. 한국 면허로 30일까지 운전 가능(여권 지참, 국제면허 병행 권장). 한인 업체는 호텔 딜리버리·공항 무인 반납을 지원하는 곳이 많아 새벽 출국과도 잘 맞습니다.</p>
+        <div class="pros-cons">
+          <div class="pc">
+            <h4>👍 장점</h4>
+            <ul>
+              <li>🌊 바람·너울 따라 동서 해안 스팟을 즉시 스위칭 — 9월 우기 일정과 궁합 최고</li>
+              <li>🌙 D8 새벽 3시 공항 이동이 예약·호출 불확실성 없이 보장</li>
+              <li>🤿 젖은 장비·웨이트·골프백 운반이 자유로움</li>
+              <li>🚕 그로토·라우라우·윙 비치 등 빈 택시가 없는 스팟 커버</li>
+              <li>🛒 마트 장보기·야경 드라이브 등 일정 외 기동력</li>
+            </ul>
+          </div>
+          <div class="pc">
+            <h4>👎 단점</h4>
+            <ul>
+              <li>🅿️ 로타 1박(D3~D4) 동안 차가 놀게 됨 — 공항 주차 or 반납·재인수 (업체와 협의)</li>
+              <li>🍷 가라판 디너·선셋 크루즈 저녁은 음주 시 운전 불가 — 그날은 택시 병행</li>
+              <li>⛽ 2026년 유가 급등 — 갤런당 $6.4 수준 (한국보다 비쌈)</li>
+              <li>💥 사고 시 처리 부담 — ZDC(완전면책) 가입 권장</li>
+              <li>🕑 D2 새벽 2시 도착 직후엔 인수 불가 — 첫날은 호텔 픽업, 렌트는 아침부터</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><span class="ico">💵</span><span>요금 근거 — 한인 업체(상지렌트카 등) 보험 포함 1일: 도요타 에코 $45 · 코롤라 $55 · 캠리 $70 · 랭글러 4WD $90. 완전면책(ZDC) 추가 시 +$8~15/일. 예약 시점 시세는 달라질 수 있으니 2~3곳 비교 견적을 권합니다.</span></div>
+      </div>
+
+      <div class="stay-panel" id="trTaxi">
+        <h3>택시 — 호출제 · 미터 요금</h3>
+        <p class="pd">미터기 기준 <b>기본 $2.50 + ¼마일당 $0.75</b>(≈ 마일당 $3). 호출은 SMJ·APS 등 콜택시 전화 또는 호텔 프런트 연계로 합니다. 아래 요금은 공개 시세와 지도 실측 거리 기반 미터 추정(≈ 표시)입니다.</p>
+        <table class="fare-tbl">
+          <thead><tr><th>구간</th><th>실측 거리</th><th>예상 요금 (편도)</th></tr></thead>
+          <tbody>
+            <tr><td>공항 → 켄싱턴 호텔</td><td>24.4km</td><td>$30~40 <span class="src">시세</span></td></tr>
+            <tr><td>켄싱턴 → 가라판 시내</td><td>10.9km</td><td>$20 <span class="src">시세</span></td></tr>
+            <tr><td>켄싱턴 → 그로토</td><td>약 11km</td><td>≈$25 <span class="src">미터 추정</span></td></tr>
+            <tr><td>그로토 → 라우라우 베이</td><td>23.3km</td><td>≈$45 <span class="src">미터 추정</span></td></tr>
+            <tr><td>켄싱턴 → 코럴 오션 골프장</td><td>22.3km</td><td>≈$44 <span class="src">미터 추정</span></td></tr>
+            <tr><td>아이러브사이판 → 가라판</td><td>1.2km</td><td>≈$5 <span class="src">미터 추정</span></td></tr>
+          </tbody>
+        </table>
+        <div class="pros-cons">
+          <div class="pc">
+            <h4>👍 장점</h4>
+            <ul>
+              <li>🍷 저녁 술자리(디너·크루즈) 완전 자유</li>
+              <li>😌 운전·주차·사고 걱정 zero</li>
+              <li>🤝 다이빙 투어 픽업과 조합하면 이동비가 크게 줄어듦</li>
+            </ul>
+          </div>
+          <div class="pc">
+            <h4>👎 단점</h4>
+            <ul>
+              <li>📵 우버 없음·버스 없음 — 전화 호출만 가능, 대기 시간 발생</li>
+              <li>🏝️ 그로토·라우라우 등 원격 스팟엔 빈 택시가 없어 돌아올 차를 미리 협상해야 함 (대기비 별도)</li>
+              <li>🌙 D8 새벽 3시 공항행은 전날 예약 필수</li>
+              <li>💵 팁 10~15% 관례 — 구간 합산하면 렌터카와 비슷한 총액</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><span class="ico">ℹ️</span><span>일정의 그로토·라우라우는 <b>한국어 가이드 투어로 진행 예정</b>이라 호텔 픽업이 포함될 가능성이 높습니다 — 예약 때 픽업 포함 여부를 확인하고, 포함이면 금액 비교 탭의 '투어 픽업으로 대체'에 110을 그대로 두세요.</span></div>
       </div>
     </section>
 
@@ -597,7 +704,8 @@
 <script defer src="./js/lightbox.js?v=1"></script>
 <script defer src="./js/checklist.js?v=1"></script>
 <script defer src="./js/day-detail.js?v=2"></script>
-<script defer src="./js/stay-calc.js?v=1"></script>
+<script defer src="./js/stay-calc.js?v=2"></script>
+<script defer src="./js/transport-calc.js?v=1"></script>
 <script defer src="./js/spots.js?v=2"></script>
 <script defer src="./js/refs.js?v=1"></script>
 <script defer src="./js/reveal.js?v=1"></script>

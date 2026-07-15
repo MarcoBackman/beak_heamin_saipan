@@ -1,10 +1,12 @@
 /* ═══════════ 숙박 전략 비교 — 탭 & 계산기 ═══════════ */
 (function(){
-  const tabs = document.querySelectorAll('.stay-tab');
+  /* 탭 토글은 섹션 스코프로 — 같은 클래스를 쓰는 다른 섹션(#transport)과 간섭 방지 */
+  const scope = document.getElementById('staycompare');
+  const tabs = scope.querySelectorAll('.stay-tab');
   tabs.forEach(btn => {
     btn.addEventListener('click', () => {
       tabs.forEach(b => b.classList.toggle('on', b === btn));
-      document.querySelectorAll('.stay-panel').forEach(p =>
+      scope.querySelectorAll('.stay-panel').forEach(p =>
         p.classList.toggle('on', p.id === btn.dataset.panel));
     });
   });
