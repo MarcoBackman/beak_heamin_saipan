@@ -92,6 +92,8 @@
     box-shadow:0 1px 4px rgba(0,0,0,.08);
   }
   .leaflet-tooltip.leg-tip{font-weight:600;white-space:nowrap}
+  .leaflet-tooltip.leg-tip small{display:block;font-weight:400;font-size:11px;color:var(--muted);margin-top:1px}
+  .map-legend a{color:inherit;text-decoration:underline;text-underline-offset:2px}
   .leaflet-tooltip-top.stop-tip::before{border-top-color:var(--border)}
   .leaflet-tooltip-bottom.stop-tip::before{border-bottom-color:var(--border)}
   .leaflet-tooltip-left.stop-tip::before{border-left-color:var(--border)}

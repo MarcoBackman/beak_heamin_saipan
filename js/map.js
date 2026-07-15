@@ -105,10 +105,21 @@
     const tip = meta.icon+' '+meta.nm+' '+fmtDur(min)+(route ? ' · '+distKm.toFixed(1)+'km' : '');
     return { mode, pts, stop:cur, tip };
   }
+  /* 이동수단 비교 섹션으로 이동 — 모바일 지도 오버레이는 닫고 스크롤 */
+  function goTransport(){
+    if (S.closeMapOverlay) S.closeMapOverlay();
+    const el = document.getElementById('transport');
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+  const legendLink = document.getElementById('legendTransport');
+  if (legendLink) legendLink.addEventListener('click', e => { e.preventDefault(); goTransport(); });
+
   /* 얇은 선 위 hover 판정용 투명 히트라인 + 소요시간 툴팁 */
   function addLegTip(latlngs, tip){
     L.polyline(latlngs, { color:'#000', opacity:0, weight:18 })
-      .bindTooltip(tip, { sticky:true, className:'stop-tip leg-tip', direction:'top', offset:[0,-10] })
+      .bindTooltip(tip + '<br><small>클릭 → 렌터카 vs 택시 비교</small>',
+        { sticky:true, className:'stop-tip leg-tip', direction:'top', offset:[0,-10] })
+      .on('click', goTransport)
       .addTo(routeLayer);
   }
 

@@ -42,6 +42,7 @@
     if (S.goToDay) S.goToDay(currentIdx, true);
   });
   S.openMapOverlay = open;
+  S.closeMapOverlay = close;
 
   /* 인라인 지도 가시성 ↔ FAB 표시 토글 */
   const io = new IntersectionObserver(entries => {
