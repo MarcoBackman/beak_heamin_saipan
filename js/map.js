@@ -41,11 +41,34 @@
   };
 
   const LINE_STYLE = {
-    drive:{ color:'#1c1c1c', weight:3,   opacity:.85 },
-    fly:  { color:'#1c1c1c', weight:2.5, opacity:.6, dashArray:'3 9' },
-    boat: { color:'#1c1c1c', weight:2.5, opacity:.6, dashArray:'1 7', lineCap:'round' },
-    trek: { color:'#1c1c1c', weight:2.5, opacity:.7, dashArray:'1 5', lineCap:'round' },
+    drive:{ color:'#1c1c1c', weight:3,   opacity:.85, interactive:false },
+    fly:  { color:'#1c1c1c', weight:2.5, opacity:.6, dashArray:'3 9', interactive:false },
+    boat: { color:'#1c1c1c', weight:2.5, opacity:.6, dashArray:'1 7', lineCap:'round', interactive:false },
+    trek: { color:'#1c1c1c', weight:2.5, opacity:.7, dashArray:'1 5', lineCap:'round', interactive:false },
   };
+  const MODE_META = {
+    drive:{ icon:'🚗', nm:'차량',   kmh:35 },
+    fly:  { icon:'✈️', nm:'비행',   kmh:250 },
+    boat: { icon:'⛵', nm:'보트',   kmh:14 },
+    trek: { icon:'🥾', nm:'트레킹', kmh:3.5 },
+  };
+
+  /* routes.js — OSRM으로 미리 받아둔 실제 도로 경로 (없으면 직선 폴백) */
+  const ROUTES = window.SAIPAN_ROUTES || {};
+  function routeKey(a, b){
+    return a[0].toFixed(4)+','+a[1].toFixed(4)+'|'+b[0].toFixed(4)+','+b[1].toFixed(4);
+  }
+  function havKm(a, b){
+    const R=6371, dLat=(b[0]-a[0])*Math.PI/180, dLon=(b[1]-a[1])*Math.PI/180;
+    const s=Math.sin(dLat/2)**2 + Math.cos(a[0]*Math.PI/180)*Math.cos(b[0]*Math.PI/180)*Math.sin(dLon/2)**2;
+    return 2*R*Math.asin(Math.sqrt(s));
+  }
+  function fmtDur(min){
+    min = Math.max(1, Math.round(min));
+    if (min < 60) return '약 '+min+'분';
+    const h = Math.floor(min/60), m = min%60;
+    return '약 '+h+'시간'+(m ? ' '+m+'분' : '');
+  }
 
   function interp(a, b, n){
     const pts = [];
@@ -68,6 +91,25 @@
     const d = Math.hypot(b[0]-a[0], b[1]-a[1]);
     const n = Math.max(14, Math.min(60, Math.round(d*220)));
     return (mode==='fly') ? arc(a,b,n) : interp(a,b,n);
+  }
+
+  /* 구간 정보 — 실제 경로·예상 소요시간 계산 */
+  function buildLeg(prev, cur){
+    const mode = cur.mode || 'drive';
+    const meta = MODE_META[mode];
+    const route = mode === 'drive' ? ROUTES[routeKey(prev.ll, cur.ll)] : null;
+    /* 경로 양끝은 도로에 스냅됨 — 핀 좌표를 끝에 이어붙여 마커와 선을 연결 */
+    const pts = route ? route.pts.concat([cur.ll]) : legPts(prev.ll, cur.ll, mode);
+    const distKm = route ? route.dist/1000 : havKm(prev.ll, cur.ll) * (mode==='drive' ? 1.3 : 1);
+    const min = cur.min != null ? cur.min : (route ? route.dur/60 : distKm/meta.kmh*60);
+    const tip = meta.icon+' '+meta.nm+' '+fmtDur(min)+(route ? ' · '+distKm.toFixed(1)+'km' : '');
+    return { mode, pts, stop:cur, tip };
+  }
+  /* 얇은 선 위 hover 판정용 투명 히트라인 + 소요시간 툴팁 */
+  function addLegTip(latlngs, tip){
+    L.polyline(latlngs, { color:'#000', opacity:0, weight:18 })
+      .bindTooltip(tip, { sticky:true, className:'stop-tip leg-tip', direction:'top', offset:[0,-10] })
+      .addTo(routeLayer);
   }
 
   function pinIcon(num){
@@ -137,17 +179,17 @@
 
     routeLayer.clearLayers();
 
-    const realStops = day.stops.filter(s => !s.virtual);
-    const bounds = L.latLngBounds(day.stops.map(s => s.ll));
-    lastBounds = bounds;
-    map.flyToBounds(bounds, { padding:[52,52], duration: animate ? .8 : 0, maxZoom:13 });
-
     /* 구간(leg) 목록 구성 */
     const legs = [];
     for (let i=1; i<day.stops.length; i++){
-      const prev = day.stops[i-1], cur = day.stops[i];
-      legs.push({ mode:cur.mode||'drive', pts:legPts(prev.ll, cur.ll, cur.mode||'drive'), stop:cur });
+      legs.push(buildLeg(day.stops[i-1], day.stops[i]));
     }
+
+    const bounds = L.latLngBounds(day.stops.map(s => s.ll));
+    /* 실제 도로 경로가 정류지 박스 밖으로 돌아가는 경우 포함 */
+    legs.forEach(leg => { if (leg.mode === 'drive') leg.pts.forEach(p => bounds.extend(p)); });
+    lastBounds = bounds;
+    map.flyToBounds(bounds, { padding:[52,52], duration: animate ? .8 : 0, maxZoom:13 });
 
     let numCounter = 0;
     if (!day.stops[0].virtual) addStopMarker(day.stops[0], ++numCounter);
@@ -156,6 +198,7 @@
       let prevLL = day.stops[0].ll;
       legs.forEach((leg, i) => {
         L.polyline([prevLL, ...leg.pts], LINE_STYLE[leg.mode]).addTo(routeLayer);
+        addLegTip([prevLL, ...leg.pts], leg.tip);
         const nextLeg = legs[i+1];
         const nextFlyLL = nextLeg && nextLeg.mode === 'fly' && nextLeg.stop.virtual ? nextLeg.stop.ll : null;
         if (!leg.stop.virtual) addStopMarker(leg.stop, ++numCounter, prevLL, nextFlyLL);
@@ -188,6 +231,7 @@
         mover.setLatLng(slice[slice.length-1]);
         if (k < total){ requestAnimationFrame(frame); }
         else {
+          addLegTip([startLL, ...leg.pts], leg.tip);
           const nextLeg = legs[legIdx+1];
           const nextFlyLL = nextLeg && nextLeg.mode === 'fly' && nextLeg.stop.virtual ? nextLeg.stop.ll : null;
           if (!leg.stop.virtual) addStopMarker(leg.stop, ++numCounter, startLL, nextFlyLL);

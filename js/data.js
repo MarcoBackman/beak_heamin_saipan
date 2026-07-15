@@ -162,12 +162,13 @@ window.SAIPAN = (function(){
   const TETETO      = [14.1728, 145.1897];   // 테테토 비치 (보정)
   const FROM_ICN    = [15.6200, 145.3300];   // 인천 방향 (화면 밖 연출용)
 
-  /* mode: 이전 지점에서 이 지점까지 오는 이동수단 (drive | fly | boat | trek) */
+  /* mode: 이전 지점에서 이 지점까지 오는 이동수단 (drive | fly | boat | trek)
+     min : 예상 이동 소요 분 — fly·boat 구간용. drive는 routes.js의 OSRM 실측값을 사용 */
   const DAYS = [
     { label:'Day 1 · 9/10 목', title:'인천 출발 → 사이판으로',
       stops:[
         {n:'인천에서 오는 하늘길', ll:FROM_ICN, virtual:true},
-        {n:'사이판 국제공항 (9/11 02:00 도착)', ll:SPN_AIRPORT, mode:'fly'},
+        {n:'사이판 국제공항 (9/11 02:00 도착)', ll:SPN_AIRPORT, mode:'fly', min:280},
       ]},
     { label:'Day 2 · 9/11 금', title:'파우파우 → 그로토 → 라우라우',
       stops:[
@@ -181,9 +182,9 @@ window.SAIPAN = (function(){
       stops:[
         {n:'켄싱턴 호텔 (연박 — 짐은 방에)', ll:KENSINGTON},
         {n:'사이판 공항', ll:SPN_AIRPORT, mode:'drive'},
-        {n:'로타 공항 (경비행기 30분)', ll:ROTA_AIRPORT, mode:'fly'},
+        {n:'로타 공항 (경비행기 30분)', ll:ROTA_AIRPORT, mode:'fly', min:30},
         {n:'로타 숙소 체크인 (송송)', ll:SONGSONG, mode:'drive'},
-        {n:'로타 홀 빛내림 ✨ (보트)', ll:ROTA_HOLE, mode:'boat'},
+        {n:'로타 홀 빛내림 ✨ (보트)', ll:ROTA_HOLE, mode:'boat', min:20},
         {n:'피나탕 파크', ll:PINATANG, mode:'drive'},
       ]},
     { label:'Day 4 · 9/13 일', title:'테테토 · 스위밍 홀 → 복귀',
@@ -192,7 +193,7 @@ window.SAIPAN = (function(){
         {n:'테테토 비치 아침 수영', ll:TETETO, mode:'drive'},
         {n:'스위밍 홀 (천연 풀)', ll:SWIM_HOLE, mode:'drive'},
         {n:'로타 공항', ll:ROTA_AIRPORT, mode:'drive'},
-        {n:'사이판 공항', ll:SPN_AIRPORT, mode:'fly'},
+        {n:'사이판 공항', ll:SPN_AIRPORT, mode:'fly', min:30},
         {n:'켄싱턴 호텔 (인피니티 풀 선셋)', ll:KENSINGTON, mode:'drive'},
       ]},
     { label:'Day 5 · 9/14 월', title:'켄싱턴 리조트 데이 🏖️',
@@ -211,13 +212,13 @@ window.SAIPAN = (function(){
         {n:'켄싱턴 리조트 모닝 (인피니티 풀 · 카약)', ll:KENSINGTON},
         {n:'아이러브사이판 쇼핑 🛍️', ll:ILOVESAIPAN, mode:'drive'},
         {n:'가라판 디너 🥂', ll:GARAPAN, mode:'drive'},
-        {n:'선셋 크루즈 (옵션) 🌅', ll:CHARLIE, mode:'boat'},
+        {n:'선셋 크루즈 (옵션) 🌅', ll:CHARLIE, mode:'boat', min:15},
       ]},
     { label:'Day 8 · 9/17 목', title:'새벽 비행기로 귀국',
       stops:[
         {n:'켄싱턴 호텔 체크아웃', ll:KENSINGTON},
         {n:'사이판 공항 (03:05 출발)', ll:SPN_AIRPORT, mode:'drive'},
-        {n:'인천으로 🇰🇷', ll:FROM_ICN, virtual:true, mode:'fly'},
+        {n:'인천으로 🇰🇷', ll:FROM_ICN, virtual:true, mode:'fly', min:285},
       ]},
   ];
 
