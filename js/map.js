@@ -114,13 +114,24 @@
   const legendLink = document.getElementById('legendTransport');
   if (legendLink) legendLink.addEventListener('click', e => { e.preventDefault(); goTransport(); });
 
-  /* 얇은 선 위 hover 판정용 투명 히트라인 + 소요시간 툴팁 */
+  /* 얇은 선 위 hover 판정용 투명 히트라인 + 소요시간 툴팁.
+     터치 기기(hover 없음)는 첫 탭에 툴팁만 열고, 같은 선을 한 번 더 탭하면 이동 */
+  const TOUCH_ONLY = window.matchMedia('(hover: none)').matches;
+  let armedLeg = null;
   function addLegTip(latlngs, tip){
-    L.polyline(latlngs, { color:'#000', opacity:0, weight:18 })
-      .bindTooltip(tip + '<br><small>클릭 → 렌터카 vs 택시 비교</small>',
-        { sticky:true, className:'stop-tip leg-tip', direction:'top', offset:[0,-10] })
-      .on('click', goTransport)
-      .addTo(routeLayer);
+    const hint = TOUCH_ONLY ? '한 번 더 탭 → 렌터카 vs 택시 비교' : '클릭 → 렌터카 vs 택시 비교';
+    const line = L.polyline(latlngs, { color:'#000', opacity:0, weight:18 })
+      .bindTooltip(tip + '<br><small>' + hint + '</small>',
+        { sticky:true, className:'stop-tip leg-tip', direction:'top', offset:[0,-10] });
+    line.on('click', e => {
+      if (TOUCH_ONLY && armedLeg !== line){
+        armedLeg = line;
+        line.openTooltip(e.latlng);
+        return;
+      }
+      goTransport();
+    });
+    line.addTo(routeLayer);
   }
 
   function pinIcon(num){
