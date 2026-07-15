@@ -222,7 +222,7 @@
         <p class="pd">확인된 요금으로 값을 바꾸면 총액이 바로 갱신됩니다. 입력값은 이 브라우저에 저장됩니다.</p>
         <div class="calc-fields">
           <label class="field"><span>렌터카 1일 요금 ($)<small>보험 포함 — 소형 $45 · 준중형 $55 · 중형 $70 (한인 업체 시세)</small></span><input type="number" id="trRate" value="55" min="0" step="5"></label>
-          <label class="field"><span>렌트 일수<small>D2 아침 인수 → D8 새벽 반납 풀렌트 6일 · 로타 1박 반납형 5일</small></span><input type="number" id="trDays" value="6" min="0" max="8" step="1"></label>
+          <label class="field"><span>렌트 일수<small>로타 1박 공항 반납·재인수형 5일 권장 · 내리 빌리면 6일</small></span><input type="number" id="trDays" value="5" min="0" max="8" step="1"></label>
           <label class="field"><span>완전면책 ZDC ($/일)<small>사고 시 자기부담금 0 옵션 — 소형 $8 ~ 대형 $15</small></span><input type="number" id="trZdc" value="8" min="0" step="1"></label>
           <label class="field"><span>유가 ($/갤런)<small>2026년 3월 사이판 보통휘발유 $6.37 — 급등 추세라 재확인</small></span><input type="number" id="trGas" value="6.4" min="0" step="0.1"></label>
           <label class="field"><span>택시 구간 합계 ($)<small>택시 탭의 요금표 기준 D2~D8 전 구간 합산 — 기본 $355</small></span><input type="number" id="trTaxiSum" value="355" min="0" step="5"></label>
@@ -244,12 +244,12 @@
           </div>
         </div>
         <div class="verdict" id="trVerdict"></div>
-        <div class="note"><span class="ico">💡</span><span>켄싱턴 패키지에 <b>공항 픽업·샌딩</b>이 포함되면 택시 합계에서 D8 새벽 공항행 $35를 빼세요. D6 골프도 켄싱턴과 코럴 오션이 <b>같은 이랜드 계열</b>이라 셔틀 제공 여부를 컨시어지에 확인해볼 가치가 있습니다 (제공 시 −$90).</span></div>
+        <div class="note"><span class="ico">💡</span><span>켄싱턴 자체 공항 셔틀은 <b>24시간 운행하지만 유료</b>입니다(OTA 어메니티 정보 확인) — 패키지에 픽업·샌딩이 포함됐는지 <b>예약 확인서로 확인</b>하고, 포함이면 택시 합계에서 D8 새벽 공항행 $35를 빼세요. 미포함이면 사설 샌딩 $25~35/차량(켄싱턴 등 북부는 +$10 받는 업체도). D6 골프는 켄싱턴과 코럴 오션이 <b>같은 이랜드 계열</b>이라 셔틀 제공 여부를 컨시어지에 확인해볼 가치가 있습니다 (제공 시 −$90).</span></div>
       </div>
 
       <div class="stay-panel" id="trRent">
         <h3>렌터카 — 풀렌트 기준 (D2 아침 인수 → D8 새벽 반납)</h3>
-        <p class="pd">사이판은 한국과 같은 <b>좌핸들·우측통행</b>이고 최고 제한속도 35mph(약 56km/h)라 운전 난도가 낮습니다. 한국 면허로 30일까지 운전 가능(여권 지참, 국제면허 병행 권장). 한인 업체는 호텔 딜리버리·공항 무인 반납을 지원하는 곳이 많아 새벽 출국과도 잘 맞습니다.</p>
+        <p class="pd">사이판은 한국과 같은 <b>좌핸들·우측통행</b>이고 최고 제한속도 35mph(약 56km/h)라 운전 난도가 낮습니다. 한국 면허로 30일까지 운전 가능(여권 지참, 국제면허 병행 권장). 한인 업체는 호텔 딜리버리와 <b>공항 주차장 무인 인수·반납(새벽 가능, 주차장 사용료 없음)</b>을 지원하는 곳이 많아 새벽 출국·로타 반납형과 잘 맞습니다.</p>
         <div class="pros-cons">
           <div class="pc">
             <h4>👍 장점</h4>
@@ -264,7 +264,7 @@
           <div class="pc">
             <h4>👎 단점</h4>
             <ul>
-              <li>🅿️ 로타 1박(D3~D4) 동안 차가 놀게 됨 — 공항 주차 or 반납·재인수 (업체와 협의)</li>
+              <li>🅿️ 로타 1박(D3~D4)은 <b>D3 공항 반납 → D4 재인수</b>가 정석 — 공항 주차가 30분 $3·시간당 $5로 인상(2023)돼 차를 두고 가면 손해</li>
               <li>🍷 가라판 디너·선셋 크루즈 저녁은 음주 시 운전 불가 — 그날은 택시 병행</li>
               <li>⛽ 2026년 유가 급등 — 갤런당 $6.4 수준 (한국보다 비쌈)</li>
               <li>💥 사고 시 처리 부담 — ZDC(완전면책) 가입 권장</li>
