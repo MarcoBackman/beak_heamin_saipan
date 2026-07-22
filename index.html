@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>백승준 ♥ 장혜민 — 사이판 · 로타 허니문</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ccircle cx='46' cy='18' r='8' fill='%23fde68a'/%3E%3Cpath d='M12 46c7-9 17-12 30-9 4 1 8 3 12 6v9H12z' fill='%23f8fafc'/%3E%3Cpath d='M28 44c3-12 5-21 4-31' stroke='%2378350f' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M31 16c-9-2-15 1-20 8 8 0 15 0 22-5zM33 15c5-7 12-9 21-5-6 4-12 8-22 8zM33 20c9 2 14 7 17 15-7-3-13-6-19-12zM29 19c-8 2-13 8-15 17 7-4 12-8 17-14z' fill='%2322c55e'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="./css/base.css?v=1">
+<link rel="stylesheet" href="./css/map.css?v=3">
+<link rel="stylesheet" href="./css/components.css?v=9">
+<link rel="stylesheet" href="./css/responsive.css?v=3">
+<link rel="stylesheet" href="./css/weather.css?v=4">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <span class="brand">사이판 · 로타 🌴</span>
+    <div class="links" id="navLinks">
+      <a href="#flights">항공편</a>
+      <a href="#checklist">체크리스트</a>
+      <a href="#staycompare">숙박 비교</a>
+      <a href="#transport">이동수단</a>
+      <a href="#spotguide">스팟 가이드</a>
+      <a href="#days">일정</a>
+      <button class="btn-dark" id="printBtn" onclick="window.print()">인쇄 / PDF 저장</button>
+    </div>
+    <button class="bgm-btn" id="bgmBtn" title="배경음악 켜기" aria-label="배경음악 켜기/끄기">🎵</button>
+    <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow">신랑 백승준 ♥ 신부 장혜민 · Honeymoon 2026</span>
+  <h1>사이판 &amp; 로타<br>허니문 여행</h1>
+  <p class="sub">그로토의 푸른 빛부터 로타 홀의 빛 내림까지,<br>둘이 함께 쓰는 8일간의 바다 일기.</p>
+  <div class="meta">
+    <span>📅 9월 10일(목) – 9월 17일(목)</span>
+    <span>✈️ 제주항공 직항</span>
+    <span>🏨 켄싱턴 7박 연박 (골프·리조트 패키지) + 로타 1박</span>
+    <span>🤿 프리다이빙 · ⛳ 골프</span>
+  </div>
+  <figure class="hero-photo">
+    <img src="./img/hero-grotto.jpg" alt="그로토 — 수중 동굴 천장에서 쏟아지는 푸른 빛기둥과 다이버들">
+    <figcaption>사이판의 푸른 눈, 그로토 · 사진 <a href="https://commons.wikimedia.org/wiki/File:Curtain_Call_(4570968992).jpg" target="_blank" rel="noopener">tata_aka_T</a> — CC BY 2.0</figcaption>
+  </figure>
+</header>
+
+<div class="layout">
+
+  <!-- ══════════ 왼쪽: 본문 ══════════ -->
+  <main class="content">
+
+    <!-- 한눈에 보기 -->
+    <section id="glance">
+      <h2>한눈에 보기</h2>
+      <p class="lede">날짜를 누르면 해당 일정으로 이동하고, 오른쪽 지도에 그날의 동선이 그려집니다.</p>
+      <div class="overview" id="overview">
+        <a href="#day1" data-day="0"><span class="d">9/10 목</span><div class="t">인천 출발 ✈️</div></a>
+        <a href="#day2" data-day="1"><span class="d">9/11 금</span><div class="t">그로토 · 라우라우</div></a>
+        <a href="#day3" data-day="2"><span class="d">9/12 토</span><div class="t">로타 홀 빛내림</div></a>
+        <a href="#day4" data-day="3"><span class="d">9/13 일</span><div class="t">테테토 · 스위밍 홀</div></a>
+        <a href="#day5" data-day="4"><span class="d">9/14 월</span><div class="t">리조트 데이 🏖️</div></a>
+        <a href="#day6" data-day="5"><span class="d">9/15 화</span><div class="t">골프 라운딩 ⛳</div></a>
+        <a href="#day7" data-day="6"><span class="d">9/16 수</span><div class="t">리조트 · 마지막 밤</div></a>
+        <a href="#day8" data-day="7"><span class="d">9/17 목</span><div class="t">귀국 🇰🇷</div></a>
+      </div>
+    </section>
+
+    <!-- 항공편 -->
+    <section id="flights">
+      <h2>항공편</h2>
+      <p class="lede">제주항공 인천 ↔ 사이판 직항, 인천공항 1터미널.</p>
+      <div class="flights">
+        <div class="flight">
+          <span class="no">7C3211</span>
+          <div class="dir">가는 편 · 9/10(목)</div>
+          <div class="route">서울 <span class="arrow">→</span> 사이판</div>
+          <div class="times">
+            <b>20:20</b> 인천 1터미널 출발<br>
+            <b>02:00</b> 사이판 도착 <span style="color:var(--muted)">(9/11 금, 현지)</span>
+          </div>
+        </div>
+        <div class="flight">
+          <span class="no">7C3212</span>
+          <div class="dir">오는 편 · 9/17(목)</div>
+          <div class="route">사이판 <span class="arrow">→</span> 서울</div>
+          <div class="times">
+            <b>03:05</b> 사이판 출발<br>
+            <b>06:50</b> 인천 1터미널 도착
+          </div>
+        </div>
+      </div>
+      <details class="ticket">
+        <summary>예약 스크린샷 보기</summary>
+        <img src="./img/itinerary.jpg" alt="제주항공 예약 상세 — 7C3211 / 7C3212" loading="lazy">
+      </details>
+    </section>
+
+    <!-- 체크리스트 -->
+    <section id="checklist">
+      <h2>출발 전 체크리스트</h2>
+      <p class="lede">체크 상태는 이 브라우저에 자동 저장됩니다.</p>
+      <div class="checklist">
+        <ul id="checkItems">
+          <li><label><input type="checkbox" data-k="passport"><span>여권, 비자</span></label></li>
+          <li><label><input type="checkbox" data-k="money"><span>돈, 카드</span></label></li>
+          <li><label><input type="checkbox" data-k="gear"><span>카메라, 수영 핀, 스노클</span></label></li>
+          <li><label><input type="checkbox" data-k="ticket"><span>비행기 표</span></label></li>
+          <li><label><input type="checkbox" data-k="luggage"><span>캐리어, 옷</span></label></li>
+          <li><label><input type="checkbox" data-k="food"><span>비상 식량 (건조)</span></label></li>
+        </ul>
+        <p class="hint">✓ 항목을 누르면 완료 표시됩니다.</p>
+      </div>
+    </section>
+
+    <!-- 숙박 전략 비교 -->
+    <section id="staycompare">
+      <h2>숙박 전략 비교</h2>
+      <p class="lede">✅ <b>옵션 A(7박 연박 + 골프·리조트 어메니티 패키지)로 예약 확정!</b> 아래 비교와 계산기는 결정 당시 기록으로 남겨둡니다.</p>
+      <div class="stay-tabs">
+        <button class="stay-tab on" data-panel="stayA">🏨 옵션 A · 7박 연박 ✅ 예약 완료</button>
+        <button class="stay-tab" data-panel="stayB">✂️ 옵션 B · 분할 예약 2박+4박</button>
+        <button class="stay-tab" data-panel="stayC">⚖️ 비용 계산기</button>
+      </div>
+
+      <div class="stay-panel on" id="stayA">
+        <h3>옵션 A — 켄싱턴 7박 연박 유지 <span style="color:var(--muted);font-weight:600">· ✅ 이 옵션으로 예약 완료</span></h3>
+        <p class="pd">9/10 밤부터 9/16 밤까지 7박을 통으로 예약하고, 로타에 가는 9/12 밤에는 켄싱턴 방을 비워둔 채 다녀오는 방식입니다. 골프 등 리조트 어메니티가 포함되어 <b>Day 6 코럴 오션 골프 데이</b>와 <b>Day 7 리조트 모닝</b>이 일정에 반영되었습니다. 골프는 켄싱턴과 같은 계열(이랜드)인 <b>코럴 오션 리조트</b> 18홀에서 이용하는 구성 — 정확한 포함 범위(그린피·카트·횟수)는 예약 확인서를 체크하세요.</p>
+        <div class="pros-cons">
+          <div class="pc">
+            <h4>👍 장점</h4>
+            <ul>
+              <li>⛳ 골프 등 리조트 어메니티를 전 일정 그대로 사용</li>
+              <li>🏨 같은 방 유지 — 체크아웃·재체크인 없음</li>
+              <li>🧳 롱핀·웨이트·캐리어를 방에 그대로 두고 로타행 (경비행기 20lb 제한 대응이 깔끔)</li>
+              <li>💵 분할 추가 요금($135/일) 없음</li>
+              <li>🌙 로타 복귀일에 바로 방으로 — 대기·짐 찾기 없음</li>
+            </ul>
+          </div>
+          <div class="pc">
+            <h4>👎 단점</h4>
+            <ul>
+              <li>💸 로타 1박 밤에도 켄싱턴 객실료 지불 — 하루 숙박비 이중 부담</li>
+              <li>🛏️ 하루는 방을 완전히 비워두게 됨 (올인클루시브 식사·시설도 그날은 못 씀)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><span class="ico">💡</span><span>연박 확정으로 Day 3의 "캐리어는 호텔에 맡기기"가 "방에 그대로 두기"로 단순해졌습니다 — 일정에 반영 완료.</span></div>
+      </div>
+
+      <div class="stay-panel" id="stayB">
+        <h3>옵션 B — 분할 예약 (2박 + 로타 1박 + 4박)</h3>
+        <p class="pd">켄싱턴을 9/10~11 2박과 9/13~16 4박으로 나눠 예약하고, 9/12 밤은 로타 숙소만 이용하는 방식입니다. 켄싱턴 1박을 아끼는 대신 분할 조건이 붙습니다.</p>
+        <div class="pros-cons">
+          <div class="pc">
+            <h4>👍 장점</h4>
+            <ul>
+              <li>💵 로타 밤(9/12)의 켄싱턴 객실료 1박 절약</li>
+              <li>🛏️ 안 쓰는 방에 돈을 내지 않는다는 심리적 깔끔함</li>
+            </ul>
+          </div>
+          <div class="pc">
+            <h4>👎 단점</h4>
+            <ul>
+              <li>💸 분할 예약 시 하루 $135 추가 요금 (적용 기준 확인 필요)</li>
+              <li>⛳ 골프 어메니티 사용 불가</li>
+              <li>🔁 체크아웃·재체크인 2회 — 같은 방·뷰 보장 없음</li>
+              <li>🧳 짐은 프런트 보관 — 복귀일 방 배정까지 대기 가능성</li>
+              <li>📋 예약 2건 관리 (변경·취소 조건도 각각)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><span class="ico">⚠️</span><span>"하루 $135"가 <b>1회성인지, 분할된 박수마다 붙는지</b>, 그리고 골프 어메니티 제외 조건이 정확히 무엇인지 예약처에 꼭 확인하세요. 확인한 값을 <b>비용 계산기</b>에 넣으면 바로 비교됩니다.</span></div>
+      </div>
+
+      <div class="stay-panel" id="stayC">
+        <h3>비용 계산기</h3>
+        <p class="pd">확인된 요금·조건을 입력하면 두 분기의 총비용을 바로 비교합니다. 입력값은 이 브라우저에 저장됩니다.</p>
+        <div class="calc-fields">
+          <label class="field"><span>켄싱턴 1박 요금 ($)<small>세금·수수료 포함 1박 평균가</small></span><input type="number" id="calcRate" value="400" min="0" step="10"></label>
+          <label class="field"><span>분할 추가 요금 ($/일)<small>분할 예약 시 하루당 추가된다고 안내받은 금액</small></span><input type="number" id="calcFee" value="135" min="0" step="5"></label>
+          <label class="field"><span>추가 요금 적용 일수<small>박수마다 부과되면 6, 1회성이면 1</small></span><input type="number" id="calcDays" value="6" min="0" max="7" step="1"></label>
+          <label class="field"><span>골프 어메니티 가치 ($)<small>분할 시 못 쓰는 혜택의 체감 가치 — 라운딩 계획 없으면 0</small></span><input type="number" id="calcGolf" value="100" min="0" step="10"></label>
+          <label class="field"><span>로타 경비행기 왕복 ($)<small>스타 마리아나스 2인 왕복 — $165/인 편도 기준 $660</small></span><input type="number" id="calcAir" value="660" min="0" step="10"></label>
+          <label class="field"><span>로타 숙소 1박 ($)<small>9/12 밤 로타섬 숙소 요금</small></span><input type="number" id="calcRota" value="150" min="0" step="10"></label>
+        </div>
+        <div class="totals">
+          <div class="total-card" id="cardA">
+            <div class="lbl">🏨 옵션 A · 연박 유지</div>
+            <div class="amt" id="totalA">–</div>
+            <div class="sub" id="subA"></div>
+            <span class="win-tag">더 저렴</span>
+          </div>
+          <div class="total-card" id="cardB">
+            <div class="lbl">✂️ 옵션 B · 분할 예약</div>
+            <div class="amt" id="totalB">–</div>
+            <div class="sub" id="subB"></div>
+            <span class="win-tag">더 저렴</span>
+          </div>
+        </div>
+        <div class="verdict" id="calcVerdict"></div>
+        <div class="note"><span class="ico">ℹ️</span><span>로타 경비행기·숙소비는 <b>두 옵션에 똑같이 드는 공통 비용</b>이라 총액에는 포함되지만, 두 옵션의 차액에는 영향을 주지 않습니다.</span></div>
+      </div>
+    </section>
+
+    <!-- 이동수단 가성비 -->
+    <section id="transport">
+      <h2>이동수단 가성비 — 렌터카 vs 택시</h2>
+      <p class="lede">사이판은 우버도 시내버스도 없고, 택시는 전화 호출제입니다. 지도에 쓰인 OSRM 실측 경로 기준 사이판 총 주행거리 약 200km(로타는 렌터카 확정이라 제외)로 두 방식의 총비용을 비교했습니다.</p>
+
+      <div class="stay-tabs">
+        <button class="stay-tab on" data-panel="trCompare">⚖️ 금액 비교 · 결론</button>
+        <button class="stay-tab" data-panel="trRent">🚗 렌터카 상세</button>
+        <button class="stay-tab" data-panel="trTaxi">🚕 택시 상세 · 요금표</button>
+      </div>
+
+      <div class="stay-panel on" id="trCompare">
+        <h3>금액 비교 계산기</h3>
+        <p class="pd">확인된 요금으로 값을 바꾸면 총액이 바로 갱신됩니다. 입력값은 이 브라우저에 저장됩니다.</p>
+        <div class="calc-fields">
+          <label class="field"><span>렌터카 1일 요금 ($)<small>보험 포함 — 소형 $45 · 준중형 $55 · 중형 $70 (한인 업체 시세)</small></span><input type="number" id="trRate" value="55" min="0" step="5"></label>
+          <label class="field"><span>렌트 일수<small>로타 1박 공항 반납·재인수형 5일 권장 · 내리 빌리면 6일</small></span><input type="number" id="trDays" value="5" min="0" max="8" step="1"></label>
+          <label class="field"><span>완전면책 ZDC ($/일)<small>사고 시 자기부담금 0 옵션 — 소형 $8 ~ 대형 $15</small></span><input type="number" id="trZdc" value="8" min="0" step="1"></label>
+          <label class="field"><span>유가 ($/갤런)<small>2026년 3월 사이판 보통휘발유 $6.37 — 급등 추세라 재확인</small></span><input type="number" id="trGas" value="6.4" min="0" step="0.1"></label>
+          <label class="field"><span>택시 구간 합계 ($)<small>택시 탭의 요금표 기준 D2~D8 전 구간 합산 — 기본 $355</small></span><input type="number" id="trTaxiSum" value="355" min="0" step="5"></label>
+          <label class="field"><span>택시 팁 (%)<small>미국령 관례 10~15%</small></span><input type="number" id="trTip" value="10" min="0" max="30" step="1"></label>
+          <label class="field"><span>투어 픽업으로 대체 ($)<small>그로토·라우라우는 가이드 투어 픽업 포함이 일반적 — 포함이면 110, 아니면 0</small></span><input type="number" id="trPickup" value="110" min="0" step="5"></label>
+        </div>
+        <div class="totals">
+          <div class="total-card" id="trCardA">
+            <div class="lbl">🚗 렌터카</div>
+            <div class="amt" id="trTotalA">–</div>
+            <div class="sub" id="trSubA"></div>
+            <span class="win-tag">더 저렴</span>
+          </div>
+          <div class="total-card" id="trCardB">
+            <div class="lbl">🚕 택시 (+투어 픽업)</div>
+            <div class="amt" id="trTotalB">–</div>
+            <div class="sub" id="trSubB"></div>
+            <span class="win-tag">더 저렴</span>
+          </div>
+        </div>
+        <div class="verdict" id="trVerdict"></div>
+        <div class="note"><span class="ico">💡</span><span>켄싱턴 자체 공항 셔틀은 <b>24시간 운행하지만 유료</b>입니다(OTA 어메니티 정보 확인) — 패키지에 픽업·샌딩이 포함됐는지 <b>예약 확인서로 확인</b>하고, 포함이면 택시 합계에서 D8 새벽 공항행 $35를 빼세요. 미포함이면 사설 샌딩 $25~35/차량(켄싱턴 등 북부는 +$10 받는 업체도). D6 골프는 켄싱턴과 코럴 오션이 <b>같은 이랜드 계열</b>인 데다 코럴 오션에 <b>무료 지역 셔틀</b> 어메니티가 있어 컨시어지 확인 가치가 충분합니다 (제공 시 −$90) — 단 일반 라운딩 이용권은 픽업 불포함(개별 이동)이 기본입니다.</span></div>
+      </div>
+
+      <div class="stay-panel" id="trRent">
+        <h3>렌터카 — 풀렌트 기준 (D2 아침 인수 → D8 새벽 반납)</h3>
+        <p class="pd">사이판은 한국과 같은 <b>좌핸들·우측통행</b>이고 최고 제한속도 35mph(약 56km/h)라 운전 난도가 낮습니다. 한국 면허로 30일까지 운전 가능(여권 지참, 국제면허 병행 권장). 한인 업체는 호텔 딜리버리와 <b>공항 주차장 무인 인수·반납(새벽 가능, 주차장 사용료 없음)</b>을 지원하는 곳이 많아 새벽 출국·로타 반납형과 잘 맞습니다.</p>
+        <div class="pros-cons">
+          <div class="pc">
+            <h4>👍 장점</h4>
+            <ul>
+              <li>🌊 바람·너울 따라 동서 해안 스팟을 즉시 스위칭 — 9월 우기 일정과 궁합 최고</li>
+              <li>🌙 D8 새벽 3시 공항 이동이 예약·호출 불확실성 없이 보장</li>
+              <li>🤿 젖은 장비·웨이트·골프백 운반이 자유로움</li>
+              <li>🚕 그로토·라우라우·윙 비치 등 빈 택시가 없는 스팟 커버</li>
+              <li>🛒 마트 장보기·야경 드라이브 등 일정 외 기동력</li>
+            </ul>
+          </div>
+          <div class="pc">
+            <h4>👎 단점</h4>
+            <ul>
+              <li>🅿️ 로타 1박(D3~D4)은 <b>D3 공항 반납 → D4 재인수</b>가 정석 — 공항 주차가 30분 $3·시간당 $5로 인상(2023)돼 차를 두고 가면 손해</li>
+              <li>🍷 가라판 디너·선셋 크루즈 저녁은 음주 시 운전 불가 — 그날은 택시 병행</li>
+              <li>⛽ 2026년 유가 급등 — 갤런당 $6.4 수준 (한국보다 비쌈)</li>
+              <li>💥 사고 시 처리 부담 — ZDC(완전면책) 가입 권장</li>
+              <li>🕑 D2 새벽 2시 도착 직후엔 인수 불가 — 첫날은 호텔 픽업, 렌트는 아침부터</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><span class="ico">💵</span><span>요금 근거 — 한인 업체(상지렌트카 등) 보험 포함 1일: 도요타 에코 $45 · 코롤라 $55 · 캠리 $70 · 랭글러 4WD $90. 완전면책(ZDC) 추가 시 +$8~15/일. 예약 시점 시세는 달라질 수 있으니 2~3곳 비교 견적을 권합니다.</span></div>
+      </div>
+
+      <div class="stay-panel" id="trTaxi">
+        <h3>택시 — 호출제 · 미터 요금</h3>
+        <p class="pd">미터기 기준 <b>기본 $2.50 + ¼마일당 $0.75</b>(≈ 마일당 $3). 호출은 SMJ·APS 등 콜택시 전화 또는 호텔 프런트 연계로 합니다. 아래 요금은 공개 시세와 지도 실측 거리 기반 미터 추정(≈ 표시)입니다.</p>
+        <table class="fare-tbl">
+          <thead><tr><th>구간</th><th>실측 거리</th><th>예상 요금 (편도)</th></tr></thead>
+          <tbody>
+            <tr><td>공항 → 켄싱턴 호텔</td><td>24.4km</td><td>$30~40 <span class="src">시세</span></td></tr>
+            <tr><td>켄싱턴 → 가라판 시내</td><td>10.9km</td><td>$20 <span class="src">시세</span></td></tr>
+            <tr><td>켄싱턴 → 그로토</td><td>약 11km</td><td>≈$25 <span class="src">미터 추정</span></td></tr>
+            <tr><td>그로토 → 라우라우 베이</td><td>23.3km</td><td>≈$45 <span class="src">미터 추정</span></td></tr>
+            <tr><td>켄싱턴 → 코럴 오션 골프장</td><td>22.3km</td><td>≈$44 <span class="src">미터 추정</span></td></tr>
+            <tr><td>아이러브사이판 → 가라판</td><td>1.2km</td><td>≈$5 <span class="src">미터 추정</span></td></tr>
+          </tbody>
+        </table>
+        <div class="pros-cons">
+          <div class="pc">
+            <h4>👍 장점</h4>
+            <ul>
+              <li>🍷 저녁 술자리(디너·크루즈) 완전 자유</li>
+              <li>😌 운전·주차·사고 걱정 zero</li>
+              <li>🤝 다이빙 투어 픽업과 조합하면 이동비가 크게 줄어듦</li>
+            </ul>
+          </div>
+          <div class="pc">
+            <h4>👎 단점</h4>
+            <ul>
+              <li>📵 우버 없음·버스 없음 — 전화 호출만 가능, 대기 시간 발생</li>
+              <li>🏝️ 그로토·라우라우 등 원격 스팟엔 빈 택시가 없어 돌아올 차를 미리 협상해야 함 (대기비 별도)</li>
+              <li>🌙 D8 새벽 3시 공항행은 전날 예약 필수</li>
+              <li>💵 팁 10~15% 관례 — 구간 합산하면 렌터카와 비슷한 총액</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><span class="ico">ℹ️</span><span>일정의 그로토·라우라우는 <b>한국어 가이드 투어로 진행 예정</b>이라 호텔 픽업이 포함될 가능성이 높습니다 — 예약 때 픽업 포함 여부를 확인하고, 포함이면 금액 비교 탭의 '투어 픽업으로 대체'에 110을 그대로 두세요.</span></div>
+      </div>
+    </section>
+
+    <!-- 스팟 가이드 -->
+    <section id="spotguide">
+      <h2>프리다이빙 · 수영 스팟 가이드</h2>
+      <p class="lede">수심·난이도·물때까지 웹 검증을 거친 스팟 정보입니다. '지도에서 보기'를 누르면 지도가 그 위치로 날아갑니다.</p>
+      <div class="island-title">🏝️ 사이판</div>
+      <div class="spotgrid" id="spotsSaipan"></div>
+      <div class="island-title" style="margin-top:32px">🌴 로타</div>
+      <div class="spotgrid" id="spotsRota"></div>
+
+      <h3 class="practical-title">🤿 프리다이빙 실전 정보</h3>
+      <div class="practical">
+        <details>
+          <summary>🎫 다이빙 투어 상품 · 예약 (한국어 업체)</summary>
+          <div class="body">그로토·로타 홀은 개별 접근이 어려워 <b>투어 예약</b>이 사실상 전제입니다. 상품·가격을 한눈에 정리했어요 — 요금은 2025년 기준이라 예약 때 재확인하세요.<br><br>
+          <b>🤿 그로토 체험 프리다이빙 (Day 2)</b><br>
+          • <b>히포(HIFO)</b> — 판매가 147,000원(정가 20만). 프라이빗 소수 진행 + 수중 촬영 스틸컷 제공. 카카오톡 채널 <b>'히포사이판'</b>으로 상담·예약.<br>
+          • <b>다이브위시(DIVEWISH)</b> — PADI 프리다이버 강사 진행. 체험뿐 아니라 프리다이빙·머메이드 <b>자격증 코스</b>도 운영.<br><br>
+          <b>🐠 그로토 체험 스쿠버다이빙 (자격증·수영 실력 불필요)</b><br>
+          • <b>아띠다이브</b> — 사이판에서 <b>그로토 스쿠버는 아띠다이브만</b> 진행. 강사 1 : 다이버 2 인솔이라 초보·비수영자도 OK, '세계 3대 동굴 다이빙 포인트'를 수중 시점으로 봅니다. 마이리얼트립·트래블포레스트에서 약 5만~11만원대(스노클+체험 패키지). 프리다이빙과 다른 각도로 그로토를 보고 싶을 때 좋은 옵션.<br><br>
+          <b>🚤 마나가하 보트 스노클 · 체험다이빙 (자유일 옵션)</b><br>
+          • <b>마이리얼트립</b> 등 — 왕복 호텔 픽업 + 왕복 보트 포함 66,400원~. 보트 산호 스노클/체험다이빙은 선택 추가. <b>환경세 $10 + 부두세 $3</b>와 장비 렌탈(조끼·수경·오리발 각 $5)은 현장 별도 현금.<br><br>
+          <b>🌴 로타 홀 보트 투어 (Day 3)</b><br>
+          • <b>Sea People's Rota</b> — 로타 홀·센하놈은 <b>보트 전용</b>이라 이 업체 투어가 사실상 유일 경로. 프리다이빙·스쿠버·스노클·트롤링까지. 가격은 인원·코스별 개별 견적 — 공식 사이트 <b>seapeoples.life</b>로 문의(빛내림 성수기라 조기 예약 권장).<br><br>
+          <b>💡 예약 팁</b> — ① 그로토 수영 목적 입장료 <b>1인 $5</b>가 투어비에 포함되는지 확인. ② 한국어 업체는 대부분 <b>장비 렌탈 + 숙소 무료 픽드랍</b> 포함(예약 때 확인). ③ 프라이빗 소수 진행 업체는 날짜가 빨리 차니 <b>2~3주 전 예약</b> 권장.</div>
+        </details>
+        <details>
+          <summary>🌦️ 9월 컨디션과 스팟 스위칭 전략</summary>
+          <div class="body">9월은 우기 절정 + 태풍철이지만 비는 짧은 스콜 위주라 액티비티는 충분히 가능합니다. 수온 29~30°C — 1.5~3mm 슈트나 래시가드+소량 웨이트면 충분. 관건은 비가 아니라 <b>바람·너울</b>: 매일 아침 Windy와 NOAA 괌 예보(weather.gov/gum)·조수표를 보고 동쪽(그로토·라우라우)과 서쪽(파우파우·마나가하) 스팟을 스위칭하세요. ⚠️ 2026년 4월 슈퍼태풍 신라쿠가 사이판을 직격했으므로, 출발 전 그로토 계단 등 시설 복구·개방 여부를 한 번 확인하는 것이 안전합니다.</div>
+        </details>
+        <details>
+          <summary>🛟 프리다이빙 안전 수칙 (둘이서 갈 때)</summary>
+          <div class="body">① 절대 단독 다이빙 금지 — 부부가 서로의 유일한 버디이므로 <b>원업-원다운</b>(한 명은 반드시 수면 감시)을 지키세요. ② 블랙아웃의 약 90%는 수면에서, 99%는 수심 10m 이내에서 발생 — 버디는 마지막 10m 구간을 마중 나가세요. ③ 잠수 전 과호흡 금지, 수면 휴식은 잠수 시간의 2배 이상. ④ 그로토의 수중 출구 밖(외해)으로는 절대 나가지 말 것. ⑤ 부이·랜야드 사용, 낯선 스팟은 현지 가이드와. ⑥ 구조 프로토콜 '블로우-탭-토크' 숙지.</div>
+        </details>
+        <details>
+          <summary>🎓 AIDA2 다이버 — 안전 브리핑 &amp; 권장 장비</summary>
+          <div class="body">두 분 다 <b>AIDA2(2스타)</b> 보유 — 교육 범위인 <b>수심 ~20m·CWT(무게중심 하강)</b>를 상한으로 잡고, 배운 안전·구조 프로토콜을 그대로 지키면 충분합니다.<br><br>
+          <b>🛟 안전 (AIDA2 복습)</b><br>
+          • <b>원업·원다운 직접 감시</b> — 버디는 상승하는 다이버를 <b>마지막 10~15m부터 마중</b>하고, <b>수면 후 최소 30초</b>간 지켜봅니다(블랙아웃·삼바 최다 구간).<br>
+          • <b>블랙아웃 / LMC(삼바)</b> 신호 숙지 → <b>기도 확보 · 블로우-탭-토크</b> 구조, 필요 시 마스크 벗기고 견인. 교육 때 배운 대로 침착하게.<br>
+          • <b>중성부력은 10m에 세팅</b> — 수면·저수심에서 <b>양성부력</b>이어야 블랙아웃 시 몸이 떠오릅니다(가장 중요한 웨이팅 원칙).<br>
+          • 이퀄라이징(프렌젤)이 안 되면 <b>즉시 중단·반환</b> — 절대 밀어붙이지 않기. 상승은 여유 있게, 수면에서 <b>회복 호흡(훅 브리딩)</b>.<br>
+          • <b>훈련 수심 초과 금지</b> — 윙 비치 30m 타워·센하놈 드롭오프(50m+)는 AIDA2 범위 밖, 로타 홀도 입구 12m 선까지만. 욕심내지 않기.<br>
+          • 다이빙 후 <b>비행 전 여유 휴식</b>(로타행·귀국 경비행기) + 수분 보충 — 반복 딥다이빙 후 곧장 비행은 피하세요.<br><br>
+          <b>🧭 권장 장비 세팅</b><br>
+          저용적 마스크(또는 노즈클립+플루이드 고글) · J형 스노클 · 롱핀(바이핀) · 1.5~3mm 프리다이빙 슈트 · <b>고무 웨이트벨트</b> · 수심/시간 알람 되는 다이브 컴퓨터 · <b>부이 + 랜야드 + 라인커터</b>. 9월 수온 29~30°C라 두꺼운 후드는 불필요합니다.</div>
+        </details>
+        <details>
+          <summary>📄 여행자 보험 — 프리다이빙 커버 확인</summary>
+          <div class="body">일반 여행자보험은 프리다이빙을 면책하는 경우가 많으니 약관의 수상레저 조항을 꼭 확인하세요. 다이빙 특화 옵션: <b>DAN World</b> 멤버십+다이빙 보험(긴급 후송 커버 — 사이판처럼 챔버가 사실상 없는 섬에서 특히 중요), <b>World Nomads Explorer</b>(프리다이빙 60m까지 커버). 국내 일반 보험 + 다이빙 보험 이중 가입을 권장합니다.</div>
+        </details>
+        <details>
+          <summary>🧳 장비·수하물 전략 — 제주항공 핀 위탁 규정 ✅ 확인됨</summary>
+          <div class="body"><b>제주항공 공식 규정(확인 완료)</b> — 롱핀·모노핀을 포함한 모든 핀류는 <b>위탁 수하물로 붙일 수 있습니다</b>. 기내 반입은 세 변의 합 115cm·최장변 55cm 이내만 허용되어 롱핀은 기내 불가. 요금은 두 갈래: ① <b>캐리어(일반 위탁 수하물) 안에 넣으면 추가 수수료 없음</b>(무료 한도 내) ② 전용 핀백으로 <b>단독 위탁하면 스포츠 수하물 수수료 — 온라인 사전결제 15,000원/USD 15, 현장 20,000원/USD 20</b> (온라인 결제는 출발 24시간 전까지, 5천 원 절약). 파손이 잦은 품목이라 전용 가방·에어캡 포장을 권장합니다. ⚠️ 수중 랜턴은 위탁 불가 — 배터리 분리 후 기내로. 렌탈: 프리다이빙 투어 업체는 대부분 장비 제공(예약 시 확인), 로타 Sea People's도 렌탈 문의 가능.</div>
+        </details>
+        <details>
+          <summary>🛩️ 경비행기(로타행) 장비 반입 가이드 ✅ 확인됨</summary>
+          <div class="body"><b>스타 마리아나스 공식 규정(확인 완료)</b> — <b>위탁 20lb(9kg) + 개인 소지품 10lb(4.5kg)</b>. 초과분은 <b>파운드당 $1</b> 추가 요금, 세 변 합 62인치(157cm) 초과 시 대형 수하물 요금. 초과·대형 짐은 '자리 나는 대로(space-available)' 실려 <b>내 비행기가 아닌 다음 편으로 올 수 있으니</b> 당일 꼭 쓸 물건은 휴대 짐(10lb) 쪽에 넣으세요.<br><br>
+          ✅ <b>가져가기 OK</b> — 마스크·스노클, 숏핀, 수영복·래시가드, 1.5~3mm 슈트(무게 여유 시), 다이빙 컴퓨터·시계, 부이·랜야드, 방수백<br>
+          ⚠️ <b>가능하지만 비권장</b> — 롱핀: 크기(62인치 합산)는 통과해도 혼자 20lb 한도를 크게 잠식하고, 대형 취급되면 다음 편으로 밀릴 수 있음. 로타 홀은 보트 투어라 업체 렌탈로 해결하는 것이 정석<br>
+          ❌ <b>두고 가기</b> — 웨이트(납): 무게 초과의 주범, 켄싱턴 방에 보관하고 필요하면 로타 업체에서 렌탈. 대형 하드케이스·캐리어도 호텔에.</div>
+        </details>
+        <details>
+          <summary>🎒 현지 장비 대여소 &amp; 대여 추천 품목</summary>
+          <div class="body">무거운 <b>웨이트(납)·슈트</b>는 항공·경비행기 무게 한도를 크게 잡아먹으니 <b>현지 대여가 정석</b>입니다. 얼굴·발에 맞는 개인 장비만 지참하고 나머지는 빌리세요. (지도 하단 <b>📍 토글</b>을 켜면 대여소·맛집 위치가 표시됩니다.)<br><br>
+          <b>🤿 대여소</b><br>
+          • <b>아쿠아 커넥션 (Aqua Connections)</b> — 가라판 로열팜 애비뉴. 미크로네시아 최대 다이빙 장비점 — 마스크·핀·슈트·웨이트 등 렌탈+판매. 빠진 장비는 여기서 해결.<br>
+          • <b>마사 다이브 (Masa Dive)</b> — 가라판 진저 스트리트. 장비 렌탈 + 보트 스노클. ☎ 670-233-0577<br>
+          • <b>다이브위시 · 히포(HIFO)</b> — 한국어 프리다이빙 업체. 투어·강습에 <b>장비 렌탈 포함</b>이 기본(예약 시 확인), 숙소 무료 픽드랍.<br>
+          • <b>로타 — Sea People's Rota</b> — 로타 홀 보트 투어 업체. 롱핀·웨이트·부이는 <b>로타 현지에서 빌려</b> 경비행기 20lb를 아끼는 게 정석.<br><br>
+          <b>🎯 대여 추천 품목</b><br>
+          ✅ <b>현지 대여</b> — 웨이트+웨이트벨트(항공 무게 주범), 3mm 슈트(없으면), 부이·랜야드, 롱핀(특히 로타 구간)<br>
+          🎒 <b>지참 권장</b> — 저용적 마스크·스노클(얼굴 핏이 중요), 다이브 컴퓨터·시계, 노즈클립, 래시가드·아쿠아슈즈<br>
+          💡 그로토·라우라우(Day 2)는 <b>사이판 대여점</b>에서, 로타 홀(Day 3)은 <b>투어 업체 렌탈</b>로 나눠 준비하면 이동 무게가 최소가 됩니다.</div>
+        </details>
+        <details>
+          <summary>💵 요금 메모</summary>
+          <div class="body">마나가하: 페리 왕복 $20 + 환경세 $10(현금), 첫 배 08:20 · 막배 15:30. 로타 경비행기(스타 마리아나스): 편도 $165(온라인 예약), 약 30분. 포비든 가이드 투어: 성인 약 $85(3시간, 장비 포함). 그로토 입장(수영 목적): $5. ※ 2026년 9월 기준 사전 재확인 권장.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- 일자별 일정 -->
+    <section id="days">
+      <h2>일자별 일정</h2>
+      <p class="lede">스크롤을 내리면 오른쪽 지도가 그날의 동선을 따라 움직입니다.</p>
+
+      <!-- Day 1 -->
+      <article class="day" id="day1" data-day="0">
+        <div class="day-head">
+          <span class="date">9월 10일</span><span class="dow">목요일 · Day 1</span>
+          <div class="tags"><span class="tag">✈️ 이동</span></div>
+        </div>
+        <h3>인천 출발</h3>
+        <ul class="sched">
+          <li><span class="time">17:00</span><span>인천공항으로 출발</span></li>
+          <li><span class="time">20:20</span><span>인천 1터미널에서 사이판행 출발 — 제주항공 <b>7C3211</b></span></li>
+        </ul>
+        <div class="note"><span class="ico">🧳</span><span>출발 전 위의 <a href="#checklist">체크리스트</a>를 마지막으로 한 번 더 확인하세요.</span></div>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day1-1.jpg" alt="인천국제공항 1터미널 출국장" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day1-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day1-2.jpg" alt="활주로의 제주항공 보잉 737" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day1-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day1-3.jpg" alt="제주항공 항공기" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day1-3.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 2 -->
+      <article class="day" id="day2" data-day="1">
+        <div class="day-head">
+          <span class="date">9월 11일</span><span class="dow">금요일 · Day 2</span>
+          <div class="tags"><span class="tag">🤿 다이빙</span><span class="tag">🏨 체크인</span></div>
+        </div>
+        <h3>사이판 도착 &amp; 첫 다이빙 데이트</h3>
+        <ul class="sched">
+          <li><span class="time">02:00</span><span>사이판 공항 도착, 켄싱턴 호텔 픽업 차량 탑승</span></li>
+          <li><span class="time">03:00</span><span>호텔 체크인 및 잠자기 💤</span></li>
+          <li><span class="time">오전</span><span>파우파우 비치(호텔 앞 도보)에서 몸풀기 수영 · 이퀄라이징 연습 🏊</span></li>
+          <li><span class="time">늦은 오전</span><span>그로토 프리다이빙 — 빛기둥은 해가 높은 정오 전후가 최적, 한국어 가이드 투어로 진행</span></li>
+          <li><span class="time">오후</span><span>라우라우 베이 거북이 프리다이빙 🐢 (만조 전후가 진입 수월)</span></li>
+        </ul>
+        <details class="rain-plan">
+          <summary>☔ 우천 시 플랜</summary>
+          <ul>
+            <li>비 자체는 다이빙에 지장 없음(어차피 젖어요) — 문제는 <b>번개·파도·진창</b>. 9월 스콜은 대개 30분~1시간이니 '대피 후 재개'가 1순위 ⏱️</li>
+            <li>스콜이면 순서 스왑: 라우라우 ↔ 그로토 — 갠 쪽부터 재개</li>
+            <li>번개면 입수 중단 → 아메리칸 메모리얼 파크 비지터센터(실내 전시 · 화목금토 09~16시), 조텐 마트 간식 장보기, 호텔 스파</li>
+            <li>그로토 적기(빨간 깃발) 게양 시 무조건 라우라우로 — 당일 아침 가이드 판단 우선</li>
+          </ul>
+        </details>
+        <p class="desc">사랑하는 이와 함께하는 첫 다이빙 데이트! 금요일은 사이판의 보석 같은 포인트들을 방문합니다.</p>
+        <div class="spots">
+          <div class="spot">
+            <div class="name">그로토<span class="en">Grotto</span></div>
+            <p>환상적인 푸른 빛을 내뿜는 동굴 다이빙 — 계단 112개를 내려가 점프 입수, 캐번 수심 18~21m·시야 30m+. 수중 출구 밖(외해)으로는 절대 나가지 말고 반드시 가이드와 함께하세요.</p>
+          </div>
+          <div class="spot">
+            <div class="name">라우라우 비치<span class="en">Lau Lau Beach</span></div>
+            <p>거북이 조우율이 매우 높은 포인트 — '맨 왼쪽 로프' 라인이 핵심 코스입니다. 사이판에서 가장 쉬운 비치 엔트리지만 리프부츠는 필수. 🐢</p>
+          </div>
+        </div>
+        <p class="desc">그로토 다이빙에 대한 더 자세한 정보는 <a href="https://www.google.com/search?q=%EC%82%AC%EC%9D%B4%ED%8C%90+%EA%B7%B8%EB%A1%9C%ED%86%A0+%EB%8B%A4%EC%9D%B4%EB%B9%99" target="_blank" rel="noopener">여기에서 확인</a>하세요.</p>
+        <div class="note"><span class="ico">🌊</span><span>너울로 그로토가 닫히는 날엔 라우라우·오비얀으로 스위칭 — 당일 아침 가이드 업체의 판단을 따르세요. 자세한 정보는 <a href="#spotguide">스팟 가이드</a> 참고.</span></div>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day2-1.jpg" alt="파우파우 비치의 백사장과 라군" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day2-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day2-3.jpg" alt="숨 쉬러 수면으로 올라가는 바다거북" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day2-3.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day2-4.jpg" alt="그로토 동굴 천장에서 쏟아지는 빛" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day2-4.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day2-5.jpg" alt="그로토 수중 출구의 푸른 빛" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day2-5.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day2-6.jpg" alt="위에서 내려다본 그로토 입구" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day2-6.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 3 -->
+      <article class="day" id="day3" data-day="2">
+        <div class="day-head">
+          <span class="date">9월 12일</span><span class="dow">토요일 · Day 3</span>
+          <div class="tags"><span class="tag">🛩️ 이동</span><span class="tag">🤿 다이빙</span></div>
+        </div>
+        <h3>로타섬으로 — 둘만의 오붓한 시간</h3>
+        <ul class="sched">
+          <li><span class="time">09:00–10:00</span><span>로타행 짐 꾸리기 — 연박이라 체크아웃 없음, 캐리어·롱핀·웨이트는 방에 그대로 두고 출발 (경비행기 위탁 20lb 제한)</span></li>
+          <li><span class="time">11:00</span><span>경비행기로 로타섬 이동 (스타 마리아나스, 약 30분)</span></li>
+          <li><span class="time">도착 후</span><span>로타섬 숙소 체크인</span></li>
+          <li><span class="time">오후</span><span>로타 홀 보트 투어 ✨ — 빛내림은 4~9월이 최강 시즌, 프리다이빙 전문 업체와 함께</span></li>
+          <li><span class="time">저녁</span><span>피나탕 파크(숙소 도보권)에서 가벼운 스노클 · 점프 놀이</span></li>
+        </ul>
+        <details class="rain-plan">
+          <summary>☔ 우천 시 플랜</summary>
+          <ul>
+            <li>파도로 로타 홀 보트 취소 시 → 토가 동굴(송송 인근 대형 석회 동굴 · 우천 무관), 송송 빌리지 산책·카페</li>
+            <li>피나탕 파크는 스웰만 없으면 비 와도 가능 — 바깥 수로만 금지</li>
+            <li>빛내림은 내일(D4) 오전 재시도 여지 — 업체와 미리 협의해두기</li>
+            <li>경비행기는 악천후 시 지연될 수 있음 — 오전 일정에 여유 두기 🛩️</li>
+          </ul>
+        </details>
+        <div class="spots">
+          <div class="spot">
+            <div class="name">로타 홀<span class="en">Rota Hole</span></div>
+            <p>천장 개구부로 빛기둥이 쏟아지는 로타의 시그니처 수중 동굴 (입구 12m · 내부 18m, 보트 전용). 투명도가 매우 높아 평생 간직할 인생샷 명소 — 오버헤드 구간이라 가이드 동반 필수. ✨</p>
+          </div>
+          <div class="spot">
+            <div class="name">피나탕 파크<span class="en">Pinatang Park</span></div>
+            <p>송송 빌리지 초입의 씨워터 파크 — 천연 수로와 풀에서 스노클·점프를 즐길 수 있습니다. 바닥에 손 짚지 않기(스톤피시 주의), 스웰 있는 날엔 바깥 수로 진입 금지.</p>
+          </div>
+        </div>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day3-1.jpg" alt="상공에서 내려다본 로타섬" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day3-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day3-2.jpg" alt="로타섬의 해안 절경" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day3-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day3-3.jpg" alt="로타 타가 라테스톤 채석장" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day3-3.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 4 -->
+      <article class="day" id="day4" data-day="3">
+        <div class="day-head">
+          <span class="date">9월 13일</span><span class="dow">일요일 · Day 4</span>
+          <div class="tags"><span class="tag">🏖️ 휴양</span><span class="tag">🛩️ 이동</span></div>
+        </div>
+        <h3>테테토 · 스위밍 홀 &amp; 사이판 복귀</h3>
+        <ul class="sched">
+          <li><span class="time">오전</span><span>테테토 비치(Teteto Beach)에서 여유로운 아침 바다 수영 — 중~만조면 스노클도 쾌적</span></li>
+          <li><span class="time">낮</span><span>스위밍 홀(Swimming Hole) — 공항 가는 길 북쪽 해안의 천연 수영장 (스웰 낮은 날 한정)</span></li>
+          <li><span class="time">오후</span><span>로타섬 출발, 사이판 복귀 — 연박 중인 방으로 바로 (재체크인 없음)</span></li>
+          <li><span class="time">저녁</span><span>켄싱턴 리조트 어메니티 — 인피니티 풀에서 선셋 🌅 후 호텔 레스토랑 디너</span></li>
+        </ul>
+        <details class="rain-plan">
+          <summary>☔ 우천 시 플랜</summary>
+          <ul>
+            <li>우천 시 스위밍 홀 비포장 진입로가 진창 → 과감히 스킵, 테테토 위주로(번개만 아니면 수영 OK)</li>
+            <li>남는 시간엔 토가 동굴·송송 카페 — 오후 비행이라 무리하지 않기</li>
+          </ul>
+        </details>
+        <p class="desc">테테토 비치는 로타섬에서 가장 아름다운 백사장으로 손꼽히며, 사람이 적어 둘만의 프라이빗한 시간을 보내기에 완벽합니다. 스위밍 홀은 암초 링 안에 바닷물이 차오른 천연 풀 — 파도가 리프를 넘어오는 날엔 관망만 하세요.</p>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day4-1.jpg" alt="테테토 비치의 백사장" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day4-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day4-2.jpg" alt="로타 스위밍 홀 — 암초 안의 천연 수영장" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day4-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day4-3.jpg" alt="위에서 내려다본 타나팍 라군" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day4-3.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 5 -->
+      <article class="day" id="day5" data-day="4">
+        <div class="day-head">
+          <span class="date">9월 14일</span><span class="dow">월요일 · Day 5</span>
+          <div class="tags"><span class="tag">🏖️ 리조트</span><span class="tag">🛶 카약</span></div>
+        </div>
+        <h3>켄싱턴 리조트 데이 — 아무것도 안 해도 되는 날</h3>
+        <ul class="sched">
+          <li><span class="time">아침</span><span>늦잠 후 여유로운 조식 — 로타 이틀의 피로를 푸는 회복일 💤</span></li>
+          <li><span class="time">오전</span><span>인피니티 풀 · 메인 풀에서 느긋하게, 책과 칵테일과 바다 🍹</span></li>
+          <li><span class="time">낮</span><span>투명 카약 타기 · 호텔 앞 파우파우 비치 하우스리프에서 가벼운 스노클 (도보 이동)</span></li>
+          <li><span class="time">오후</span><span>스파 or 낮잠 — 내일 골프 라운딩을 위해 체력 충전</span></li>
+          <li><span class="time">저녁</span><span>호텔 레스토랑 디너 — 오션 그릴에서 선셋 디너 추천 🌅</span></li>
+        </ul>
+        <details class="rain-plan">
+          <summary>☔ 우천 시 플랜</summary>
+          <ul>
+            <li>리조트 데이는 우천 무관 — 실내 풀·스파·라운지로 자연스럽게 전환</li>
+            <li>스콜 사이사이 갠 틈에 카약·스노클만 짧게 끼워 넣기</li>
+          </ul>
+        </details>
+        <p class="desc">일정 중간에 통째로 비워둔 호캉스 날입니다. 올인클루시브로 예약했으니 이날만큼은 시계를 보지 말고, 호텔이 주는 것들을 천천히 누려보세요. 파우파우 비치는 호텔 앞 도보 하우스리프라 물이 그리우면 언제든 들어갈 수 있습니다.</p>
+        <div class="note"><span class="ico">🤿</span><span>몸이 근질거리면 라우라우 베이 재방문(거북이 🐢 · 만조 전후)이나 오비얀 비치(만조 필수)로 반나절 프리다이빙을 다녀와도 좋습니다 — 조수표부터 확인하세요.</span></div>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day5-4.jpg" alt="리조트 데이에 어울리는 사이판 라군 전경" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day5-4.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day5-2.jpg" alt="하얀 백사장과 파란 하늘" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day5-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day5-3.jpg" alt="파우파우 비치 하우스리프를 떠올리는 투명한 물빛" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day5-3.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 6 -->
+      <article class="day" id="day6" data-day="5">
+        <div class="day-head">
+          <span class="date">9월 15일</span><span class="dow">화요일 · Day 6</span>
+          <div class="tags"><span class="tag">⛳ 골프</span><span class="tag">🏖️ 리조트</span></div>
+        </div>
+        <h3>코럴 오션 골프 데이 — 이 날의 주인공은 골프 ⛳</h3>
+        <ul class="sched">
+          <li><span class="time">이른 아침</span><span>코럴 오션 리조트로 출발 (섬 남쪽 끝 · 차 약 30~35분) — 더위를 피해 이른 티오프, 티타임은 호텔 컨시어지에 사전 예약</span></li>
+          <li><span class="time">오전</span><span>⛳ 18홀 라운딩 — 사이판 유일 LPGA 투어 공식 규격, 바다를 끼고 도는 오션프런트 코스 (켄싱턴 계열 골프 어메니티 적용)</span></li>
+          <li><span class="time">낮</span><span>클럽하우스 점심 — 컨디션과 날씨가 허락하면 오후 추가 9홀 연장전 ⛳</span></li>
+          <li><span class="time">늦은 오후</span><span>호텔 복귀 — 인피니티 풀 🏊 · 스파로 라운딩 피로 풀기</span></li>
+          <li><span class="time">저녁</span><span>호텔 레스토랑 디너 — 7개 레스토랑 중 골라서 여유롭게 🥂</span></li>
+        </ul>
+        <details class="rain-plan">
+          <summary>☔ 우천 시 플랜</summary>
+          <ul>
+            <li>스콜(30분~1시간)이면 클럽하우스 대피 후 재개 — 단, <b>번개 치면 라운딩 즉시 중단</b> ⚡</li>
+            <li>종일 비 예보면 전날 티타임 변경·취소 문의 → 리조트 데이로 전환: 스파 · 실내 라운지 · 레스토랑 투어</li>
+            <li>비 오는 날은 옵션인 포비든 투어도 어차피 취소 — 아메리칸 메모리얼 파크 비지터센터(화 개관) + 가라판 카페로</li>
+          </ul>
+        </details>
+        <p class="desc">예약에 포함된 골프 어메니티를 주인공으로 쓰는 날입니다. 코럴 오션 리조트는 켄싱턴과 같은 계열(이랜드)의 자매 리조트로, 골프 혜택은 이곳 18홀에서 이용하는 구성이 일반적입니다. 코럴 오션은 골프 카트가 있는 리조트형 골프장이고 티타임 예약이 필요한 시설이라, 전날 컨시어지에서 예약 확인서·티오프 시간·픽업/이동 방법을 한 번에 체크하세요. 하루를 통째로 비워 라운딩에 집중하고, 물놀이는 어제 리조트 데이와 내일 리조트 모닝에 맡기세요. <a href="https://www.google.com/search?q=%EC%BD%94%EB%9F%B4+%EC%98%A4%EC%85%98+%EB%A6%AC%EC%A1%B0%ED%8A%B8+%EC%82%AC%EC%9D%B4%ED%8C%90+%EA%B3%A8%ED%94%84" target="_blank" rel="noopener">코럴 오션 골프 정보</a>를 참고하세요.</p>
+        <div class="spots">
+          <div class="spot">
+            <div class="name">코럴 오션 골프장<span class="en">Coral Ocean Resort</span></div>
+            <p>사이판 유일의 LPGA 투어 공식 규격 18홀 오션프런트 코스 — 남쪽 해안 절벽을 따라 도는 시그니처 홀이 백미입니다. 켄싱턴 계열이라 투숙객 골프 어메니티가 여기 적용됩니다. 보통 확인해야 할 범위는 18홀 그린피, 골프 카트, 클럽/백 렌탈, 골프화 렌탈, 락커·샤워, 식음 크레딧 또는 점심 포함 여부입니다.</p>
+          </div>
+          <div class="spot">
+            <div class="name">골프채 대여 체크<span class="en">Rental Clubs</span></div>
+            <p>골프채는 현장 렌탈 가능으로 안내되는 상품이 있으나 수량과 좌·우타 세트, 남성/여성용 샤프트, 렌탈료 포함 여부는 예약 조건마다 다릅니다. 개인 클럽을 안 가져갈 계획이면 전날 호텔 컨시어지에 “클럽 세트+백+골프화 포함인지, 장갑·볼·티는 별도인지”를 확인하세요. 장갑은 개인 손에 맞는 것으로 챙기고, 볼·티·마커는 여유 있게 가져가는 편이 안전합니다.</p>
+          </div>
+          <div class="spot">
+            <div class="name">켄싱턴 리조트 어메니티<span class="en">Kensington Resort</span></div>
+            <p>골프 외 리조트 어메니티는 인피니티 풀, 스파, 레스토랑, 라운지, 투명 카약·스노클 같은 물놀이 옵션을 따로 구분해서 보면 편합니다. 골프 날에는 라운딩 뒤 샤워·스파·저녁 식사를 우선 쓰고, 카약·스노클은 내일 오전 리조트 모닝에서 몰아 쓰세요.</p>
+          </div>
+        </div>
+        <div class="note"><span class="ico">🥾</span><span>몸이 근질근질하면 골프 대신 <b>포비든 아일랜드 가이드 투어</b>(9:30~12:30 · 약 $85 · 반드시 썰물+저파도)로 바꿔도 좋습니다 — 전날까지 썰물 시간과 투어 예약을 확인하세요.</span></div>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day6-1.jpg" alt="포비든 아일랜드 옵션 코스의 남부 해안 절경" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day6-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day6-2.jpg" alt="절벽 아래로 파도가 부서지는 포비든 아일랜드 전망" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day6-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day6-3.jpg" alt="포비든 아일랜드 천연 풀과 바위 해안" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day6-3.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 7 -->
+      <article class="day" id="day7" data-day="6">
+        <div class="day-head">
+          <span class="date">9월 16일</span><span class="dow">수요일 · Day 7</span>
+          <div class="tags"><span class="tag">🛍️ 쇼핑</span><span class="tag">🌇 마지막 밤</span></div>
+        </div>
+        <h3>리조트 모닝 &amp; 허니문의 마지막 밤</h3>
+        <ul class="sched">
+          <li><span class="time">오전</span><span>리조트 모닝 — 여유로운 조식 후 인피니티 풀 · 투명 카약 · 파우파우 비치에서 마지막 물놀이 🏊 (내일 새벽 비행이니 무리 없이)</span></li>
+          <li><span class="time">낮</span><span>쇼핑 — '아이러브사이판'에서 기념품 고르기</span></li>
+          <li><span class="time">저녁</span><span>가라판 지역 분위기 좋은 레스토랑에서 럭셔리 코스 요리 🥂 또는 선셋 크루즈</span></li>
+        </ul>
+        <details class="rain-plan">
+          <summary>☔ 우천 시 플랜</summary>
+          <ul>
+            <li>리조트 모닝은 우천에도 무리 없음 — 스파·실내 시설로 전환</li>
+            <li>쇼핑·디너는 우천 무관 — 일정 그대로</li>
+            <li>선셋 크루즈 취소 시 가라판 레스토랑 디너를 여유 있게 연장 🥂</li>
+          </ul>
+        </details>
+        <div class="note"><span class="ico">🤿</span><span>바다가 잔잔하고 컨디션이 좋다면 이른 아침 <b>윙 비치</b>(차 5분)에서 얕고 가볍게 마지막 프리다이빙을 하는 옵션도 살아 있습니다 — 파도 있는 날은 입수 금지.</span></div>
+        <p class="desc">사이판 시내의 '아이러브사이판'에 들러 여행을 추억할 기념품을 골라보세요. <a href="https://www.google.com/search?q=%EC%82%AC%EC%9D%B4%ED%8C%90+%EA%B0%80%EB%9D%BC%ED%8C%90+%EC%87%BC%ED%95%91" target="_blank" rel="noopener">사이판 시내 쇼핑 정보</a>를 참고하면 도움이 됩니다.</p>
+        <p class="desc">허니문의 마지막 밤을 로맨틱하게 마무리하세요. 선셋 크루즈를 선택해 바다 위 석양을 감상하는 것도 추천합니다. 🌅</p>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day7-1.jpg" alt="가라판 시내 스카이라인" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day7-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day7-2.jpg" alt="가라판 쇼핑가의 DFS 갤러리아" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day7-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day7-3.jpg" alt="사이판 바다 위로 붉게 물든 석양" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day7-3.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day7-4.jpg" alt="해질녘의 사이판 해변" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day7-4.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Day 8 -->
+      <article class="day" id="day8" data-day="7">
+        <div class="day-head">
+          <span class="date">9월 17일</span><span class="dow">목요일 · Day 8</span>
+          <div class="tags"><span class="tag">✈️ 귀국</span></div>
+        </div>
+        <h3>귀국</h3>
+        <ul class="sched">
+          <li><span class="time">새벽</span><span>호텔 체크아웃 및 공항 이동</span></li>
+          <li><span class="time">새벽 2시</span><span>공항 도착 및 탑승 수속</span></li>
+          <li><span class="time">03:05</span><span>사이판 출발 — 제주항공 <b>7C3212</b></span></li>
+          <li><span class="time">06:50</span><span>인천 1터미널 도착 🇰🇷</span></li>
+        </ul>
+        <div class="note"><span class="ico">🕑</span><span>새벽 2시 비행기 일정 — 예약 기준 실제 출발 시각은 <b>03:05</b>입니다. 전날 밤 미리 짐을 싸두고 늦지 않게 공항으로 이동하세요.</span></div>
+        <div class="album">
+          <h4>📸 앨범</h4>
+          <div class="grid">
+            <figure class="shot"><img src="./img/day8-1.jpg" alt="사이판 국제공항 활주로" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day8-1.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day8-2.jpg" alt="야자수가 서 있는 사이판 국제공항 청사" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day8-2.jpg</span></div></figure>
+            <figure class="shot"><img src="./img/day8-3.jpg" alt="인천국제공항 1터미널 도착장" loading="lazy" onerror="this.parentElement.classList.add('empty')"><div class="ph-inner"><span class="cam">📷</span><span>img/day8-3.jpg</span></div></figure>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- ══════════ 오른쪽: 지도 사이드 ══════════ -->
+  <aside class="map-side" id="mapSide">
+    <div class="map-panel">
+      <div class="map-head">
+        <div class="day-label" id="mapDayLabel">Day 1 · 9/10 목</div>
+        <div class="day-title" id="mapDayTitle">인천 출발</div>
+      </div>
+      <div id="map"></div>
+      <div class="map-ctrl">
+        <button class="nav-btn" id="prevDay" aria-label="이전 날">◀</button>
+        <input type="range" id="daySlider" min="0" max="7" step="1" value="0" aria-label="일자 선택">
+        <button class="nav-btn" id="nextDay" aria-label="다음 날">▶</button>
+        <button class="nav-btn" id="spotsToggle" aria-label="전체 스팟 보기" title="전체 스팟 보기">🤿</button>
+        <button class="nav-btn" id="poisToggle" aria-label="대여소 · 맛집 · 상점 보기" title="대여소 · 맛집 · 상점 보기">📍</button>
+      </div>
+      <div class="map-legend">
+        <span class="k"><span class="line"></span>차량 · 도보</span>
+        <span class="k"><span class="line fly"></span>비행</span>
+        <span class="k"><span class="line boat"></span>보트</span>
+        <span class="k">📍 켜면 🏨 호텔 · 🤿 대여소 · 🍽️ 맛집 · 🛍️ 상점 · 📌 지역</span>
+        <span class="k" style="margin-left:auto">선에 마우스를 올리면 예상 소요시간 · <a href="#transport" id="legendTransport">🚗 렌터카 vs 택시 →</a></span>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<audio id="bgm" src="./audio/bgm.mp3" loop preload="auto"></audio>
+
+<footer>
+  <div class="wrap">
+    신랑 백승준 ♥ 신부 장혜민<br>
+    사이판 &amp; 로타 허니문 · 2026. 9. 10 – 9. 17<br>
+    안전하고 행복한 여행 되세요 💙
+    <details class="credits">
+      <summary>사진 출처 · Wikimedia Commons</summary>
+      <ul>
+        <li>대표 — <a href="https://commons.wikimedia.org/wiki/File:Curtain_Call_(4570968992).jpg" target="_blank" rel="noopener">그로토 빛기둥</a> · tata_aka_T · CC BY 2.0</li>
+        <li>Day 1 — <a href="https://commons.wikimedia.org/wiki/File:Incheon_International_Airport_Terminal_1_Departure.jpg" target="_blank" rel="noopener">인천공항 출국장</a> · Arne Müseler · CC BY-SA 3.0 DE / <a href="https://commons.wikimedia.org/wiki/File:Jeju_Air_Boeing_737-8_MAX_HL8524_landing_at_Taoyuan_February_2026.jpg" target="_blank" rel="noopener">제주항공 737</a> · 4300streetcar · CC BY 4.0 / <a href="https://commons.wikimedia.org/wiki/File:Boeing_737-8AS_Jeju_Air_HL8088,_Jeju_Int%27l_Airport,_25_December_2024_01.jpg" target="_blank" rel="noopener">제주항공 항공기</a> · 정찬송 · CC BY 2.0 KR</li>
+        <li>Day 2 — <a href="https://commons.wikimedia.org/wiki/File:Pau_Pau_Beach.JPG" target="_blank" rel="noopener">파우파우 비치</a> · Abasaa · 퍼블릭 도메인 / <a href="https://commons.wikimedia.org/wiki/File:Green_turtle_swimming_out_for_a_breath_at_the_GBR.jpg" target="_blank" rel="noopener">바다거북</a> · Ppmh21 · CC BY-SA 4.0 / <a href="https://commons.wikimedia.org/wiki/File:Heavenly_Drawn_Up_(4574477950).jpg" target="_blank" rel="noopener">그로토 천장 빛</a> · tata_aka_T · CC BY 2.0 / <a href="https://commons.wikimedia.org/wiki/File:Saipan_Grotto_Underwater.jpg" target="_blank" rel="noopener">그로토 수중 출구</a> · Canadie · CC BY-SA 4.0 / <a href="https://commons.wikimedia.org/wiki/File:Grotto_in_Saipan_2.JPG" target="_blank" rel="noopener">그로토 입구</a> · Abasaa · 퍼블릭 도메인</li>
+        <li>Day 3 — <a href="https://commons.wikimedia.org/wiki/File:Rota_ISS020.JPG" target="_blank" rel="noopener">로타섬 상공</a> · NASA · 퍼블릭 도메인 / <a href="https://commons.wikimedia.org/wiki/File:Rota_Island_in_the_Commonwealth_of_Northern_Mariana_Islands.jpg" target="_blank" rel="noopener">로타 해안</a> · CT Snow · CC BY 2.0 / <a href="https://commons.wikimedia.org/wiki/File:Taga_Latte_Stone_Quarry,_Rota.jpg" target="_blank" rel="noopener">타가 채석장</a> · CT Snow · CC BY 2.0</li>
+        <li>Day 4 — <a href="https://commons.wikimedia.org/wiki/File:Teteto_Beach_-_panoramio.jpg" target="_blank" rel="noopener">테테토 비치</a> · yuichiro anazawa · CC BY 3.0 / <a href="https://commons.wikimedia.org/wiki/File:Swimming_Hole_-_panoramio.jpg" target="_blank" rel="noopener">스위밍 홀</a> · menma1/2 · CC BY 3.0 / <a href="https://commons.wikimedia.org/wiki/File:Tanapag_Lagoon_from_above.jpg" target="_blank" rel="noopener">타나팍 라군</a> · A. Legra · CC BY-SA 3.0</li>
+        <li>Day 7 — <a href="https://commons.wikimedia.org/wiki/File:GarapanSkyline.jpg" target="_blank" rel="noopener">가라판 전경</a> · Buffaboy · CC BY-SA 4.0 / <a href="https://commons.wikimedia.org/wiki/File:DFS_Galleria_Saipan_-_panoramio.jpg" target="_blank" rel="noopener">DFS 갤러리아</a> · kajikawa · CC BY 3.0 / <a href="https://commons.wikimedia.org/wiki/File:Saipan_Sunset_(15551933139).jpg" target="_blank" rel="noopener">사이판 선셋</a> · Phil Warren · CC BY 2.0 / <a href="https://commons.wikimedia.org/wiki/File:Sunset_in_Saipan.jpg" target="_blank" rel="noopener">해질녘 해변</a> · LeoTschW · CC BY-SA 4.0</li>
+        <li>Day 8 — <a href="https://commons.wikimedia.org/wiki/File:Saipan_International_airport_(31037379131).jpg" target="_blank" rel="noopener">사이판 공항 활주로</a> · Edward Russell · CC BY 2.0 / <a href="https://commons.wikimedia.org/wiki/File:Saipan_International_Airport_-_panoramio.jpg" target="_blank" rel="noopener">사이판 공항</a> · kajikawa · CC BY 3.0 / <a href="https://commons.wikimedia.org/wiki/File:Incheon_International_Airport_Terminal_1_Arrival.jpg" target="_blank" rel="noopener">인천공항 도착장</a> · Arne Müseler · CC BY-SA 3.0 DE</li>
+        <li>배경음악 — <a href="https://commons.wikimedia.org/wiki/File:Audionautix-com-ccby-happyukulele.mp3" target="_blank" rel="noopener">Happy Ukulele</a> · Jason Shaw (Audionautix) · CC BY 3.0</li>
+      </ul>
+    </details>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="./js/data.js?v=11"></script>
+<script defer src="./js/routes.js?v=1"></script>
+<script defer src="./js/img-retry.js?v=1"></script>
+<script defer src="./js/bgm.js?v=1"></script>
+<script defer src="./js/lightbox.js?v=1"></script>
+<script defer src="./js/checklist.js?v=1"></script>
+<script defer src="./js/day-detail.js?v=2"></script>
+<script defer src="./js/stay-calc.js?v=2"></script>
+<script defer src="./js/transport-calc.js?v=1"></script>
+<script defer src="./js/spots.js?v=2"></script>
+<script defer src="./js/refs.js?v=1"></script>
+<script defer src="./js/reveal.js?v=1"></script>
+<script defer src="./js/map.js?v=8"></script>
+<script defer src="./js/day-nav.js?v=1"></script>
+<script defer src="./js/map-overlay.js?v=2"></script>
+<script defer src="./js/weather.js?v=4"></script>
+
+</body>
+</html>
