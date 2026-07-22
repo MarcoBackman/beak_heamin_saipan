@@ -6,7 +6,9 @@
       "PowerShell(\\(Get-Content index.html | Measure-Object -Line\\).Lines; \\(Get-Item index.html\\).Length)",
       "Bash(git -C /d/repository/beak_heamin_saipan status --short --branch)",
       "Bash(git -C /d/repository/beak_heamin_saipan log --oneline -3)",
-      "Bash(git -C /d/repository/beak_heamin_saipan remote -v)"
+      "Bash(git -C /d/repository/beak_heamin_saipan remote -v)",
+      "PowerShell(gh run *)",
+      "Bash(curl -s \"https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=Laolao%20Bay%20golf%20Saipan&srnamespace=6&srlimit=10&format=json\")"
     ]
   }
 }
