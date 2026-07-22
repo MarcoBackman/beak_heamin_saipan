@@ -413,6 +413,49 @@
     background:var(--off-white);border:2.5px solid var(--charcoal);
     box-shadow:0 1px 3px rgba(0,0,0,.3);
   }
+  .poi-hit{width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .poi-pin{
+    width:24px;height:24px;border-radius:9999px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;line-height:1;
+    background:var(--off-white);border:2px solid var(--charcoal);
+    box-shadow:0 1px 4px rgba(0,0,0,.3);
+  }
+  .poi-pin.poi-stay{border-color:#b91c1c;box-shadow:0 0 0 2px rgba(185,28,28,.20),0 1px 4px rgba(0,0,0,.3)}
+  .poi-pin.poi-rental{border-color:#0f766e;box-shadow:0 0 0 2px rgba(15,118,110,.18),0 1px 4px rgba(0,0,0,.3)}
+  .poi-pin.poi-food{border-color:#b45309;box-shadow:0 0 0 2px rgba(180,83,9,.18),0 1px 4px rgba(0,0,0,.3)}
+  .poi-pin.poi-shop{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,.18),0 1px 4px rgba(0,0,0,.3)}
+  .poi-pin.poi-place{border-color:#475569;box-shadow:0 0 0 2px rgba(71,85,105,.18),0 1px 4px rgba(0,0,0,.3)}
+  /* 호버 설명 패널 — position:fixed 라 지도 폭에 안 잘리고 넓게 표시 */
+  .poi-hover{
+    position:fixed;z-index:1200;pointer-events:none;
+    width:max-content;max-width:min(92vw,560px);
+    background:var(--cream);border:1px solid var(--border);border-radius:8px;
+    padding:10px 14px;font-size:13.5px;line-height:1.6;color:var(--charcoal);
+    box-shadow:0 6px 22px rgba(0,0,0,.16);
+    font-family:"Pretendard Variable",Pretendard,ui-sans-serif,system-ui,sans-serif;
+  }
+  .poi-hover[hidden]{display:none}
+  .poi-hover b{font-weight:600}
+  .poi-hover small{color:var(--muted)}
+  .leaflet-popup.poi-pop .leaflet-popup-content{margin:11px 15px;font-size:13px;line-height:1.55}
+  .leaflet-popup.poi-pop .leaflet-popup-content small{color:var(--muted)}
+  .poi-link{display:inline-block;margin-top:8px;color:#0f766e;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  /* 스팟 팝업 사진 슬라이드 */
+  .leaflet-popup.spot-pop .leaflet-popup-content{margin:10px 12px}
+  .spot-pop-slide{position:relative;width:210px;margin-bottom:8px;border-radius:8px;overflow:hidden;background:rgba(0,0,0,.08)}   /* 명시 폭 — 이미지 width:100%가 shrink-to-fit 팝업에서 붕괴하는 것 방지 */
+  .spot-pop-slide img{display:block;width:100%;height:150px;object-fit:cover}
+  .spot-pop-slide img[hidden]{display:none}   /* .spot-pop-slide img 규칙이 UA [hidden]을 덮어써서 명시적으로 숨김 */
+  .spot-pop-slide .sp-prev,.spot-pop-slide .sp-next{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:26px;height:26px;border:none;border-radius:9999px;
+    background:rgba(0,0,0,.5);color:#fff;font-size:16px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .spot-pop-slide .sp-prev{left:6px}
+  .spot-pop-slide .sp-next{right:6px}
+  .spot-pop-slide .sp-count{position:absolute;right:8px;bottom:6px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:1px 7px;border-radius:9999px}
+  .spot-pop-nm{font-weight:600;font-size:13px;text-align:center}
 
   /* ── 라이트박스 (사진 확대) ──────────── */
   .shot:not(.empty){cursor:zoom-in}

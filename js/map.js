@@ -37,8 +37,85 @@
   S.flySpot = function(ll, name){
     if (!map.hasLayer(spotsLayer)){ map.addLayer(spotsLayer); spotsBtn.classList.add('on'); }
     map.flyTo(ll, 14, { duration:.9 });
-    L.popup({ offset:[0,-8] }).setLatLng(ll).setContent(name).openOn(map);
+    const spot = (S.SPOTS || []).find(s => s.nm === name);
+    const imgs = (spot && spot.imgs) || [];
+    let content = '';
+    if (imgs.length){
+      content += '<div class="spot-pop-slide" data-i="0">' +
+        imgs.map((src,i) => '<img src="'+src+'" alt="'+name+'"'+(i ? ' hidden' : '')+'>').join('') +
+        (imgs.length > 1 ? '<button type="button" class="sp-prev" aria-label="이전 사진">‹</button><button type="button" class="sp-next" aria-label="다음 사진">›</button><span class="sp-count">1/'+imgs.length+'</span>' : '') +
+        '</div>';
+    }
+    content += '<div class="spot-pop-nm">'+name+'</div>';
+    L.popup({ offset:[0,-8], className:'spot-pop', maxWidth: imgs.length ? 240 : 180 })
+      .setLatLng(ll).setContent(content).openOn(map);
   };
+
+  /* 스팟 팝업 사진 슬라이드 — 팝업이 열릴 때 ‹ › 버튼 배선 (사진 여러 장일 때만) */
+  map.on('popupopen', e => {
+    const el = e.popup.getElement();
+    const slide = el && el.querySelector('.spot-pop-slide');
+    if (!slide) return;
+    const imgs = [...slide.querySelectorAll('img')];
+    if (imgs.length < 2) return;
+    const count = slide.querySelector('.sp-count');
+    const go = d => {
+      let i = +slide.dataset.i;
+      imgs[i].hidden = true;
+      i = (i + d + imgs.length) % imgs.length;
+      imgs[i].hidden = false;
+      slide.dataset.i = i;
+      if (count) count.textContent = (i+1)+'/'+imgs.length;
+    };
+    slide.querySelector('.sp-prev').addEventListener('click', () => go(-1));
+    slide.querySelector('.sp-next').addEventListener('click', () => go(1));
+  });
+
+  /* 편의 지점 레이어 — 호텔·대여소·맛집·상점 (별도 토글) */
+  const poisLayer = L.layerGroup();
+  const POI_EMOJI = { stay:'🏨', rental:'🤿', food:'🍽️', shop:'🛍️', place:'📌' };
+  /* 호버 설명 패널 — position:fixed 라 지도 밖으로도 나갈 수 있어 폭 제한 없음 (Leaflet 툴팁은 지도 컨테이너에 잘림) */
+  const poiHover = document.createElement('div');
+  poiHover.className = 'poi-hover';
+  poiHover.hidden = true;
+  document.body.appendChild(poiHover);
+  function showPoiHover(html, el){
+    poiHover.innerHTML = html;
+    poiHover.hidden = false;
+    const r = el.getBoundingClientRect();
+    const hw = poiHover.offsetWidth, hh = poiHover.offsetHeight;
+    let left = r.left + r.width/2 - hw/2;
+    left = Math.max(8, Math.min(left, window.innerWidth - hw - 8));   /* 화면 밖으로 안 나가게 좌우 클램프 */
+    let top = r.top - hh - 10;
+    if (top < 8) top = r.bottom + 10;                                 /* 위 공간 부족하면 아래로 */
+    poiHover.style.left = left + 'px';
+    poiHover.style.top = top + 'px';
+  }
+  const hidePoiHover = () => { poiHover.hidden = true; };
+  map.on('movestart zoomstart', hidePoiHover);   /* 지도 이동 중엔 숨김 (좌표 어긋남 방지) */
+
+  (S.POIS || []).forEach(p => {
+    const icon = L.divIcon({
+      className:'',
+      html:'<div class="poi-hit"><span class="poi-pin poi-'+p.cat+'">'+(POI_EMOJI[p.cat]||'📍')+'</span></div>',
+      iconSize:[40,40], iconAnchor:[20,20],   /* 눈에 보이는 핀은 24px, 나머지는 투명 호버 영역 */
+    });
+    const html = '<b>'+p.nm+'</b> · '+p.en+'<br><small>'+p.note+'</small>';
+    const link = p.url || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.en + ' Saipan'));
+    const popupHtml = html + '<br><a class="poi-link" href="'+link+'" target="_blank" rel="noopener">' + (p.url ? '🔗 웹사이트' : '📍 구글 지도에서 열기') + '</a>';
+    const m = L.marker(p.ll, { icon })
+      .bindPopup(popupHtml, { className:'poi-pop', maxWidth:320, offset:[0,-14] })   /* 클릭=포커스+링크, 지도 클릭=해제 */
+      .addTo(poisLayer);
+    m.on('mouseover', () => showPoiHover(html, m._icon));   /* 호버=넓은 설명 패널 */
+    m.on('mouseout', hidePoiHover);
+    m.on('popupopen', hidePoiHover);   /* 클릭 포커스되면 호버 패널은 숨김 */
+    m.on('remove', hidePoiHover);      /* 레이어 토글 off 시 숨김 */
+  });
+  const poisBtn = document.getElementById('poisToggle');
+  if (poisBtn) poisBtn.addEventListener('click', () => {
+    if (map.hasLayer(poisLayer)){ map.removeLayer(poisLayer); poisBtn.classList.remove('on'); }
+    else { map.addLayer(poisLayer); poisBtn.classList.add('on'); }
+  });
 
   const LINE_STYLE = {
     drive:{ color:'#1c1c1c', weight:3,   opacity:.85, interactive:false },
