@@ -24,20 +24,7 @@
   /* 전체 스팟 레이어 — 스팟 가이드와 연동 */
   const spotsLayer = L.layerGroup();
   const spotIcon = L.divIcon({ className:'', html:'<div class="spot-pin"></div>', iconSize:[12,12], iconAnchor:[6,6] });
-  S.SPOTS.forEach(s => {
-    L.marker(s.ll, { icon:spotIcon })
-      .bindTooltip(s.nm + ' · ' + s.kind, { className:'stop-tip', direction:'top', offset:[0,-8] })
-      .addTo(spotsLayer);
-  });
-  const spotsBtn = document.getElementById('spotsToggle');
-  spotsBtn.addEventListener('click', () => {
-    if (map.hasLayer(spotsLayer)){ map.removeLayer(spotsLayer); spotsBtn.classList.remove('on'); }
-    else { map.addLayer(spotsLayer); spotsBtn.classList.add('on'); }
-  });
-  S.flySpot = function(ll, name){
-    if (!map.hasLayer(spotsLayer)){ map.addLayer(spotsLayer); spotsBtn.classList.add('on'); }
-    map.flyTo(ll, 14, { duration:.9 });
-    const spot = (S.SPOTS || []).find(s => s.nm === name);
+  function openSpotPopup(spot, ll, name){
     const imgs = (spot && spot.imgs) || [];
     let content = '';
     if (imgs.length){
@@ -49,6 +36,23 @@
     content += '<div class="spot-pop-nm">'+name+'</div>';
     L.popup({ offset:[0,-8], className:'spot-pop', maxWidth: imgs.length ? 240 : 180 })
       .setLatLng(ll).setContent(content).openOn(map);
+  }
+  S.SPOTS.forEach(s => {
+    L.marker(s.ll, { icon:spotIcon })
+      .bindTooltip(s.nm + ' · ' + s.kind, { className:'stop-tip', direction:'top', offset:[0,-8] })
+      .on('click', () => openSpotPopup(s, s.ll, s.nm))
+      .addTo(spotsLayer);
+  });
+  const spotsBtn = document.getElementById('spotsToggle');
+  spotsBtn.addEventListener('click', () => {
+    if (map.hasLayer(spotsLayer)){ map.removeLayer(spotsLayer); spotsBtn.classList.remove('on'); }
+    else { map.addLayer(spotsLayer); spotsBtn.classList.add('on'); }
+  });
+  S.flySpot = function(ll, name){
+    if (!map.hasLayer(spotsLayer)){ map.addLayer(spotsLayer); spotsBtn.classList.add('on'); }
+    map.flyTo(ll, 14, { duration:.9 });
+    const spot = (S.SPOTS || []).find(s => s.nm === name);
+    openSpotPopup(spot, ll, name);
   };
 
   /* 스팟 팝업 사진 슬라이드 — 팝업이 열릴 때 ‹ › 버튼 배선 (사진 여러 장일 때만) */
