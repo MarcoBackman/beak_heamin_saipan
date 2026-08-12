@@ -255,6 +255,61 @@
   let current = -1;
   let lastBounds = null;
 
+  /* 모바일 GPS — 브라우저 위치 생명주기는 geolocation.js, Leaflet 표현은 여기서 담당 */
+  let userMarker = null;
+  let userAccuracy = null;
+  let userLocation = null;
+  let followUser = false;
+
+  function userLocationIcon(heading){
+    const hasHeading = Number.isFinite(heading);
+    const headingStyle = hasHeading ? ' style="--heading:'+heading+'deg"' : '';
+    return L.divIcon({
+      className:'',
+      html:'<div class="user-location-pin'+(hasHeading ? ' has-heading' : '')+'"'+headingStyle+'><span class="user-location-heading" aria-hidden="true"></span><span class="user-location-dot"></span></div>',
+      iconSize:[34,34], iconAnchor:[17,17],
+    });
+  }
+
+  function moveToUser(){
+    if (!userLocation) return false;
+    followUser = true;
+    map.flyTo(userLocation, 16, { duration:reducedMotion ? 0 : .45 });
+    return true;
+  }
+
+  S.setUserLocation = (location, options) => {
+    userLocation = [location.lat, location.lng];
+    if (!userAccuracy){
+      userAccuracy = L.circle(userLocation, {
+        radius:location.accuracy,
+        className:'user-location-accuracy',
+        color:'#2563eb', weight:1.5, opacity:.65,
+        fillColor:'#3b82f6', fillOpacity:.12,
+        interactive:false,
+      }).addTo(map);
+      userMarker = L.marker(userLocation, {
+        icon:userLocationIcon(location.heading),
+        interactive:false,
+        zIndexOffset:2000,
+      }).addTo(map);
+    } else {
+      userAccuracy.setLatLng(userLocation).setRadius(location.accuracy);
+      userMarker.setLatLng(userLocation).setIcon(userLocationIcon(location.heading));
+    }
+    if ((options && options.focus) || followUser) moveToUser();
+  };
+  S.focusUserLocation = moveToUser;
+  S.clearUserLocation = () => {
+    if (userMarker) map.removeLayer(userMarker);
+    if (userAccuracy) map.removeLayer(userAccuracy);
+    userMarker = null;
+    userAccuracy = null;
+    userLocation = null;
+    followUser = false;
+  };
+  map.on('dragstart', () => { followUser = false; });
+
   /* 외부 연동 API — day-nav.js가 소비 */
   const dayChangeCbs = [];
   S.onDayChange = cb => { dayChangeCbs.push(cb); if (current >= 0) cb(current); };

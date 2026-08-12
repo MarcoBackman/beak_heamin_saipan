@@ -34,6 +34,7 @@
   }
   function close(){
     document.body.classList.remove('map-open');
+    if (S.stopLocationTracking) S.stopLocationTracking();
   }
   fab.addEventListener('click', open);
   closeBtn.addEventListener('click', close);

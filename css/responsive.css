@@ -44,6 +44,16 @@
       border:0;border-radius:10px;
       font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
     }
+    body.map-open .map-ctrl .location-btn{
+      display:flex;min-width:44px;width:44px;height:44px;
+      border-radius:9999px;font-size:23px;
+    }
+    body.map-open .location-status:not([hidden]){
+      display:flex;align-items:center;min-height:34px;
+      margin:0 14px 8px;padding:7px 10px;border-radius:8px;
+      background:rgba(37,99,235,.08);color:#1d4ed8;
+      font-size:12px;line-height:1.4;
+    }
     body.map-open .map-fab{display:none}
   }
   @media (max-width:768px){
