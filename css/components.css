@@ -123,6 +123,57 @@
   }
   .verdict small{display:block;color:var(--muted);font-size:13px;margin-top:6px}
 
+  /* ── 확정 예약 · 통신 · 장비 선택 ───── */
+  .choice-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;margin-top:18px;
+  }
+  .choice-card{
+    position:relative;display:flex;flex-direction:column;gap:10px;
+    min-width:0;padding:22px;
+    border:1px solid var(--border);border-radius:14px;background:var(--cream);
+    transition:border-color .2s,background .2s,transform .2s;
+  }
+  .choice-card.recommended,.choice-card.selected{border-color:var(--border-strong);background:var(--tint-3)}
+  .choice-card.selected{transform:translateY(-2px)}
+  .choice-card h3{font-size:18px;font-weight:600;letter-spacing:-.25px}
+  .choice-card ul{list-style:none;display:grid;gap:6px}
+  .choice-card li{font-size:13px;color:var(--text-82);line-height:1.55}
+  .choice-card li::before{content:"·";margin-right:6px;font-weight:700}
+  .choice-tag{
+    align-self:flex-start;font-size:11px;font-weight:600;
+    border-radius:9999px;padding:3px 9px;background:var(--charcoal);color:var(--off-white);
+  }
+  .choice-tag.muted{background:var(--tint-4);color:var(--muted)}
+  .choice-price{font-size:24px;font-weight:600;letter-spacing:-.4px}
+  .choice-price small{font-size:12px;font-weight:400;color:var(--muted)}
+  .choice-link{margin-top:auto;font-size:13px;color:var(--charcoal);text-decoration:underline}
+  .gear-choice{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer}
+  .gear-choice input{
+    appearance:none;width:19px;height:19px;border:1px solid var(--border-strong);
+    border-radius:50%;background:var(--cream);position:relative;cursor:pointer;
+  }
+  .gear-choice input:checked::after{
+    content:"";position:absolute;inset:4px;border-radius:50%;background:var(--charcoal);
+  }
+  .gear-choice input:focus-visible{outline:none;box-shadow:rgba(0,0,0,.1) 0 4px 12px}
+  .reservation-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .reservation-grid > div{
+    display:flex;flex-direction:column;gap:5px;padding:18px;
+    border:1px solid var(--border);border-radius:12px;background:var(--tint-3);
+  }
+  .reservation-grid span{font-size:12px;color:var(--muted)}
+  .reservation-grid b{font-size:18px;font-weight:600}
+  .reservation-grid small{font-size:12px;color:var(--text-82);line-height:1.5}
+  .handoff-steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .handoff-steps > div{
+    display:flex;flex-direction:column;gap:6px;padding:18px;
+    border:1px solid var(--border);border-radius:12px;background:var(--tint-3);
+  }
+  .handoff-steps b{font-size:14px}
+  .handoff-steps span{font-size:13px;color:var(--text-82);line-height:1.55}
+  .note.warning{border-color:var(--border-strong)}
+
   /* ── Day cards ───────────────────────── */
   .day{
     border:1px solid var(--border);border-radius:16px;

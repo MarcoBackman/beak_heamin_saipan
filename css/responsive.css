@@ -87,6 +87,7 @@
     .spotgrid{grid-template-columns:1fr}
     .stay-panel{padding:24px}
     .pros-cons,.calc-fields,.totals{grid-template-columns:1fr}
+    .choice-grid{grid-template-columns:1fr}
   }
   @media (max-width:560px){
     .wrap,.layout{padding-left:14px;padding-right:14px}
@@ -130,6 +131,8 @@
       padding:10px 12px;
     }
     .stay-panel{padding:18px}
+    .reservation-grid,.handoff-steps{grid-template-columns:1fr}
+    .choice-card{padding:18px}
     .calc-fields .field{
       display:grid;grid-template-columns:1fr;
       gap:8px;align-items:stretch;
