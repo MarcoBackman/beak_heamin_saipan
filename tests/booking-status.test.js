@@ -46,6 +46,6 @@ test('connects the Rota booking workflow to preparation and itinerary', () => {
 });
 
 test('ships the mobile booking layout with a fresh cache version', () => {
-  assert.match(html, /css\/responsive\.css\?v=4/);
+  assert.match(html, /css\/responsive\.css\?v=5/);
   assert.match(responsiveCss, /\.booking-status-grid,\.rota-options,\.booking-steps\{grid-template-columns:1fr\}/);
 });
