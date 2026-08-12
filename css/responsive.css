@@ -86,7 +86,9 @@
     .refs-row{grid-auto-columns:200px}
     .spotgrid{grid-template-columns:1fr}
     .stay-panel{padding:24px}
-    .pros-cons,.calc-fields,.totals{grid-template-columns:1fr}
+    .pros-cons{grid-template-columns:1fr}
+    .booking-status-grid,.rota-options,.booking-steps{grid-template-columns:1fr}
+    .rota-booking-head{align-items:flex-start;flex-direction:column;gap:10px}
     .choice-grid{grid-template-columns:1fr}
   }
   @media (max-width:560px){
@@ -114,7 +116,7 @@
     section .lede{font-size:15px;margin-bottom:22px}
     .overview{grid-template-columns:1fr;gap:8px}
     .overview a{border-radius:10px;padding:13px 14px}
-    .flight,.checklist,.stay-panel,.day,.spot,.spotcard,.pc,.total-card{
+    .flight,.checklist,.stay-panel,.day,.spot,.spotcard,.pc,.booking-card,.rota-option{
       border-radius:10px;
     }
     .flight{padding:18px}
@@ -133,14 +135,8 @@
     .stay-panel{padding:18px}
     .reservation-grid,.handoff-steps{grid-template-columns:1fr}
     .choice-card{padding:18px}
-    .calc-fields .field{
-      display:grid;grid-template-columns:1fr;
-      gap:8px;align-items:stretch;
-    }
-    .calc-fields input{
-      width:100%;text-align:left;font-size:16px;
-    }
-    .total-card .amt{font-size:26px}
+    .booking-actions{display:grid;grid-template-columns:1fr}
+    .booking-action{width:100%}
     .day{padding:18px;margin-bottom:18px}
     .day-head{
       display:grid;grid-template-columns:1fr;
