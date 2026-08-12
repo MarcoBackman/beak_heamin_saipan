@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="./css/base.css?v=1">
 <link rel="stylesheet" href="./css/map.css?v=3">
-<link rel="stylesheet" href="./css/components.css?v=10">
+<link rel="stylesheet" href="./css/components.css?v=11">
 <link rel="stylesheet" href="./css/responsive.css?v=3">
 <link rel="stylesheet" href="./css/weather.css?v=4">
 </head>
@@ -63,9 +63,9 @@
         <a href="#day2" data-day="1"><span class="d">9/11 금</span><div class="t">그로토 · 라우라우</div></a>
         <a href="#day3" data-day="2"><span class="d">9/12 토</span><div class="t">로타 홀 빛내림</div></a>
         <a href="#day4" data-day="3"><span class="d">9/13 일</span><div class="t">테테토 · 스위밍 홀</div></a>
-        <a href="#day5" data-day="4"><span class="d">9/14 월</span><div class="t">리조트 데이 🏖️</div></a>
+        <a href="#day5" data-day="4"><span class="d">9/14 월</span><div class="t">마나가하 · 숏핀 🏝️</div></a>
         <a href="#day6" data-day="5"><span class="d">9/15 화</span><div class="t">골프 라운딩 ⛳</div></a>
-        <a href="#day7" data-day="6"><span class="d">9/16 수</span><div class="t">리조트 · 마지막 밤</div></a>
+        <a href="#day7" data-day="6"><span class="d">9/16 수</span><div class="t">장비 반납 · 마지막 밤</div></a>
         <a href="#day8" data-day="7"><span class="d">9/17 목</span><div class="t">귀국 🇰🇷</div></a>
       </div>
     </section>
@@ -111,10 +111,11 @@
           <li><label><input type="checkbox" data-k="licenses"><span>실물 국내면허증 · 국제운전면허증</span></label></li>
           <li><label><input type="checkbox" data-k="rental-card"><span>운전자 명의 카드 · 렌트비+$200 보증금 한도</span></label></li>
           <li><label><input type="checkbox" data-k="rental-cover"><span>CDW 자기부담금 $1,000 · ZDC 현장 가격 확인</span></label></li>
+          <li><label><input type="checkbox" data-k="rental-fuel"><span>새벽 반납 연료 기준 · 선결제 옵션 · 이용 가능한 주유소 확인</span></label></li>
           <li><label><input type="checkbox" data-k="skt-roaming"><span>승준 SKT · T 괌·사이판 5천원 신청</span></label></li>
           <li><label><input type="checkbox" data-k="kt-roaming"><span>혜민 KT · 함께 쓰는 로밍 4GB 신청</span></label></li>
           <li><label><input type="checkbox" data-k="sim-tools"><span>USIM 핀 · 로밍 설정 화면 캡처</span></label></li>
-          <li><label><input type="checkbox" data-k="dive-booking"><span>장비점 6일 대여 · 사이즈 · 보증금 예약</span></label></li>
+          <li><label><input type="checkbox" data-k="dive-booking"><span>장비점 <span data-gear-duration-label>6일</span> 대여 · 사이즈 · 보증금 예약</span></label></li>
           <li><label><input type="checkbox" data-k="personal-fins"><span>롱핀 · 숏핀 · 스노클 · 핀백</span></label></li>
           <li><label><input type="checkbox" data-k="power"><span>충전기 · 보조배터리 · 미국식 110V 플러그</span></label></li>
           <li><label><input type="checkbox" data-k="health"><span>여행자·프리다이빙 보험 · 상비약</span></label></li>
@@ -312,16 +313,21 @@
           <div><b>1 · 카운터</b><span>최종 총액, CDW·PAI, ZDC, 제3자 배상, 연료 기준, 추가 운전자 조건 확인</span></div>
           <div><b>2 · 인수 사진</b><span>전후좌우, 휠 4개, 유리, 지붕, 실내, 계기판 연료·주행거리를 동영상으로 촬영</span></div>
           <div><b>3 · 운행 중</b><span>벌금·주차·견인·오염 비용은 별도. 음주한 날은 차량을 두고 택시 이용</span></div>
-          <div><b>4 · 반납</b><span>인수 때와 같은 연료로 주유하고 영수증 보관, 직원 입회 검사와 반납 완료증 요청</span></div>
+          <div><b>4 · 반납</b><span>인수 때와 같은 연료로 주유하고 영수증 보관, 직원 입회 검사와 반납 완료증 요청. 새벽 주유가 어려우므로 전날 주유 후 허용 운행거리 또는 선결제 연료 옵션 확정</span></div>
         </div>
-        <div class="note warning"><span class="ico">⏰</span><span><b>02:30 반납 예약과 03:05 항공편은 35분 차이로 매우 촉박합니다.</b> 전날 공항지점에 항공편 시간을 알리고 02:00 이전 반납 또는 즉시 반납 절차를 협의하세요.</span></div>
+        <div class="note warning"><span class="ico">⏰</span><span><b>02:30 반납 예약과 03:05 항공편은 35분 차이로 진행이 불가능합니다.</b> 전날 공항지점에 항공편 시간을 알리고 <b>01:30 조기 반납 또는 키드롭</b>을 협의하세요.</span></div>
       </div>
     </section>
 
     <!-- 프리다이빙 장비 대여 -->
     <section id="gear-rental">
-      <h2>프리다이빙 풀세트 — 6일 대여 업체 선택</h2>
-      <p class="lede">롱핀·숏핀·스노클은 개인 장비를 쓰고, 나머지 장비는 Day 2 오전 직접 방문해 피팅한 뒤 Day 7에 반납합니다. 선택 결과는 이 브라우저에 저장됩니다.</p>
+      <h2>프리다이빙 풀세트 — <span data-gear-duration-label>6일</span> 대여 업체 선택</h2>
+      <p class="lede">롱핀·숏핀·스노클은 개인 장비를 쓰고, 나머지 장비는 Day 2 오전 직접 방문해 피팅한 뒤 Day 7에 반납합니다. 기간과 업체 선택은 이 브라우저에 저장됩니다.</p>
+      <div class="duration-options" aria-label="장비 대여 기간">
+        <strong>대여 기간</strong>
+        <label class="gear-choice"><input type="radio" name="gearDuration" value="6"><span>6일 · D2 인수 → D7 반납 <b>추천</b></span></label>
+        <label class="gear-choice"><input type="radio" name="gearDuration" value="7"><span>7일 · 업체 과금 기준/늦은 반납 협의</span></label>
+      </div>
       <div class="gear-options choice-grid">
         <article class="choice-card gear-card" data-gear-vendor="divewish">
           <label class="gear-choice"><input type="radio" name="gearVendor" value="divewish"><span>이 업체로 선택</span></label>
@@ -330,7 +336,7 @@
           <p class="choice-price">07:00–18:00</p>
           <ul>
             <li><b>장점:</b> 프리다이빙 장비 대여 명시, 한국어, 매일 이른 오픈, 주차·카드 결제</li>
-            <li><b>확인:</b> 6일 단독 대여료와 부이·랜야드·웨이트 포함 범위는 비공개</li>
+            <li><b>확인:</b> <span data-gear-duration-label>6일</span> 단독 대여료와 부이·랜야드·웨이트 포함 범위는 비공개</li>
           </ul>
           <a class="choice-link" href="https://www.padi.com/dive-center/northern-mariana-islands/divewish/" target="_blank" rel="noopener">공식 등록 정보 · +1 670-789-8231 →</a>
         </article>
@@ -352,12 +358,12 @@
           <p class="choice-price">개별 견적</p>
           <ul>
             <li><b>장점:</b> 장비 포함 다이빙 프로모션, 가라판 방문 동선, 합리적인 패키지</li>
-            <li><b>확인:</b> 단독 프리다이빙 풀세트 6일 품목·가격 비공개, 일본어 중심</li>
+            <li><b>확인:</b> 단독 프리다이빙 풀세트 <span data-gear-duration-label>6일</span> 품목·가격 비공개, 일본어 중심</li>
           </ul>
           <a class="choice-link" href="https://www.masadive-saipan.com/" target="_blank" rel="noopener">공식 사이트 · +1 670-233-0577 →</a>
         </article>
       </div>
-      <div class="note"><span class="ico">☎️</span><span>예약 때 두 사람의 키·체중·발 사이즈와 함께 <b>6일 총액, 슈트·마스크·고무벨트·웨이트·부이·랜야드·라인커터·다이브 컴퓨터 구성, 보증금, 파손·분실비, Day 2 이른 인수와 Day 7 반납 마감</b>을 한 번에 물어보세요.</span></div>
+      <div class="note"><span class="ico">☎️</span><span>예약 때 두 사람의 키·체중·발 사이즈와 함께 <b><span data-gear-duration-label>6일</span> 총액, 슈트·마스크·고무벨트·웨이트·부이·랜야드·라인커터·다이브 컴퓨터 구성, 보증금, 파손·분실비, Day 2 이른 인수와 Day 7 반납 마감</b>을 한 번에 물어보세요.</span></div>
     </section>
 
     <!-- 스팟 가이드 -->
@@ -379,7 +385,7 @@
           • <b>다이브위시(DIVEWISH)</b> — PADI 프리다이버 강사 진행. 체험뿐 아니라 프리다이빙·머메이드 <b>자격증 코스</b>도 운영.<br><br>
           <b>🐠 그로토 체험 스쿠버다이빙 (자격증·수영 실력 불필요)</b><br>
           • <b>아띠다이브</b> — 사이판에서 <b>그로토 스쿠버는 아띠다이브만</b> 진행. 강사 1 : 다이버 2 인솔이라 초보·비수영자도 OK, '세계 3대 동굴 다이빙 포인트'를 수중 시점으로 봅니다. 마이리얼트립·트래블포레스트에서 약 5만~11만원대(스노클+체험 패키지). 프리다이빙과 다른 각도로 그로토를 보고 싶을 때 좋은 옵션.<br><br>
-          <b>🚤 마나가하 보트 스노클 · 체험다이빙 (자유일 옵션)</b><br>
+          <b>🚤 마나가하 보트 스노클 · 체험다이빙 (Day 5)</b><br>
           • <b>마이리얼트립</b> 등 — 왕복 호텔 픽업 + 왕복 보트 포함 66,400원~. 보트 산호 스노클/체험다이빙은 선택 추가. <b>환경세 $10 + 부두세 $3</b>와 장비 렌탈(조끼·수경·오리발 각 $5)은 현장 별도 현금.<br><br>
           <b>🌴 로타 홀 보트 투어 (Day 3)</b><br>
           • <b>Sea People's Rota</b> — 로타 홀·센하놈은 <b>보트 전용</b>이라 이 업체 투어가 사실상 유일 경로. 프리다이빙·스쿠버·스노클·트롤링까지. 가격은 인원·코스별 개별 견적 — 공식 사이트 <b>seapeoples.life</b>로 문의(빛내림 성수기라 조기 예약 권장).<br><br>
@@ -417,7 +423,7 @@
         <details>
           <summary>🛩️ 경비행기(로타행) 장비 반입 가이드 ✅ 확인됨</summary>
           <div class="body"><b>스타 마리아나스 공식 규정(확인 완료)</b> — <b>위탁 20lb(9kg) + 개인 소지품 10lb(4.5kg)</b>. 초과분은 <b>파운드당 $1</b> 추가 요금, 세 변 합 62인치(157cm) 초과 시 대형 수하물 요금. 초과·대형 짐은 '자리 나는 대로(space-available)' 실려 <b>내 비행기가 아닌 다음 편으로 올 수 있으니</b> 당일 꼭 쓸 물건은 휴대 짐(10lb) 쪽에 넣으세요.<br><br>
-          ✅ <b>가져가기 OK</b> — 마스크·스노클, 숏핀, 수영복·래시가드, 1.5~3mm 슈트(무게 여유 시), 다이빙 컴퓨터·시계, 부이·랜야드, 방수백<br>
+          ✅ <b>가져가기 OK</b> — 마스크·스노클, 숏핀, 수영복·래시가드, 1.5~3mm 슈트(무게 여유 시), 다이빙 컴퓨터·시계, 방수백<br>
           ⚠️ <b>가능하지만 비권장</b> — 롱핀: 크기(62인치 합산)는 통과해도 혼자 20lb 한도를 크게 잠식하고, 대형 취급되면 다음 편으로 밀릴 수 있음. 로타 홀은 보트 투어라 업체 렌탈로 해결하는 것이 정석<br>
           ❌ <b>두고 가기</b> — 웨이트(납): 무게 초과의 주범, 켄싱턴 방에 보관하고 필요하면 로타 업체에서 렌탈. 대형 하드케이스·캐리어도 호텔에.</div>
         </details>
@@ -428,11 +434,11 @@
           • <b>아쿠아 커넥션 (Aqua Connections)</b> — 가라판 로열팜 애비뉴. 미크로네시아 최대 다이빙 장비점 — 마스크·핀·슈트·웨이트 등 렌탈+판매. 빠진 장비는 여기서 해결.<br>
           • <b>마사 다이브 (Masa Dive)</b> — 가라판 진저 스트리트. 장비 렌탈 + 보트 스노클. ☎ 670-233-0577<br>
           • <b>다이브위시 · 히포(HIFO)</b> — 한국어 프리다이빙 업체. 투어·강습에 <b>장비 렌탈 포함</b>이 기본(예약 시 확인), 숙소 무료 픽드랍.<br>
-          • <b>로타 — Sea People's Rota</b> — 로타 홀 보트 투어 업체. 롱핀·웨이트·부이는 <b>로타 현지에서 빌려</b> 경비행기 20lb를 아끼는 게 정석.<br><br>
+          • <b>로타 — Sea People's Rota</b> — 로타 홀 보트 투어 업체. 롱핀·웨이트·부이는 <b>투어 포함 장비로 요청</b>해 경비행기 20lb를 아끼는 게 정석.<br><br>
           <b>🎯 대여 추천 품목</b><br>
-          ✅ <b>현지 대여</b> — 웨이트+웨이트벨트(항공 무게 주범), 3mm 슈트(없으면), 부이·랜야드, 롱핀(특히 로타 구간)<br>
-          🎒 <b>지참 권장</b> — 저용적 마스크·스노클(얼굴 핏이 중요), 다이브 컴퓨터·시계, 노즈클립, 래시가드·아쿠아슈즈<br>
-          💡 그로토·라우라우(Day 2)는 <b>사이판 대여점</b>에서, 로타 홀(Day 3)은 <b>투어 업체 렌탈</b>로 나눠 준비하면 이동 무게가 최소가 됩니다.</div>
+          ✅ <b>사이판 <span data-gear-duration-label>6일</span> 풀세트 대여</b> — 슈트·마스크·고무 웨이트벨트·웨이트·부이·랜야드·라인커터·다이브 컴퓨터(구성은 업체별 확인). <b>핀·스노클은 제외</b><br>
+          🎒 <b>직접 지참</b> — 롱핀·숏핀·스노클, 얼굴 핏이 중요한 개인 마스크, 노즈클립, 래시가드·아쿠아슈즈<br>
+          💡 Day 2에 렌터카로 선택한 장비점에서 인수하고 Day 7에 반납합니다. 로타에는 숏핀·마스크·스노클만, 마나가하에는 <b>숏핀·마스크·스노클만</b> 가져가세요.</div>
         </details>
         <details>
           <summary>💵 요금 메모</summary>
@@ -474,13 +480,14 @@
           <span class="date">9월 11일</span><span class="dow">금요일 · Day 2</span>
           <div class="tags"><span class="tag">🤿 다이빙</span><span class="tag">🏨 체크인</span></div>
         </div>
-        <h3>사이판 도착 &amp; 첫 다이빙 데이트</h3>
+        <h3>렌터카 인수 · 장비 피팅 &amp; 첫 다이빙 데이트</h3>
         <ul class="sched">
-          <li><span class="time">02:00</span><span>사이판 공항 도착, 켄싱턴 호텔 픽업 차량 탑승</span></li>
-          <li><span class="time">03:00</span><span>호텔 체크인 및 잠자기 💤</span></li>
-          <li><span class="time">오전</span><span>파우파우 비치(호텔 앞 도보)에서 몸풀기 수영 · 이퀄라이징 연습 🏊</span></li>
-          <li><span class="time">늦은 오전</span><span>그로토 프리다이빙 — 빛기둥은 해가 높은 정오 전후가 최적, 한국어 가이드 투어로 진행</span></li>
-          <li><span class="time">오후</span><span>라우라우 베이 거북이 프리다이빙 🐢 (만조 전후가 진입 수월)</span></li>
+          <li><span class="time">02:00</span><span>사이판 공항 도착 → 입국·수하물 수령 후 Enterprise 카운터 이동</span></li>
+          <li><span class="time">02:30</span><span>Intermediate SUV 인수 — 서류·연료량·기존 흠집 확인 및 사진 촬영 후 켄싱턴까지 약 30~35분 운전</span></li>
+          <li><span class="time">08:40</span><span>렌터카로 선택한 장비점 방문 — 핀·스노클 제외 프리다이빙 풀세트 피팅, <span data-gear-duration-label>6일</span> 대여 시작</span></li>
+          <li><span class="time">오전</span><span>라우라우 베이에서 얕게 몸풀기·이퀄라이징 확인 🐢</span></li>
+          <li><span class="time">11:30</span><span>그로토 프리다이빙 — 빛기둥은 정오 전후가 최적, 한국어 가이드와 진행</span></li>
+          <li><span class="time">오후</span><span>파우파우 비치 회복 수영 후 렌터카로 호텔 복귀</span></li>
         </ul>
         <details class="rain-plan">
           <summary>☔ 우천 시 플랜</summary>
@@ -504,6 +511,7 @@
         </div>
         <p class="desc">그로토 다이빙에 대한 더 자세한 정보는 <a href="https://www.google.com/search?q=%EC%82%AC%EC%9D%B4%ED%8C%90+%EA%B7%B8%EB%A1%9C%ED%86%A0+%EB%8B%A4%EC%9D%B4%EB%B9%99" target="_blank" rel="noopener">여기에서 확인</a>하세요.</p>
         <div class="note"><span class="ico">🌊</span><span>너울로 그로토가 닫히는 날엔 라우라우·오비얀으로 스위칭 — 당일 아침 가이드 업체의 판단을 따르세요. 자세한 정보는 <a href="#spotguide">스팟 가이드</a> 참고.</span></div>
+        <div class="note"><span class="ico">🚗</span><span>새벽 도착 직후 운전이므로 졸리면 즉시 안전한 곳에 정차하세요. 차량 인수에는 <b>실물 면허증·국제운전면허증·여권·주운전자 명의 카드</b>가 필요합니다.</span></div>
         <div class="album">
           <h4>📸 앨범</h4>
           <div class="grid">
@@ -524,7 +532,8 @@
         </div>
         <h3>로타섬으로 — 둘만의 오붓한 시간</h3>
         <ul class="sched">
-          <li><span class="time">09:00–10:00</span><span>로타행 짐 꾸리기 — 연박이라 체크아웃 없음, 캐리어·롱핀·웨이트는 방에 그대로 두고 출발 (경비행기 위탁 20lb 제한)</span></li>
+          <li><span class="time">09:00–10:00</span><span>로타행 짐 꾸리기 — 캐리어·롱핀·대여 웨이트·부이는 방에 두고 숏핀·스노클 위주로 경량화</span></li>
+          <li><span class="time">10:00</span><span>렌터카로 사이판 공항 이동(약 30~35분) → 공영주차장 1박 주차(최대 $20), 차량 안 귀중품 비우기</span></li>
           <li><span class="time">11:00</span><span>경비행기로 로타섬 이동 (스타 마리아나스, 약 30분)</span></li>
           <li><span class="time">도착 후</span><span>로타섬 숙소 체크인</span></li>
           <li><span class="time">오후</span><span>로타 홀 보트 투어 ✨ — 빛내림은 4~9월이 최강 시즌, 프리다이빙 전문 업체와 함께</span></li>
@@ -569,7 +578,7 @@
         <ul class="sched">
           <li><span class="time">오전</span><span>테테토 비치(Teteto Beach)에서 여유로운 아침 바다 수영 — 중~만조면 스노클도 쾌적</span></li>
           <li><span class="time">낮</span><span>스위밍 홀(Swimming Hole) — 공항 가는 길 북쪽 해안의 천연 수영장 (스웰 낮은 날 한정)</span></li>
-          <li><span class="time">오후</span><span>로타섬 출발, 사이판 복귀 — 연박 중인 방으로 바로 (재체크인 없음)</span></li>
+          <li><span class="time">오후</span><span>로타섬 출발, 사이판 복귀 → 공영주차장에서 렌터카 회수 후 연박 중인 방으로 이동</span></li>
           <li><span class="time">저녁</span><span>켄싱턴 리조트 어메니티 — 인피니티 풀에서 선셋 🌅 후 호텔 레스토랑 디너</span></li>
         </ul>
         <details class="rain-plan">
@@ -594,25 +603,25 @@
       <article class="day" id="day5" data-day="4">
         <div class="day-head">
           <span class="date">9월 14일</span><span class="dow">월요일 · Day 5</span>
-          <div class="tags"><span class="tag">🏖️ 리조트</span><span class="tag">🛶 카약</span></div>
+          <div class="tags"><span class="tag">🏝️ 마나가하</span><span class="tag">🤿 숏핀</span></div>
         </div>
-        <h3>켄싱턴 리조트 데이 — 아무것도 안 해도 되는 날</h3>
+        <h3>마나가하 섬 — 숏핀만 가볍게</h3>
         <ul class="sched">
-          <li><span class="time">아침</span><span>늦잠 후 여유로운 조식 — 로타 이틀의 피로를 푸는 회복일 💤</span></li>
-          <li><span class="time">오전</span><span>인피니티 풀 · 메인 풀에서 느긋하게, 책과 칵테일과 바다 🍹</span></li>
-          <li><span class="time">낮</span><span>투명 카약 타기 · 호텔 앞 파우파우 비치 하우스리프에서 가벼운 스노클 (도보 이동)</span></li>
-          <li><span class="time">오후</span><span>스파 or 낮잠 — 내일 골프 라운딩을 위해 체력 충전</span></li>
-          <li><span class="time">저녁</span><span>호텔 레스토랑 디너 — 오션 그릴에서 선셋 디너 추천 🌅</span></li>
+          <li><span class="time">07:30</span><span>숏핀·스노클·마스크만 챙겨 렌터카로 스마일링 코브 마리나 이동</span></li>
+          <li><span class="time">08:00</span><span>마리나 주차·체크인, 환경세·부두세 현금 결제 및 귀항편 확인</span></li>
+          <li><span class="time">08:20</span><span>첫 보트로 마나가하 섬 이동 (약 15~20분)</span></li>
+          <li><span class="time">오전~오후</span><span>지정 수영 구역에서 숏핀 스노클 — 롱핀·부이·웨이트는 호텔에 보관</span></li>
+          <li><span class="time">15:00</span><span>막배보다 한 편 앞 보트로 복귀 → 렌터카로 호텔 이동·장비 세척</span></li>
         </ul>
         <details class="rain-plan">
           <summary>☔ 우천 시 플랜</summary>
           <ul>
-            <li>리조트 데이는 우천 무관 — 실내 풀·스파·라운지로 자연스럽게 전환</li>
-            <li>스콜 사이사이 갠 틈에 카약·스노클만 짧게 끼워 넣기</li>
+            <li>강풍·너울로 보트가 취소되면 켄싱턴 풀·스파·카약 리조트 데이로 전환</li>
+            <li>마나가하는 Day 7 오전에 한 번만 재시도하고, 장비 반납 마감과 충돌하지 않게 조정</li>
           </ul>
         </details>
-        <p class="desc">일정 중간에 통째로 비워둔 호캉스 날입니다. 올인클루시브로 예약했으니 이날만큼은 시계를 보지 말고, 호텔이 주는 것들을 천천히 누려보세요. 파우파우 비치는 호텔 앞 도보 하우스리프라 물이 그리우면 언제든 들어갈 수 있습니다.</p>
-        <div class="note"><span class="ico">🤿</span><span>몸이 근질거리면 라우라우 베이 재방문(거북이 🐢 · 만조 전후)이나 오비얀 비치(만조 필수)로 반나절 프리다이빙을 다녀와도 좋습니다 — 조수표부터 확인하세요.</span></div>
+        <p class="desc">차량을 마리나에 세워두고 보트로 들어가는 날입니다. 섬 안에서는 가볍고 다루기 쉬운 숏핀만 사용하고, <span data-gear-duration-label>6일</span> 대여 풀세트의 무거운 장비는 호텔에 보관해 분실과 이동 부담을 줄입니다.</p>
+        <div class="note"><span class="ico">🎒</span><span><b>마나가하 준비물:</b> 숏핀·스노클·마스크, 래시가드, 리프 세이프 선크림, 수건, 드라이백, 물, 환경세·부두세용 현금. <b>롱핀·부이·웨이트는 가져가지 않습니다.</b></span></div>
         <div class="album">
           <h4>📸 앨범</h4>
           <div class="grid">
@@ -631,7 +640,7 @@
         </div>
         <h3>코럴 오션 골프 데이 — 이 날의 주인공은 골프 ⛳</h3>
         <ul class="sched">
-          <li><span class="time">이른 아침</span><span>코럴 오션 리조트로 출발 (섬 남쪽 끝 · 차 약 30~35분) — 더위를 피해 이른 티오프, 티타임은 호텔 컨시어지에 사전 예약</span></li>
+          <li><span class="time">이른 아침</span><span>렌터카로 코럴 오션 리조트 출발 (약 30~35분) — 주차·체크인을 위해 <b>티오프 60분 전</b> 호텔에서 출발</span></li>
           <li><span class="time">오전</span><span>⛳ 18홀 라운딩 — 사이판 유일 LPGA 투어 공식 규격, 바다를 끼고 도는 오션프런트 코스 (켄싱턴 계열 골프 어메니티 적용)</span></li>
           <li><span class="time">낮</span><span>클럽하우스 점심 — 컨디션과 날씨가 허락하면 오후 추가 9홀 연장전 ⛳</span></li>
           <li><span class="time">늦은 오후</span><span>호텔 복귀 — 인피니티 풀 🏊 · 스파로 라운딩 피로 풀기</span></li>
@@ -677,11 +686,13 @@
           <span class="date">9월 16일</span><span class="dow">수요일 · Day 7</span>
           <div class="tags"><span class="tag">🛍️ 쇼핑</span><span class="tag">🌇 마지막 밤</span></div>
         </div>
-        <h3>리조트 모닝 &amp; 허니문의 마지막 밤</h3>
+        <h3>대여 장비 반납 &amp; 허니문의 마지막 밤</h3>
         <ul class="sched">
-          <li><span class="time">오전</span><span>리조트 모닝 — 여유로운 조식 후 인피니티 풀 · 투명 카약 · 파우파우 비치에서 마지막 물놀이 🏊 (내일 새벽 비행이니 무리 없이)</span></li>
-          <li><span class="time">낮</span><span>쇼핑 — '아이러브사이판'에서 기념품 고르기</span></li>
-          <li><span class="time">저녁</span><span>가라판 지역 분위기 좋은 레스토랑에서 럭셔리 코스 요리 🥂 또는 선셋 크루즈</span></li>
+          <li><span class="time">오전</span><span>마나가하가 D5에 취소됐으면 재도전, 정상 진행했으면 리조트 모닝</span></li>
+          <li><span class="time">11:30</span><span><span data-gear-duration-label>6일</span> 대여 풀세트 세척·건조·구성품 확인 후 렌터카로 선택한 장비점에 반납</span></li>
+          <li><span class="time">낮</span><span>렌터카로 '아이러브사이판' 이동 → 기념품 쇼핑</span></li>
+          <li><span class="time">18:00</span><span>Mobil Garapan 운영시간 안에 계약서 기준 연료량까지 주유 → 영수증·게이지 사진 보관</span></li>
+          <li><span class="time">저녁</span><span>가라판 디너 🥂 또는 선셋 크루즈 — 운전자는 금주, 둘 다 마시면 차량을 두고 택시 이용</span></li>
         </ul>
         <details class="rain-plan">
           <summary>☔ 우천 시 플랜</summary>
@@ -691,7 +702,8 @@
             <li>선셋 크루즈 취소 시 가라판 레스토랑 디너를 여유 있게 연장 🥂</li>
           </ul>
         </details>
-        <div class="note"><span class="ico">🤿</span><span>바다가 잔잔하고 컨디션이 좋다면 이른 아침 <b>윙 비치</b>(차 5분)에서 얕고 가볍게 마지막 프리다이빙을 하는 옵션도 살아 있습니다 — 파도 있는 날은 입수 금지.</span></div>
+        <div class="note"><span class="ico">🤿</span><span>대여점 영업 마감 전에 반납 시간을 확정하세요. 마나가하 재도전 시에는 장비 반납을 오후로 미루되, 반납 마감은 넘기지 않습니다.</span></div>
+        <div class="note"><span class="ico">⛽</span><span>공식 주유소는 새벽에 닫는 곳이 많습니다. 인수 때 Enterprise에 <b>전날 주유 후 약 36km 운행이 허용되는지</b> 또는 <b>선결제 연료 옵션</b>을 확정하세요. 둘 다 안 되면 직원에게 01시대 이용 가능한 주유소를 지정받습니다.</span></div>
         <p class="desc">사이판 시내의 '아이러브사이판'에 들러 여행을 추억할 기념품을 골라보세요. <a href="https://www.google.com/search?q=%EC%82%AC%EC%9D%B4%ED%8C%90+%EA%B0%80%EB%9D%BC%ED%8C%90+%EC%87%BC%ED%95%91" target="_blank" rel="noopener">사이판 시내 쇼핑 정보</a>를 참고하면 도움이 됩니다.</p>
         <p class="desc">허니문의 마지막 밤을 로맨틱하게 마무리하세요. 선셋 크루즈를 선택해 바다 위 석양을 감상하는 것도 추천합니다. 🌅</p>
         <div class="album">
@@ -713,12 +725,13 @@
         </div>
         <h3>귀국</h3>
         <ul class="sched">
-          <li><span class="time">새벽</span><span>호텔 체크아웃 및 공항 이동</span></li>
-          <li><span class="time">새벽 2시</span><span>공항 도착 및 탑승 수속</span></li>
+          <li><span class="time">00:40</span><span>호텔 체크아웃 → 렌터카로 공항 이동 (약 30~35분)</span></li>
+          <li><span class="time">01:30</span><span>연료 게이지·차량 외관·주행거리 촬영 후 Enterprise 조기 반납/키드롭</span></li>
+          <li><span class="time">01:45</span><span>공항 탑승 수속·수하물 위탁</span></li>
           <li><span class="time">03:05</span><span>사이판 출발 — 제주항공 <b>7C3212</b></span></li>
           <li><span class="time">06:50</span><span>인천 1터미널 도착 🇰🇷</span></li>
         </ul>
-        <div class="note"><span class="ico">🕑</span><span>새벽 2시 비행기 일정 — 예약 기준 실제 출발 시각은 <b>03:05</b>입니다. 전날 밤 미리 짐을 싸두고 늦지 않게 공항으로 이동하세요.</span></div>
+        <div class="note"><span class="ico">⚠️</span><span>Enterprise 예약 반납 시각 <b>02:30</b>과 항공편 <b>03:05</b> 사이는 35분뿐이라 그대로 진행할 수 없습니다. 출국 전 <b>01:30 조기 반납 또는 키드롭</b>을 Enterprise에 반드시 확정하세요.</span></div>
         <div class="album">
           <h4>📸 앨범</h4>
           <div class="grid">
@@ -752,7 +765,7 @@
         <span class="k"><span class="line fly"></span>비행</span>
         <span class="k"><span class="line boat"></span>보트</span>
         <span class="k">📍 켜면 🏨 호텔 · 🤿 대여소 · 🍽️ 맛집 · 🛍️ 상점 · 📌 지역</span>
-        <span class="k" style="margin-left:auto">선에 마우스를 올리면 예상 소요시간 · <a href="#transport" id="legendTransport">🚗 렌터카 vs 택시 →</a></span>
+        <span class="k" style="margin-left:auto">선에 마우스를 올리면 예상 소요시간 · <a href="#transport" id="legendTransport">🚗 Enterprise 예약·보험 →</a></span>
       </div>
     </div>
   </aside>
@@ -783,20 +796,20 @@
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script defer src="./js/data.js?v=12"></script>
-<script defer src="./js/routes.js?v=1"></script>
+<script defer src="./js/data.js?v=13"></script>
+<script defer src="./js/routes.js?v=2"></script>
 <script defer src="./js/img-retry.js?v=1"></script>
 <script defer src="./js/bgm.js?v=1"></script>
 <script defer src="./js/lightbox.js?v=1"></script>
 <script defer src="./js/checklist.js?v=1"></script>
-<script defer src="./js/gear-rental.js?v=1"></script>
-<script defer src="./js/day-detail.js?v=2"></script>
+<script defer src="./js/gear-rental.js?v=2"></script>
+<script defer src="./js/day-detail.js?v=3"></script>
 <script defer src="./js/stay-calc.js?v=2"></script>
 <script defer src="./js/section-tabs.js?v=1"></script>
 <script defer src="./js/spots.js?v=2"></script>
 <script defer src="./js/refs.js?v=1"></script>
 <script defer src="./js/reveal.js?v=1"></script>
-<script defer src="./js/map.js?v=9"></script>
+<script defer src="./js/map.js?v=10"></script>
 <script defer src="./js/day-nav.js?v=1"></script>
 <script defer src="./js/map-overlay.js?v=2"></script>
 <script defer src="./js/weather.js?v=4"></script>

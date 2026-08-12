@@ -2,7 +2,8 @@
 (function(){
   const S = window.SAIPAN;
   if (!S || !S.DETAILS || !S.DAYS) return;
-  const KEY = 'saipan-day-details';
+  /* 일정 구조가 크게 바뀌면 버전을 올려 예전 인덱스 기반 체크가 새 항목에 붙지 않게 한다. */
+  const KEY = 'saipan-day-details-v2';
   const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
 
   function esc(s){
@@ -35,10 +36,11 @@
   let opener = null;
 
   function row(k, time, text){
+    const formatted = S.formatGearText ? S.formatGearText(text) : text;
     return '<li><label>' +
       '<input type="checkbox" data-k="' + k + '"' + (saved[k] ? ' checked' : '') + '>' +
       (time ? '<span class="t">' + esc(time) + '</span>' : '') +
-      '<span class="x">' + esc(text) + '</span></label></li>';
+      '<span class="x">' + esc(formatted) + '</span></label></li>';
   }
 
   function open(idx){                          /* idx: 0-based day index */
@@ -56,7 +58,7 @@
       '</ul></section>' +
       (d.tips && d.tips.length
         ? '<section><h4>💡 꿀팁</h4><ul class="dm-tips">' +
-            d.tips.map(t => '<li>' + esc(t) + '</li>').join('') +
+            d.tips.map(t => '<li>' + esc(S.formatGearText ? S.formatGearText(t) : t) + '</li>').join('') +
           '</ul></section>'
         : '');
     modal.classList.add('on');
@@ -91,7 +93,7 @@
     if (!S.DETAILS[dayNum]) return;
     const btn = document.createElement('button');
     btn.className = 'detail-btn';
-    btn.innerHTML = '📋 자세히 보기 <span class="sub">시간대별 할 일 · 챙길 것</span><span class="cnt"></span>';
+    btn.innerHTML = '📋 오늘 일정·준비물 <span class="sub">시간대별 이동 · 할 일 · 챙길 것</span><span class="cnt"></span>';
     const anchor = art.querySelector('.sched') || art.querySelector('.day-head');
     anchor.insertAdjacentElement('afterend', btn);
     btn.addEventListener('click', () => { opener = btn; open(idx); });

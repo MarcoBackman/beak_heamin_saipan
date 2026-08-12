@@ -200,7 +200,7 @@
   const TOUCH_ONLY = window.matchMedia('(hover: none)').matches;
   let armedLeg = null;
   function addLegTip(latlngs, tip){
-    const hint = TOUCH_ONLY ? '한 번 더 탭 → 렌터카 vs 택시 비교' : '클릭 → 렌터카 vs 택시 비교';
+    const hint = TOUCH_ONLY ? '한 번 더 탭 → Enterprise 예약·보험' : '클릭 → Enterprise 예약·보험';
     const line = L.polyline(latlngs, { color:'#000', opacity:0, weight:18 })
       .bindTooltip(tip + '<br><small>' + hint + '</small>',
         { sticky:true, className:'stop-tip leg-tip', direction:'top', offset:[0,-10] });
@@ -380,6 +380,13 @@
   /* ── 한눈에 보기 클릭 연동 ── */
   document.querySelectorAll('#overview a').forEach(a => {
     a.addEventListener('click', () => showDay(+a.dataset.day, true));
+  });
+
+  /* 장비점을 바꾸면 data.js의 해당 정류장 좌표가 갱신되므로 현재 경로도 즉시 다시 그림 */
+  if (window.addEventListener) window.addEventListener('saipan:gear-vendor-change', () => {
+    const idx = current < 0 ? 0 : current;
+    current = -1;
+    showDay(idx, false);
   });
 
   showDay(0, true);
