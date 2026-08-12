@@ -36,3 +36,10 @@ test('removes the obsolete stay comparison and protects private data', () => {
   assert.match(css, /\.booking-status-grid/);
   assert.match(css, /\.booking-steps/);
 });
+
+test('connects the Rota booking workflow to preparation and itinerary', () => {
+  assert.match(html, /data-k="rota-stay-booked"/);
+  assert.match(html, /로타 숙소 9\/12–9\/13 1박 예약 완료/);
+  assert.match(html, /예약 바우처·숙소 연락처 확인 후 체크인/);
+  assert.match(html, /숙소 체크아웃 시각 재확인/);
+});
