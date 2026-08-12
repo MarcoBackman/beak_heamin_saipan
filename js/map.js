@@ -10,7 +10,7 @@
   }
 
   const map = L.map('map', { zoomControl:false, attributionControl:true });
-  L.control.zoom({ position:'bottomright' }).addTo(map);
+  L.control.zoom({ position:'bottomleft' }).addTo(map);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
     maxZoom:18, subdomains:'abcd',

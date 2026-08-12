@@ -1,6 +1,6 @@
   /* ── Responsive ──────────────────────── */
   /* ── 지도 오버레이 요소 — 모바일에서만 표시 ── */
-  .map-fab,.map-overlay-close,.map-overlay-goto{display:none}
+  .map-fab,.map-overlay-close,.map-overlay-goto,.map-fullscreen-toggle{display:none}
 
   @media (max-width:1023px){
     .layout{grid-template-columns:1fr;gap:0}
@@ -24,33 +24,74 @@
     body.map-open{overflow:hidden}
     body.map-open aside.map-side{
       position:fixed;inset:0;z-index:1500;
-      margin:0;padding:12px;background:var(--cream);
-      order:0;height:auto;
+      margin:0;padding:0;background:var(--cream);
+      order:0;height:100vh;height:100dvh;min-height:0;
     }
-    body.map-open .map-panel{height:100%}
+    body.map-open .map-panel{
+      position:relative;height:100%;border:0;border-radius:0;
+      background:var(--cream);overflow:hidden;
+    }
     body.map-open #map{height:auto;flex:1}
-    body.map-open .map-head{position:relative;padding-right:56px}
+    body.map-open .map-head{
+      position:absolute;z-index:700;top:0;left:0;right:0;
+      padding:calc(12px + env(safe-area-inset-top)) 112px 12px 16px;
+      border:0;background:linear-gradient(180deg,rgba(250,248,242,.97),rgba(250,248,242,.88));
+      backdrop-filter:blur(10px);box-shadow:0 1px 10px rgba(0,0,0,.08);
+    }
     body.map-open .map-overlay-close{
       display:flex;align-items:center;justify-content:center;
-      position:absolute;right:12px;top:12px;
-      width:34px;height:34px;border-radius:9999px;
-      background:transparent;color:var(--charcoal);
+      position:absolute;right:12px;top:calc(10px + env(safe-area-inset-top));
+      width:44px;height:44px;border-radius:9999px;
+      background:rgba(255,255,255,.8);color:var(--charcoal);
       border:1px solid var(--border-strong);
       font-size:15px;cursor:pointer;font-family:inherit;
     }
+    body.map-open .map-fullscreen-toggle:not([hidden]){
+      display:flex;align-items:center;justify-content:center;
+      position:absolute;right:62px;top:calc(10px + env(safe-area-inset-top));
+      width:44px;height:44px;border-radius:9999px;
+      background:rgba(255,255,255,.8);color:var(--charcoal);
+      border:1px solid var(--border-strong);
+      font-size:19px;cursor:pointer;font-family:inherit;
+    }
+    body.map-open .map-overlay-dock{
+      position:relative;z-index:700;flex:none;
+      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+      background:rgba(250,248,242,.95);backdrop-filter:blur(12px);
+      border-top:1px solid rgba(0,0,0,.08);box-shadow:0 -3px 16px rgba(0,0,0,.1);
+    }
+    body.map-open .map-ctrl{
+      display:flex;flex-direction:column;align-items:stretch;gap:8px;
+      padding:0;border:0;
+    }
+    body.map-open .map-day-ctrl{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px}
+    body.map-open .map-layer-ctrl{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    body.map-open .map-ctrl .nav-btn{width:44px;height:44px}
+    body.map-open .map-layer-ctrl .nav-btn{
+      width:100%;gap:7px;border-radius:10px;font-size:14px;font-weight:600;
+    }
+    body.map-open .map-layer-ctrl .nav-btn span{display:inline}
+    body.map-open .map-overlay-dock>.location-btn{
+      display:flex;align-items:center;justify-content:center;
+      position:absolute;right:14px;top:-62px;z-index:710;
+      width:48px;height:48px;min-width:48px;border-radius:9999px;
+      background:rgba(255,255,255,.96);color:var(--charcoal);
+      border:1px solid var(--border-strong);font-family:inherit;font-size:25px;
+      box-shadow:0 3px 12px rgba(0,0,0,.22);cursor:pointer;
+    }
+    body.map-open .map-legend{
+      padding:8px 2px 0;gap:10px;white-space:nowrap;overflow:hidden;
+    }
+    body.map-open .map-legend .k:nth-child(n+4){display:none}
     body.map-open .map-overlay-goto{
-      display:block;margin:0 14px 14px;padding:12px;
+      display:block;width:100%;min-height:44px;margin:10px 0 0;padding:12px;
       background:var(--charcoal);color:var(--off-white);
       border:0;border-radius:10px;
       font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
     }
-    body.map-open .map-ctrl .location-btn{
-      display:flex;min-width:44px;width:44px;height:44px;
-      border-radius:9999px;font-size:23px;
-    }
     body.map-open .location-status:not([hidden]){
       display:flex;align-items:center;min-height:34px;
-      margin:0 14px 8px;padding:7px 10px;border-radius:8px;
+      margin:0 58px 8px 0;padding:7px 10px;border-radius:8px;
       background:rgba(37,99,235,.08);color:#1d4ed8;
       font-size:12px;line-height:1.4;
     }
