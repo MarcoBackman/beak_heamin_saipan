@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="./css/base.css?v=1">
 <link rel="stylesheet" href="./css/map.css?v=3">
-<link rel="stylesheet" href="./css/components.css?v=11">
+<link rel="stylesheet" href="./css/components.css?v=12">
 <link rel="stylesheet" href="./css/responsive.css?v=3">
 <link rel="stylesheet" href="./css/weather.css?v=4">
 </head>
@@ -22,7 +22,7 @@
       <a href="#flights">항공편</a>
       <a href="#checklist">체크리스트</a>
       <a href="#connectivity">통신</a>
-      <a href="#staycompare">숙박 비교</a>
+      <a href="#booking-status">예약 현황</a>
       <a href="#transport">렌터카</a>
       <a href="#spotguide">스팟 가이드</a>
       <a href="#days">일정</a>
@@ -168,94 +168,79 @@
       <div class="verdict"><b>추천 합계 약 38,000원</b> — 승준은 SKT 5천원, 혜민은 KT 4GB를 각각 사용합니다. DOCOMO USIM은 KT 상품 가입이 어렵거나 현지 전화번호가 꼭 필요할 때만 선택하세요.</div>
     </section>
 
-    <!-- 숙박 전략 비교 -->
-    <section id="staycompare">
-      <h2>숙박 전략 비교</h2>
-      <p class="lede">✅ <b>옵션 A(7박 연박 + 골프·리조트 어메니티 패키지)로 예약 확정!</b> 아래 비교와 계산기는 결정 당시 기록으로 남겨둡니다.</p>
-      <div class="stay-tabs">
-        <button class="stay-tab on" data-panel="stayA">🏨 옵션 A · 7박 연박 ✅ 예약 완료</button>
-        <button class="stay-tab" data-panel="stayB">✂️ 옵션 B · 분할 예약 2박+4박</button>
-        <button class="stay-tab" data-panel="stayC">⚖️ 비용 계산기</button>
+    <!-- 예약 현황 -->
+    <section id="booking-status">
+      <h2>예약 현황</h2>
+      <p class="lede">확정된 예약과 아직 처리해야 할 로타 1박을 한곳에서 확인합니다.</p>
+      <div class="booking-status-grid">
+        <article class="booking-card confirmed">
+          <span class="booking-state">예약 확정</span>
+          <h3>켄싱턴 호텔 사이판 · 7박</h3>
+          <p class="booking-dates">2026. 9. 10 체크인 → 2026. 9. 17 체크아웃</p>
+          <ul>
+            <li>로타 1박 중에도 객실 유지</li>
+            <li>큰 짐·롱핀·대여 웨이트·부이는 객실 보관</li>
+          </ul>
+        </article>
+        <article class="booking-card confirmed">
+          <span class="booking-state">예약 확정</span>
+          <h3>Enterprise 렌터카 · 6일</h3>
+          <p class="booking-dates">9/11 02:30 → 9/17 02:30</p>
+          <ul>
+            <li>Intermediate SUV · 무제한 주행</li>
+            <li>$268.05 현장 결제 · CDW·PAI 포함</li>
+          </ul>
+          <a class="booking-action secondary" href="#transport">면허·보험·인수 조건 보기 →</a>
+        </article>
+        <article class="booking-card pending">
+          <span class="booking-state">예약 필요</span>
+          <h3>로타 숙소 · 1박</h3>
+          <p class="booking-dates">9/12 체크인 → 9/13 체크아웃 · 성인 2명</p>
+          <div class="booking-deadlines">
+            <span>8/16 권장 예약</span>
+            <span>8/23 최종 결정</span>
+          </div>
+          <small>호텔 공식 마감일이 아닌 내부 실행 기준</small>
+        </article>
       </div>
 
-      <div class="stay-panel on" id="stayA">
-        <h3>옵션 A — 켄싱턴 7박 연박 유지 <span style="color:var(--muted);font-weight:600">· ✅ 이 옵션으로 예약 완료</span></h3>
-        <p class="pd">9/10 밤부터 9/16 밤까지 7박을 통으로 예약하고, 로타에 가는 9/12 밤에는 켄싱턴 방을 비워둔 채 다녀오는 방식입니다. 골프 등 리조트 어메니티가 포함되어 <b>Day 6 코럴 오션 골프 데이</b>와 <b>Day 7 리조트 모닝</b>이 일정에 반영되었습니다. 골프는 켄싱턴과 같은 계열(이랜드)인 <b>코럴 오션 리조트</b> 18홀에서 이용하는 구성 — 정확한 포함 범위(그린피·카트·횟수)는 예약 확인서를 체크하세요.</p>
-        <div class="pros-cons">
-          <div class="pc">
-            <h4>👍 장점</h4>
-            <ul>
-              <li>⛳ 골프 등 리조트 어메니티를 전 일정 그대로 사용</li>
-              <li>🏨 같은 방 유지 — 체크아웃·재체크인 없음</li>
-              <li>🧳 롱핀·웨이트·캐리어를 방에 그대로 두고 로타행 (경비행기 20lb 제한 대응이 깔끔)</li>
-              <li>💵 분할 추가 요금($135/일) 없음</li>
-              <li>🌙 로타 복귀일에 바로 방으로 — 대기·짐 찾기 없음</li>
-            </ul>
-          </div>
-          <div class="pc">
-            <h4>👎 단점</h4>
-            <ul>
-              <li>💸 로타 1박 밤에도 켄싱턴 객실료 지불 — 하루 숙박비 이중 부담</li>
-              <li>🛏️ 하루는 방을 완전히 비워두게 됨 (올인클루시브 식사·시설도 그날은 못 씀)</li>
-            </ul>
-          </div>
+      <div class="rota-booking-head">
+        <div>
+          <h3>로타 1박 예약 후보</h3>
+          <p>예약 화면에서 9/12–9/13, 성인 2명으로 조회한 뒤 실제 객실 재고와 취소 조건을 확인하세요.</p>
         </div>
-        <div class="note"><span class="ico">💡</span><span>연박 확정으로 Day 3의 "캐리어는 호텔에 맡기기"가 "방에 그대로 두기"로 단순해졌습니다 — 일정에 반영 완료.</span></div>
+        <a href="https://rotamayor.cnmi.gov/businesses/" target="_blank" rel="noopener">로타 시장실 업체 목록 →</a>
+      </div>
+      <div class="rota-options">
+        <article class="rota-option recommended">
+          <span class="booking-state">1순위</span>
+          <h4>Hotel Valentino</h4>
+          <p>송송 중심·식당 접근이 편하고 온라인 예약이 가능한 후보입니다.</p>
+          <div class="booking-actions">
+            <a class="booking-action primary" href="https://www.booking.com/hotel/mp/valentino.en-gb.html?checkin=2026-09-12&amp;checkout=2026-09-13&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0" target="_blank" rel="noopener">9/12 객실 조회</a>
+            <a class="booking-action secondary" href="tel:+16705328466">전화 +1 670-532-8466</a>
+          </div>
+        </article>
+        <article class="rota-option">
+          <span class="booking-state">2순위</span>
+          <h4>Coral Garden Hotel</h4>
+          <p>해변 접근·조용한 환경이 장점이며 온라인과 전화로 예약할 수 있습니다.</p>
+          <div class="booking-actions">
+            <a class="booking-action primary" href="https://www.booking.com/hotel/mp/coral-garden.en-gb.html?checkin=2026-09-12&amp;checkout=2026-09-13&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0" target="_blank" rel="noopener">9/12 객실 조회</a>
+            <a class="booking-action secondary" href="tel:+16705323201">전화 +1 670-532-3201</a>
+          </div>
+        </article>
       </div>
 
-      <div class="stay-panel" id="stayB">
-        <h3>옵션 B — 분할 예약 (2박 + 로타 1박 + 4박)</h3>
-        <p class="pd">켄싱턴을 9/10~11 2박과 9/13~16 4박으로 나눠 예약하고, 9/12 밤은 로타 숙소만 이용하는 방식입니다. 켄싱턴 1박을 아끼는 대신 분할 조건이 붙습니다.</p>
-        <div class="pros-cons">
-          <div class="pc">
-            <h4>👍 장점</h4>
-            <ul>
-              <li>💵 로타 밤(9/12)의 켄싱턴 객실료 1박 절약</li>
-              <li>🛏️ 안 쓰는 방에 돈을 내지 않는다는 심리적 깔끔함</li>
-            </ul>
-          </div>
-          <div class="pc">
-            <h4>👎 단점</h4>
-            <ul>
-              <li>💸 분할 예약 시 하루 $135 추가 요금 (적용 기준 확인 필요)</li>
-              <li>⛳ 골프 어메니티 사용 불가</li>
-              <li>🔁 체크아웃·재체크인 2회 — 같은 방·뷰 보장 없음</li>
-              <li>🧳 짐은 프런트 보관 — 복귀일 방 배정까지 대기 가능성</li>
-              <li>📋 예약 2건 관리 (변경·취소 조건도 각각)</li>
-            </ul>
-          </div>
-        </div>
-        <div class="note"><span class="ico">⚠️</span><span>"하루 $135"가 <b>1회성인지, 분할된 박수마다 붙는지</b>, 그리고 골프 어메니티 제외 조건이 정확히 무엇인지 예약처에 꼭 확인하세요. 확인한 값을 <b>비용 계산기</b>에 넣으면 바로 비교됩니다.</span></div>
-      </div>
-
-      <div class="stay-panel" id="stayC">
-        <h3>비용 계산기</h3>
-        <p class="pd">확인된 요금·조건을 입력하면 두 분기의 총비용을 바로 비교합니다. 입력값은 이 브라우저에 저장됩니다.</p>
-        <div class="calc-fields">
-          <label class="field"><span>켄싱턴 1박 요금 ($)<small>세금·수수료 포함 1박 평균가</small></span><input type="number" id="calcRate" value="400" min="0" step="10"></label>
-          <label class="field"><span>분할 추가 요금 ($/일)<small>분할 예약 시 하루당 추가된다고 안내받은 금액</small></span><input type="number" id="calcFee" value="135" min="0" step="5"></label>
-          <label class="field"><span>추가 요금 적용 일수<small>박수마다 부과되면 6, 1회성이면 1</small></span><input type="number" id="calcDays" value="6" min="0" max="7" step="1"></label>
-          <label class="field"><span>골프 어메니티 가치 ($)<small>분할 시 못 쓰는 혜택의 체감 가치 — 라운딩 계획 없으면 0</small></span><input type="number" id="calcGolf" value="100" min="0" step="10"></label>
-          <label class="field"><span>로타 경비행기 왕복 ($)<small>스타 마리아나스 2인 왕복 — $165/인 편도 기준 $660</small></span><input type="number" id="calcAir" value="660" min="0" step="10"></label>
-          <label class="field"><span>로타 숙소 1박 ($)<small>9/12 밤 로타섬 숙소 요금</small></span><input type="number" id="calcRota" value="150" min="0" step="10"></label>
-        </div>
-        <div class="totals">
-          <div class="total-card" id="cardA">
-            <div class="lbl">🏨 옵션 A · 연박 유지</div>
-            <div class="amt" id="totalA">–</div>
-            <div class="sub" id="subA"></div>
-            <span class="win-tag">더 저렴</span>
-          </div>
-          <div class="total-card" id="cardB">
-            <div class="lbl">✂️ 옵션 B · 분할 예약</div>
-            <div class="amt" id="totalB">–</div>
-            <div class="sub" id="subB"></div>
-            <span class="win-tag">더 저렴</span>
-          </div>
-        </div>
-        <div class="verdict" id="calcVerdict"></div>
-        <div class="note"><span class="ico">ℹ️</span><span>로타 경비행기·숙소비는 <b>두 옵션에 똑같이 드는 공통 비용</b>이라 총액에는 포함되지만, 두 옵션의 차액에는 영향을 주지 않습니다.</span></div>
-      </div>
+      <h3 class="booking-steps-title">예약 방법</h3>
+      <ol class="booking-steps">
+        <li><b>1</b><span>9/12–9/13 · 성인 2명으로 객실 조회</span></li>
+        <li><b>2</b><span>무료 취소 가능 여부와 결제 시점을 확인하고 요금 선택</span></li>
+        <li><b>3</b><span>로타 도착 예정 시각을 숙소에 전달</span></li>
+        <li><b>4</b><span>예약 바우처와 숙소 연락처를 오프라인 저장</span></li>
+        <li><b>5</b><span>공항·로타 홀 투어 픽업 동선과 체크아웃 시각 확인</span></li>
+      </ol>
+      <div class="note warning"><span class="ico">⏰</span><span><b>8/16까지 예약을 권장하고 8/23을 최종 결정일로 둡니다.</b> 이는 호텔 정책이 아니라 객실 수가 적은 로타 일정의 내부 실행 기준입니다. 8/23까지 확보하지 못하면 로타 숙박·항공·투어를 함께 재검토하세요. 표시 가격과 무료 취소 기한은 객실 유형과 조회 시점에 따라 달라지므로 결제 직전 조건을 기준으로 합니다.</span></div>
     </section>
 
     <!-- 렌터카 예약 -->
@@ -804,7 +789,6 @@
 <script defer src="./js/checklist.js?v=1"></script>
 <script defer src="./js/gear-rental.js?v=2"></script>
 <script defer src="./js/day-detail.js?v=3"></script>
-<script defer src="./js/stay-calc.js?v=2"></script>
 <script defer src="./js/section-tabs.js?v=1"></script>
 <script defer src="./js/spots.js?v=2"></script>
 <script defer src="./js/refs.js?v=1"></script>
