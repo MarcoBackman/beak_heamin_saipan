@@ -6,6 +6,7 @@ const test = require('node:test');
 const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'css', 'components.css'), 'utf8');
+const responsiveCss = fs.readFileSync(path.join(root, 'css', 'responsive.css'), 'utf8');
 
 test('shows Kensington and Enterprise as confirmed reservations', () => {
   assert.match(html, /예약 현황/);
@@ -42,4 +43,9 @@ test('connects the Rota booking workflow to preparation and itinerary', () => {
   assert.match(html, /로타 숙소 9\/12–9\/13 1박 예약 완료/);
   assert.match(html, /예약 바우처·숙소 연락처 확인 후 체크인/);
   assert.match(html, /숙소 체크아웃 시각 재확인/);
+});
+
+test('ships the mobile booking layout with a fresh cache version', () => {
+  assert.match(html, /css\/responsive\.css\?v=4/);
+  assert.match(responsiveCss, /\.booking-status-grid,\.rota-options,\.booking-steps\{grid-template-columns:1fr\}/);
 });
