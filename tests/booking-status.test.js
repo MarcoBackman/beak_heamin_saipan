@@ -5,6 +5,7 @@ const test = require('node:test');
 
 const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const itineraryData = fs.readFileSync(path.join(root, 'js', 'data.js'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'css', 'components.css'), 'utf8');
 const responsiveCss = fs.readFileSync(path.join(root, 'css', 'responsive.css'), 'utf8');
 
@@ -47,5 +48,18 @@ test('connects the Rota booking workflow to preparation and itinerary', () => {
 
 test('ships the mobile booking layout with a fresh cache version', () => {
   assert.match(html, /css\/responsive\.css\?v=6/);
+  assert.match(html, /js\/data\.js\?v=14/);
   assert.match(responsiveCss, /\.booking-status-grid,\.rota-options,\.booking-steps\{grid-template-columns:1fr\}/);
+});
+
+test('uses KT M Mobile guidance for Hyemin across the checklist and itinerary', () => {
+  assert.match(html, /혜민 KT M모바일 · 함께 쓰는 로밍 4GB 신청/);
+  assert.match(html, /KT M모바일 · 함께 쓰는 로밍 4GB/);
+  assert.match(html, /KT M모바일 홈페이지·앱에서 출국 전 신청/);
+  assert.match(html, /href="https:\/\/www\.ktmmobile\.com\/rate\/roamingList\.do"[^>]*>KT M모바일 공식 안내 →<\/a>/);
+  assert.match(html, /혜민은 KT M모바일 4GB/);
+  assert.match(itineraryData, /아내 KT M모바일 함께 쓰는 로밍 4GB 신청/);
+  assert.match(itineraryData, /SKT\/KT M모바일 로밍/);
+  assert.doesNotMatch(html, /혜민 KT ·|KT 앱에서 출국 전 신청|혜민은 KT 4GB/);
+  assert.doesNotMatch(itineraryData, /아내 KT 함께 쓰는|SKT\/KT 로밍/);
 });
