@@ -21,6 +21,7 @@
     <div class="links" id="navLinks">
       <a href="#flights">항공편</a>
       <a href="#checklist">체크리스트</a>
+      <a href="#entry-guide">입국 준비</a>
       <a href="#connectivity">통신</a>
       <a href="#booking-status">예약 현황</a>
       <a href="#transport">렌터카</a>
@@ -73,7 +74,7 @@
     <!-- 항공편 -->
     <section id="flights">
       <h2>항공편</h2>
-      <p class="lede">제주항공 인천 ↔ 사이판 직항, 인천공항 1터미널.</p>
+      <p class="lede">제주항공 인천 ↔ 사이판 직항과 스타 마리아나스 사이판 ↔ 로타 경비행기 일정입니다.</p>
       <div class="flights">
         <div class="flight">
           <span class="no">7C3211</span>
@@ -93,6 +94,24 @@
             <b>06:50</b> 인천 1터미널 도착
           </div>
         </div>
+        <div class="flight">
+          <span class="no">S2 1302</span>
+          <div class="dir">로타 가는 편 · 9/12(토) · 예약 확인 필요</div>
+          <div class="route">사이판 <span class="arrow">→</span> 로타</div>
+          <div class="times">
+            <b>10:30</b> 사이판 공항 커뮤터 터미널 출발<br>
+            <b>11:00</b> 로타 공항 도착
+          </div>
+        </div>
+        <div class="flight">
+          <span class="no">S2 3104</span>
+          <div class="dir">사이판 오는 편 · 9/13(일) · 예약 확인 필요</div>
+          <div class="route">로타 <span class="arrow">→</span> 사이판</div>
+          <div class="times">
+            <b>16:30</b> 로타 공항 출발<br>
+            <b>17:00</b> 사이판 공항 도착
+          </div>
+        </div>
       </div>
       <details class="ticket">
         <summary>예약 스크린샷 보기</summary>
@@ -106,8 +125,13 @@
       <p class="lede">체크 상태는 이 브라우저에 자동 저장됩니다.</p>
       <div class="checklist">
         <ul id="checkItems">
-          <li><label><input type="checkbox" data-k="entry-docs"><span>여권 · ESTA/입국서류 · 왕복 항공권</span></label></li>
-          <li><label><input type="checkbox" data-k="rota-stay-booked"><span>로타 숙소 9/12–9/13 1박 예약 완료</span></label></li>
+          <li><label><input type="checkbox" data-k="entry-docs"><span>여권(여행기간 내 유효) · 왕복 항공권 확인</span></label></li>
+          <li><label><input type="checkbox" data-k="g-cnmi-eta-sungjun"><span>승준 G-CNMI ETA 개별 신청 · 승인 화면/PDF 저장</span></label></li>
+          <li><label><input type="checkbox" data-k="g-cnmi-eta-hyemin"><span>혜민 G-CNMI ETA 개별 신청 · 승인 화면/PDF 저장</span></label></li>
+          <li><label><input type="checkbox" data-k="cnmi-customs"><span>부부 1건 CNMI 전자 세관신고 · QR 코드 저장</span></label></li>
+          <li><label><input type="checkbox" data-k="rota-stay-booked"><span>Coral Garden Hotel 9/12–9/13 1박 예약 확정</span></label></li>
+          <li><label><input type="checkbox" data-k="rota-flight-booked"><span>스타 마리아나스 S2 1302 · S2 3104 왕복 예약 확인</span></label></li>
+          <li><label><input type="checkbox" data-k="rota-car-booked"><span>로타 공항 렌터카 9/12 11:00 인수 · 9/13 15:00 반납 예약</span></label></li>
           <li><label><input type="checkbox" data-k="stay-docs"><span>호텔·로타 숙소·투어 바우처 오프라인 저장</span></label></li>
           <li><label><input type="checkbox" data-k="licenses"><span>실물 국내면허증 · 국제운전면허증</span></label></li>
           <li><label><input type="checkbox" data-k="rental-card"><span>운전자 명의 카드 · 렌트비+$200 보증금 한도</span></label></li>
@@ -124,6 +148,63 @@
           <li><label><input type="checkbox" data-k="luggage"><span>캐리어 · 옷 · 수영복 · 리프 세이프 선크림</span></label></li>
         </ul>
         <p class="hint">✓ 항목을 누르면 완료 표시됩니다.</p>
+      </div>
+    </section>
+
+    <!-- 입국 준비 -->
+    <section id="entry-guide">
+      <h2>입국 준비 · G-CNMI ETA</h2>
+      <p class="lede">이번 사이판·로타 일정은 대한민국 여권으로 45일 이하 체류하는 G-CNMI 비자면제프로그램 기준입니다. G-CNMI ETA는 비자가 아니라 사전 전자여행허가이며, 승준·혜민이 각각 1건씩 신청해야 합니다.</p>
+      <div class="choice-grid">
+        <article class="choice-card recommended">
+          <span class="choice-tag">두 사람 각각 신청</span>
+          <h3>무료 전자여행허가</h3>
+          <ul>
+            <li>현재 신청 수수료 무료</li>
+            <li>공식 예상 작성 시간 약 23분</li>
+            <li>출발 최소 5일 전 제출 권장</li>
+            <li>허가 유효기간은 승인일로부터 최대 2년 또는 여권 만료일까지</li>
+          </ul>
+        </article>
+        <article class="choice-card">
+          <span class="choice-tag muted">미리 준비</span>
+          <h3>여권 · 사진 · 연락처</h3>
+          <ul>
+            <li>기계 판독 가능한 전자여권과 본인 얼굴 사진</li>
+            <li>이메일, 영문 자택 주소와 전화번호</li>
+            <li>한국 비상연락처의 이름·전화·이메일</li>
+            <li>현재 또는 직전 직장명·영문 주소·전화번호</li>
+          </ul>
+        </article>
+        <article class="choice-card recommended">
+          <span class="choice-tag">부부 1건</span>
+          <h3>CNMI 전자 세관신고</h3>
+          <ul>
+            <li>사이판 입국 72시간 전부터 작성</li>
+            <li>함께 입국하는 남편·아내는 가족 1건 제출 가능</li>
+            <li>완료 QR 코드를 캡처하고 오프라인 저장</li>
+            <li>식품·동식물·현금 등 신고 대상은 사실대로 입력</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 class="booking-steps-title">G-CNMI ETA 신청 순서</h3>
+      <ol class="booking-steps">
+        <li><b>1</b><span>공식 사이트에서 한국어 선택 → ‘새 개인 신청서’ → 법적 고지·면책조항 동의</span></li>
+        <li><b>2</b><span>여권 정보면 스캔 또는 입력 → 성명·생년월일·여권번호를 여권과 정확히 일치 → 셀피 업로드</span></li>
+        <li><b>3</b><span>영문 자택 주소·전화·이메일 → 한국 비상연락처 → 현재 또는 직전 고용 정보 입력</span></li>
+        <li><b>4</b><span>미국 내 연락처와 체류지는 첫 숙소인 Kensington Hotel Saipan 정보 입력</span></li>
+        <li><b>5</b><span>범죄·입국 거부·건강 등 자격 질문에 사실대로 답변 → 전체 검토·제출 → 신청 번호 저장</span></li>
+      </ol>
+
+      <div class="verdict">
+        <b>숙소 입력용 영문 정보</b> — Kensington Hotel Saipan · P.O. Box 5152 CHRB, Saipan, MP 96950 · +1 670-322-3311
+        <small>신청 번호와 여권 정보는 이 공개 사이트에 입력하지 말고 각자 휴대폰의 안전한 위치에 보관하세요. 승인 화면을 PDF 또는 캡처로 저장하되, 여행 허가 승인이 최종 입국을 보장하지는 않습니다.</small>
+        <div class="booking-actions">
+          <a class="booking-action primary" href="https://g-cnmi-eta.cbp.dhs.gov/" target="_blank" rel="noopener">G-CNMI ETA 공식 신청</a>
+          <a class="booking-action secondary" href="https://g-cnmi-eta.cbp.dhs.gov/individualStatusLookup" target="_blank" rel="noopener">ETA 상태 확인</a>
+          <a class="booking-action secondary" href="https://landing.travel.mp/" target="_blank" rel="noopener">CNMI 세관신고</a>
+        </div>
       </div>
     </section>
 
@@ -172,7 +253,7 @@
     <!-- 예약 현황 -->
     <section id="booking-status">
       <h2>예약 현황</h2>
-      <p class="lede">확정된 예약과 아직 처리해야 할 로타 1박을 한곳에서 확인합니다.</p>
+      <p class="lede">Coral Garden Hotel까지 숙박이 확정되었습니다. 로타 항공권과 현지 렌터카는 별도 예약 상태를 확인하세요.</p>
       <div class="booking-status-grid">
         <article class="booking-card confirmed">
           <span class="booking-state">예약 확정</span>
@@ -193,55 +274,55 @@
           </ul>
           <a class="booking-action secondary" href="#transport">면허·보험·인수 조건 보기 →</a>
         </article>
-        <article class="booking-card pending">
-          <span class="booking-state">예약 필요</span>
-          <h3>로타 숙소 · 1박</h3>
-          <p class="booking-dates">9/12 체크인 → 9/13 체크아웃 · 성인 2명</p>
-          <div class="booking-deadlines">
-            <span>8/16 권장 예약</span>
-            <span>8/23 최종 결정</span>
-          </div>
-          <small>호텔 공식 마감일이 아닌 내부 실행 기준</small>
+        <article class="booking-card confirmed">
+          <span class="booking-state">예약 확정</span>
+          <h3>Coral Garden Hotel · 1박</h3>
+          <p class="booking-dates">9/12 13:00–16:30 체크인 → 9/13 07:30–12:00 체크아웃</p>
+          <ul>
+            <li>성인 2명 · 바다 전망 · 식사 미포함</li>
+            <li>총 US$74.75 · 숙소 결제</li>
+            <li>12:00–13:00 도착 예정 전달 완료</li>
+          </ul>
         </article>
       </div>
 
       <div class="rota-booking-head">
         <div>
-          <h3>로타 1박 예약 후보</h3>
-          <p>예약 화면에서 9/12–9/13, 성인 2명으로 조회한 뒤 실제 객실 재고와 취소 조건을 확인하세요.</p>
+          <h3>확정 숙소와 공항 이동</h3>
+          <p>후보 비교는 종료했습니다. 로타 공항에서 렌터카를 받아 약 17–25분 이동하는 계획입니다.</p>
         </div>
-        <a href="https://rotamayor.cnmi.gov/businesses/" target="_blank" rel="noopener">로타 시장실 업체 목록 →</a>
+        <a href="https://www.cnmiports.com/rotarpt.asp" target="_blank" rel="noopener">로타 공항 공식 안내 →</a>
       </div>
       <div class="rota-options">
-        <article class="rota-option recommended">
-          <span class="booking-state">1순위</span>
-          <h4>Hotel Valentino</h4>
-          <p>송송 중심·식당 접근이 편하고 온라인 예약이 가능한 후보입니다.</p>
+        <article class="rota-option recommended confirmed">
+          <span class="booking-state">예약 확정</span>
+          <h4>Coral Garden Hotel</h4>
+          <p>1 Songsong Village #1524. 9/12 정오 전후 도착해 짐을 맡기고, 객실은 공식 체크인 시작인 13:00부터 배정받습니다.</p>
           <div class="booking-actions">
-            <a class="booking-action primary" href="https://www.booking.com/hotel/mp/valentino.en-gb.html?checkin=2026-09-12&amp;checkout=2026-09-13&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0" target="_blank" rel="noopener">9/12 객실 조회</a>
-            <a class="booking-action secondary" href="tel:+16705328466">전화 +1 670-532-8466</a>
+            <a class="booking-action primary" href="https://www.coralgardenhotel.com/" target="_blank" rel="noopener">호텔 공식 사이트</a>
+            <a class="booking-action secondary" href="tel:+16705323201">전화 +1 670-532-3201</a>
           </div>
         </article>
-        <article class="rota-option">
-          <span class="booking-state">2순위</span>
-          <h4>Coral Garden Hotel</h4>
-          <p>해변 접근·조용한 환경이 장점이며 온라인과 전화로 예약할 수 있습니다.</p>
+        <article class="rota-option pending">
+          <span class="booking-state">렌터카 예약 확인 필요</span>
+          <h4>로타 공항 → 호텔</h4>
+          <p>11:00 도착 후 수하물 수령·차량 인수에 30–40분, 약 15km 운전에 17–25분을 잡아 호텔 11:50–12:20 도착을 목표로 합니다.</p>
           <div class="booking-actions">
-            <a class="booking-action primary" href="https://www.booking.com/hotel/mp/coral-garden.en-gb.html?checkin=2026-09-12&amp;checkout=2026-09-13&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0" target="_blank" rel="noopener">9/12 객실 조회</a>
-            <a class="booking-action secondary" href="tel:+16705323201">전화 +1 670-532-3201</a>
+            <a class="booking-action primary" href="tel:+16705323535">Budget +1 670-532-3535</a>
+            <a class="booking-action secondary" href="tel:+16705320901">Islander +1 670-532-0901</a>
           </div>
         </article>
       </div>
 
-      <h3 class="booking-steps-title">예약 방법</h3>
+      <h3 class="booking-steps-title">로타 왕복 현실 시간표</h3>
       <ol class="booking-steps">
-        <li><b>1</b><span>9/12–9/13 · 성인 2명으로 객실 조회</span></li>
-        <li><b>2</b><span>무료 취소 가능 여부와 결제 시점을 확인하고 요금 선택</span></li>
-        <li><b>3</b><span>로타 도착 예정 시각을 숙소에 전달</span></li>
-        <li><b>4</b><span>예약 바우처와 숙소 연락처를 오프라인 저장</span></li>
-        <li><b>5</b><span>공항·로타 홀 투어 픽업 동선과 체크아웃 시각 확인</span></li>
+        <li><b>1</b><span>9/12 08:45 켄싱턴 출발 → 09:20 공항 주차</span></li>
+        <li><b>2</b><span>09:30 커뮤터 터미널 체크인 → 10:30 S2 1302 출발</span></li>
+        <li><b>3</b><span>11:00 로타 도착 → 차량 인수 → 11:50–12:20 호텔 도착</span></li>
+        <li><b>4</b><span>9/13 14:30 주유·차량 반납 → 15:00 항공 체크인</span></li>
+        <li><b>5</b><span>16:30 S2 3104 출발 → 17:00 사이판 도착</span></li>
       </ol>
-      <div class="note warning"><span class="ico">⏰</span><span><b>8/16까지 예약을 권장하고 8/23을 최종 결정일로 둡니다.</b> 이는 호텔 정책이 아니라 객실 수가 적은 로타 일정의 내부 실행 기준입니다. 8/23까지 확보하지 못하면 로타 숙박·항공·투어를 함께 재검토하세요. 표시 가격과 무료 취소 기한은 객실 유형과 조회 시점에 따라 달라지므로 결제 직전 조건을 기준으로 합니다.</span></div>
+      <div class="note warning"><span class="ico">⏰</span><span><b>2026. 8. 17 실시간 예약 화면에서 두 편 모두 예약 가능함을 확인했습니다.</b> 숙소 예약과 항공권·로타 렌터카는 별개이므로 미결제라면 먼저 확보하세요. 스타 마리아나스는 출발 15분 전에 체크인을 닫지만, 주차·수하물 계량·소형기 좌석 배정을 고려해 60분 전 도착으로 잡았습니다. <a href="https://www.starmarianasair.com/bookscheduledflight" target="_blank" rel="noopener">항공 예약 →</a> · <a href="https://www.starmarianasair.com/flights-schedules" target="_blank" rel="noopener">공식 시간표 →</a></span></div>
     </section>
 
     <!-- 렌터카 예약 -->
@@ -428,7 +509,7 @@
         </details>
         <details>
           <summary>💵 요금 메모</summary>
-          <div class="body">마나가하: 페리 왕복 $20 + 환경세 $10(현금), 첫 배 08:20 · 막배 15:30. 로타 경비행기(스타 마리아나스): 편도 $165(온라인 예약), 약 30분. 포비든 가이드 투어: 성인 약 $85(3시간, 장비 포함). 그로토 입장(수영 목적): $5. ※ 2026년 9월 기준 사전 재확인 권장.</div>
+          <div class="body">마나가하: 페리 왕복 $20 + 환경세 $10(현금), 첫 배 08:20 · 막배 15:30. 로타 경비행기(스타 마리아나스): 편도 $165(온라인 예약), 약 30분. 이 일정은 9/12 S2 1302 10:30 출발과 9/13 S2 3104 16:30 출발을 기준으로 하며, 운항 시각은 출발 72시간 전에 다시 확인합니다. 포비든 가이드 투어: 성인 약 $85(3시간, 장비 포함). 그로토 입장(수영 목적): $5.</div>
         </details>
       </div>
     </section>
@@ -518,12 +599,15 @@
         </div>
         <h3>로타섬으로 — 둘만의 오붓한 시간</h3>
         <ul class="sched">
-          <li><span class="time">09:00–10:00</span><span>로타행 짐 꾸리기 — 캐리어·롱핀·대여 웨이트·부이는 방에 두고 숏핀·스노클 위주로 경량화</span></li>
-          <li><span class="time">10:00</span><span>렌터카로 사이판 공항 이동(약 30~35분) → 공영주차장 1박 주차(최대 $20), 차량 안 귀중품 비우기</span></li>
-          <li><span class="time">11:00</span><span>경비행기로 로타섬 이동 (스타 마리아나스, 약 30분)</span></li>
-          <li><span class="time">도착 후</span><span>예약 바우처·숙소 연락처 확인 후 체크인, 로타 홀 투어 픽업 장소 재확인</span></li>
-          <li><span class="time">오후</span><span>로타 홀 보트 투어 ✨ — 빛내림은 4~9월이 최강 시즌, 프리다이빙 전문 업체와 함께</span></li>
-          <li><span class="time">저녁</span><span>피나탕 파크(숙소 도보권)에서 가벼운 스노클 · 점프 놀이</span></li>
+          <li><span class="time">08:00–08:40</span><span>조식 후 로타행 짐 최종 계량 — 캐리어·롱핀·대여 웨이트·부이는 켄싱턴 방에 두고 숏핀·스노클 위주로 경량화</span></li>
+          <li><span class="time">08:45</span><span>렌터카로 사이판 공항 이동(약 30~35분) → 09:20 공영주차장 1박 주차, 차량 안 귀중품 비우기</span></li>
+          <li><span class="time">09:30</span><span>커뮤터 터미널에서 수하물·몸무게 계량 및 체크인 — 마감은 출발 15분 전이지만 60분 여유 확보</span></li>
+          <li><span class="time">10:30–11:00</span><span>스타 마리아나스 S2 1302로 로타 이동</span></li>
+          <li><span class="time">11:00–11:40</span><span>수하물 수령 → 예약한 로타 공항 렌터카 인수·차량 상태 촬영</span></li>
+          <li><span class="time">11:40–12:20</span><span>약 15km를 17~25분 운전해 Coral Garden Hotel 도착 — 전달한 12~13시 도착 범위, 13:00 전이면 짐부터 맡기기</span></li>
+          <li><span class="time">13:00</span><span>예약 바우처·숙소 연락처 확인 후 체크인, 로타 홀 투어 픽업 장소 재확인</span></li>
+          <li><span class="time">13:30 이후</span><span>로타 홀 보트 투어 ✨ — 사전 확정한 업체 픽업 시각을 우선하고, 지연 시 내일 오전 재시도 협의</span></li>
+          <li><span class="time">17:30 이후</span><span>피나탕 파크에서 가벼운 스노클·점프 놀이 후 송송에서 저녁</span></li>
         </ul>
         <details class="rain-plan">
           <summary>☔ 우천 시 플랜</summary>
@@ -562,10 +646,14 @@
         </div>
         <h3>테테토 · 스위밍 홀 &amp; 사이판 복귀</h3>
         <ul class="sched">
-          <li><span class="time">오전</span><span>숙소 체크아웃 시각 재확인 → 테테토 비치(Teteto Beach)에서 여유로운 아침 바다 수영 — 중~만조면 스노클도 쾌적</span></li>
-          <li><span class="time">낮</span><span>스위밍 홀(Swimming Hole) — 공항 가는 길 북쪽 해안의 천연 수영장 (스웰 낮은 날 한정)</span></li>
-          <li><span class="time">오후</span><span>로타섬 출발, 사이판 복귀 → 공영주차장에서 렌터카 회수 후 연박 중인 방으로 이동</span></li>
-          <li><span class="time">저녁</span><span>켄싱턴 리조트 어메니티 — 인피니티 풀에서 선셋 🌅 후 호텔 레스토랑 디너</span></li>
+          <li><span class="time">07:30–08:00</span><span>간단히 식사하고 Coral Garden Hotel 체크아웃 — 공식 체크아웃 가능 시간 07:30~12:00</span></li>
+          <li><span class="time">08:25–09:50</span><span>테테토 비치에서 아침 수영 — 중~만조면 스노클도 쾌적, 짐·귀중품은 차 안에서 보이지 않게 보관</span></li>
+          <li><span class="time">10:05–11:20</span><span>스위밍 홀 — 스웰 낮을 때만 수면 위주로 즐기고, 귀환 비행을 앞두고 반복 딥다이빙은 하지 않기</span></li>
+          <li><span class="time">11:30–13:30</span><span>마른옷으로 갈아입고 점심 → 날씨·비포장도로·장비 건조를 위한 60분 예비 시간 유지</span></li>
+          <li><span class="time">14:00–15:00</span><span>주유 후 로타 공항 이동 → 차량 상태 촬영·반납, 15:00 항공 체크인</span></li>
+          <li><span class="time">16:30–17:00</span><span>스타 마리아나스 S2 3104로 사이판 복귀</span></li>
+          <li><span class="time">17:00–18:10</span><span>수하물 수령·주차 정산·Enterprise 차량 확인 → 켄싱턴까지 약 30~35분 운전</span></li>
+          <li><span class="time">저녁</span><span>지연이 없으면 18:20 전후 선셋, 늦어지면 무리하지 말고 호텔 레스토랑 디너와 휴식</span></li>
         </ul>
         <details class="rain-plan">
           <summary>☔ 우천 시 플랜</summary>
@@ -790,7 +878,7 @@
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script defer src="./js/data.js?v=14"></script>
+<script defer src="./js/data.js?v=15"></script>
 <script defer src="./js/routes.js?v=2"></script>
 <script defer src="./js/img-retry.js?v=1"></script>
 <script defer src="./js/bgm.js?v=1"></script>
